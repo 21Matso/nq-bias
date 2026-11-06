@@ -282,19 +282,20 @@ def model_payload_v2(model: dict | None, summary: dict) -> dict:
         if n:
             conf = {"n": n, "share": n / h["n"], "hit": sum(t["hit"] * t["n"] for t in rows) / n,
                     "bp": sum(t["bp"] * t["n"] for t in rows) / n}
-        avg_edge = h["hit"] - max(base, 1 - base)
-        if conf and pl.get("conf_p95") and conf["hit"] > pl["conf_p95"]:
+        c6 = h.get("conf6") or {}
+        if conf and c6.get("n"):
+            conf.update({"expected": c6.get("expected"), "p": c6.get("p"), "excess": c6.get("excess")})
+        beats_placebo = c6.get("excess", 0) > (pl.get("excess6_p95") or 0)
+        if conf and c6.get("p", 1) < 0.05 and beats_placebo:
             level = "good"
-            text = (f"I snitt over alle dager er modellen ikke bedre enn å alltid gjette opp ({h['hit'] * 100:.1f} % mot "
-                    f"{base * 100:.1f} %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. {conf['share'] * 100:.0f} % av dagene) "
-                    f"traff den {conf['hit'] * 100:.1f} %, over flaksnivået på {pl['conf_p95'] * 100:.1f} %. "
-                    "Bruk biasen bare på disse dagene; NØYTRAL betyr at modellen ikke vet.")
+            text = (f"Over alle dager er modellen ikke bedre enn å alltid gjette opp ({h['hit'] * 100:.1f} % mot {base * 100:.1f} %). "
+                    f"Men på dagene den gir bias (minst 6 pp fra 50 %, ca. {conf['share'] * 100:.0f} % av dagene) traff den "
+                    f"{conf['hit'] * 100:.1f} %, mot {c6['expected'] * 100:.1f} % ved ren tilfeldighet (p = {c6['p']:.3f}), "
+                    "og bedre enn alle placebo-kjøringene. Bruk biasen bare på disse dagene. NØYTRAL betyr at modellen ikke vet.")
         elif conf:
             level = "meh"
-            text = (f"Dagene med bias traff {conf['hit'] * 100:.1f} %, men det er ikke sikkert over flaksnivået "
-                    f"({(pl.get('conf_p95') or 0) * 100:.1f} %). Behandle biasen som en svak indikasjon.")
-        if avg_edge > 0.02 and level == "good":
-            text = text.replace("I snitt over alle dager er modellen ikke bedre enn å alltid gjette opp", "Modellen er også bedre enn å alltid gjette opp i snitt")
+            text = (f"Dagene med bias traff {conf['hit'] * 100:.1f} %, mot {((c6.get('expected') or 0.5)) * 100:.1f} % ved tilfeldighet, "
+                    "men det er ikke statistisk sikkert. Behandle biasen som en svak indikasjon.")
     out = {"version": 2, "level": level, "verdict": text, "research": summary, "confident": conf}
     if model:
         coefs = []

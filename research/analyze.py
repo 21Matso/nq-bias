@@ -534,6 +534,23 @@ def walk_forward_nested(df: pd.DataFrame, start_years: int = 3, c: float = 0.05)
     return res, preds.dropna(), chosen
 
 
+def conf_test(p: pd.Series, y: pd.Series, thr: float) -> dict:
+    """Treff på dager med |p-0.5| >= thr, mot det man ville fått ved ren tilfeldighet
+    med samme andel bullish/bearish-spådommer (uavhengighet). Ekstra treff = treff - forventet."""
+    yy = y.loc[p.index]
+    m = (p - 0.5).abs() >= thr
+    n = int(m.sum())
+    if n == 0:
+        return {"n": 0, "hit": None, "expected": None, "excess": 0.0, "p": 1.0}
+    b = float(yy.mean())
+    up = (p[m] > 0.5)
+    q = float(up.mean())
+    e = q * b + (1 - q) * (1 - b)
+    hits = int(((p[m] > 0.5).astype(int) == yy[m]).sum())
+    return {"n": n, "hit": hits / n, "expected": e, "excess": hits - e * n, "share_bull": q,
+            "p": float(stats.binomtest(hits, n, e, alternative="greater").pvalue)}
+
+
 def score(p: pd.Series, y: pd.Series, fh_all: pd.Series, name: str, cols: list[str]) -> dict:
     from sklearn.metrics import roc_auc_score
     yy = y.loc[p.index]
@@ -557,6 +574,8 @@ def score(p: pd.Series, y: pd.Series, fh_all: pd.Series, name: str, cols: list[s
                        "hit": float(hit[pd.DatetimeIndex(p.index).year == yr].mean())}
                       for yr in sorted(set(pd.DatetimeIndex(p.index).year))]
     res["hit_recent"] = float(hit.iloc[-500:].mean())
+    res["conf6"] = conf_test(p, y, 0.06)
+    res["conf10"] = conf_test(p, y, 0.10)
     return res
 
 
@@ -643,13 +662,14 @@ def main() -> None:
     results["nested_rolling"] = [{"date": str(k), "hit": float(v)} for k, v in roll.items()]
     # placebo for hele prosedyren (utvalg + trening) på stokkede utfall
     rng0 = np.random.default_rng(7)
-    nph = []
+    nph, exc = [], []
     for _ in range(int(os.environ.get("N_PERM_NESTED", "30"))):
         dp = df.copy()
         ok = dp["y"].notna().to_numpy()
         vals = dp.loc[ok, ["fh", "y"]].to_numpy()
         dp.loc[ok, ["fh", "y"]] = vals[rng0.permutation(len(vals))]
         r, _, _ = walk_forward_nested(dp)
+        exc.append((r["conf6"]["excess"], r["conf10"]["excess"]))
         tiers = {t["tier"]: t for t in r["tiers"]}
         top = tiers.get("over 10 pp")
         conf = [tiers[k] for k in ("6–10 pp", "over 10 pp") if k in tiers]
@@ -663,7 +683,9 @@ def main() -> None:
             return (float(v.mean()), float(np.percentile(v, 95))) if len(v) else (None, None)
         results["placebo_nested"] = {"n": len(a), "mean": st(0)[0], "p95": st(0)[1], "max": float(np.nanmax(a[:, 0])),
                                      "top_mean": st(1)[0], "top_p95": st(1)[1],
-                                     "conf_mean": st(2)[0], "conf_p95": st(2)[1], "conf_n_mean": float(np.mean(a[:, 3]))}
+                                     "conf_mean": st(2)[0], "conf_p95": st(2)[1], "conf_n_mean": float(np.mean(a[:, 3])),
+                                     "excess6_mean": float(np.mean([e[0] for e in exc])), "excess6_p95": float(np.percentile([e[0] for e in exc], 95)),
+                                     "excess10_mean": float(np.mean([e[1] for e in exc])), "excess10_p95": float(np.percentile([e[1] for e in exc], 95))}
     # profiler: opp-andel per kvintil for de viktigste signalene
     prof = {}
     for col in ["fh_mom20_z", "fh_mom5_z", "gap_z", "rel_es_z", "vix_ts", "on_range_z"]:
@@ -770,6 +792,12 @@ def write_report(R: dict) -> None:
         for t in m["tiers"]:
             L.append(f"| {t['tier']} | {t['n']} | {f(t['hit'], 1, pct=True)} | {f(t['bp'], 1, sign=True)} |")
         L.append("\nPer år: " + " · ".join(f"{y['year']}: {f(y['hit'], 0, pct=True)}" for y in m["by_year"]) + "\n")
+        for key, lab in (("conf6", "minst 6 pp"), ("conf10", "minst 10 pp")):
+            c6 = m.get(key)
+            if c6 and c6["n"]:
+                L.append(f"Dager med {lab}: {c6['n']} dager, treff {f(c6['hit'], 1, pct=True)} mot {f(c6['expected'], 1, pct=True)} ved tilfeldighet "
+                         f"(samme andel bullish), {c6['excess']:+.0f} ekstra treff, p = {f(c6['p'], 4)}.  ")
+        L.append("")
     pl = R.get("placebo")
     if pl:
         L.append(f"## Placebo (flaksnivå)\nSamme modell trent på {pl['n']} tilfeldig stokkede utfall: snitt-treff "
@@ -779,7 +807,8 @@ def write_report(R: dict) -> None:
     if pn:
         L.append(f"**Placebo for den ærlige prosedyren** ({pn['n']} stokkinger): snitt-treff {f(pn['mean'], 1, pct=True)}, "
                  f"95-persentil {f(pn['p95'], 1, pct=True)}, høyeste {f(pn['max'], 1, pct=True)}. "
-                 f"Dager med minst 6 pp: snitt {f(pn.get('conf_mean'), 1, pct=True)}, 95-persentil {f(pn.get('conf_p95'), 1, pct=True)}. "
+                 f"Ekstra treff på dager med minst 6 pp: placebo snitt {pn.get('excess6_mean', 0):+.1f}, 95-persentil {pn.get('excess6_p95', 0):+.1f}; "
+                 f"minst 10 pp: snitt {pn.get('excess10_mean', 0):+.1f}, 95-persentil {pn.get('excess10_p95', 0):+.1f}. "
                  f"I den sikreste klassen (over 10 pp): snitt {f(pn.get('top_mean'), 1, pct=True)}, 95-persentil {f(pn.get('top_p95'), 1, pct=True)}.\n")
     ch = R.get("nested_selection", {})
     if ch:
