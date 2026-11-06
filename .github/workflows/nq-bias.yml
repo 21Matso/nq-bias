@@ -6,6 +6,7 @@ name: NQ Bias
 #   09:00–09:29 ET  beregner dagens bias og logger den i journalen
 #   ellers          fyller inn fasit og oppdaterer journal og modellstatistikk
 # GitHub kan starte planlagte kjøringer noen minutter forsinket, derfor flere forsøk før åpning.
+# Den kjører også når selve programmet endres (push), så rettelser tas i bruk med en gang.
 on:
   schedule:
     - cron: "20 12 * * 1-5"
@@ -13,6 +14,9 @@ on:
     - cron: "0,10,20,25 14 * * 1-5"
     - cron: "0 15,16 * * 1-5"
     - cron: "30 21 * * 1-5"
+  push:
+    branches: [main]
+    paths: [".github/workflows/**", "*.py", "requirements.txt"]
   workflow_dispatch:
     inputs:
       mode:
@@ -52,7 +56,9 @@ jobs:
         run: |
           git config user.name "nq-bias-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data.json data/journal.csv data/model.joblib 2>/dev/null || true
+          for f in docs/data.json data/journal.csv data/model.joblib; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
           if git diff --cached --quiet; then
             echo "Ingen endringer"
             exit 0
