@@ -7,3 +7,4 @@ docs/data.tmp
 research/node_modules/
 research/package-lock.json
 research/data/*_recent.csv.gz
+research/data/*_live.csv.gz

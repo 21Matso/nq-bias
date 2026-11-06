@@ -5,13 +5,17 @@ name: NQ Bias
 #   08:15–08:59 ET  forbereder (trener modellen for dagen)
 #   09:00–09:29 ET  beregner dagens bias og logger den i journalen
 #   ellers          fyller inn fasit og oppdaterer journal og modellstatistikk
-# GitHub kan starte planlagte kjøringer noen minutter forsinket, derfor flere forsøk før åpning.
+# GitHub kan starte planlagte kjøringer forsinket eller hoppe over dem, derfor venter én kjøring selv
+# på riktige klokkeslett før åpning, med reserver.
 # Den kjører også når selve programmet endres (push), så rettelser tas i bruk med en gang.
 on:
   schedule:
     - cron: "20 12 * * 1-5"
-    - cron: "0,10,20,25 13 * * 1-5"
-    - cron: "0,10,20,25 14 * * 1-5"
+    # Før-åpning-vinduet: én kjøring starter ca. 08:40 ET og beregner selv biasen 09:00, 09:12
+    # og 09:22 ET. 12:xx/13:xx UTC dekker sommer- og vintertid; de senere er reserver.
+    - cron: "40 12,13 * * 1-5"
+    - cron: "55 12,13 * * 1-5"
+    - cron: "8 13,14 * * 1-5"
     - cron: "0 15,16 * * 1-5"
     - cron: "30 21 * * 1-5"
   push:
@@ -35,7 +39,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 80
     steps:
       - uses: actions/checkout@v4
 

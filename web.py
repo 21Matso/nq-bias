@@ -308,6 +308,74 @@ def model_payload_v2(model: dict | None, summary: dict) -> dict:
     return out
 
 
+LIVE_TARGETS_ET = [time(9, 0), time(9, 12), time(9, 22)]
+
+
+def _git(*a):
+    import subprocess
+    return subprocess.run(["git", *a], cwd=C.BASE_DIR, capture_output=True, text=True)
+
+
+def commit_push(msg: str) -> None:
+    """Lagre og publiser mellom kjøringene i før-åpning-vinduet (kun på GitHub)."""
+    import os
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return
+    _git("config", "user.name", "nq-bias-bot")
+    _git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
+    for f in ("docs/data.json", "data/journal.csv", "data/model_v2.joblib"):
+        if (C.BASE_DIR / f).exists():
+            _git("add", f)
+    if _git("diff", "--cached", "--quiet").returncode == 0:
+        return
+    _git("commit", "-m", msg)
+    for _ in range(3):
+        if _git("pull", "--rebase", "-X", "theirs", "origin", "main").returncode == 0 and _git("push").returncode == 0:
+            R.console.print("Publisert.")
+            return
+    R.console.print("[red]Klarte ikke å publisere denne kjøringen.[/red]")
+
+
+def refresh_dukascopy() -> None:
+    """Hent de siste minuttene fra Dukascopy før hver beregning."""
+    import os
+    import subprocess
+    try:
+        subprocess.run(["node", "fetch.js"], cwd=C.BASE_DIR / "research", timeout=240,
+                       env={**os.environ, "RECENT_DAYS": "2", "RECENT_TAG": "live"})
+    except Exception as e:
+        R.console.print(f"[yellow]Dukascopy-oppdatering feilet: {e}[/yellow]")
+
+
+def run_window(args, nq) -> str:
+    """GitHub sin timeplan er upresis og hopper iblant over kjøringer. Derfor starter én
+    kjøring ca. 08:40 ET og beregner selv biasen kl. 09:00, 09:12 og 09:22, med publisering
+    etter hver. Utenfor vinduet gjøres en vanlig kjøring."""
+    import argparse as _ap
+    import time as _t
+    now = D.now_ny()
+    mode = getattr(args, "mode", "auto") or "auto"
+    if mode != "auto" or now.weekday() >= 5 or not (PREP_START_ET <= now.time() < C.OPEN_ET):
+        return run(args, nq)
+    did = False
+    for T in LIVE_TARGETS_ET:
+        target = pd.Timestamp(datetime.combine(now.date(), T), tz=C.NY)
+        now = D.now_ny()
+        if now > target + pd.Timedelta(minutes=6) or now >= pd.Timestamp(datetime.combine(now.date(), C.OPEN_ET), tz=C.NY):
+            continue
+        wait = (target - now).total_seconds()
+        if wait > 0:
+            R.console.print(f"Venter {wait / 60:.1f} min til {T:%H:%M} ET …")
+            _t.sleep(wait)
+        refresh_dukascopy()
+        D._ARRAYS.clear()
+        D.SOURCE_ERRORS.clear()
+        run(_ap.Namespace(**{**vars(args), "mode": "live"}), nq)
+        commit_push(f"Bias {D.now_ny().tz_convert(C.OSLO):%Y-%m-%d %H:%M} norsk tid")
+        did = True
+    return "live" if did else run(args, nq)
+
+
 def run(args, nq) -> str:
     """nq = nqbias-modulen (for å gjenbruke load_bundle, markedsbilde, kalender)."""
     import bias2 as B

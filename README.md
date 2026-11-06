@@ -17,10 +17,10 @@ Siden oppdaterer seg selv. Du trenger ikke kjøre noe, og ingen PC må stå på.
 | Tid (New York) | Vanligvis norsk tid | Hva skjer |
 |---|---|---|
 | ca. 08:20 | 14:20 | Modellen trenes på nytt med gårsdagens data |
-| 09:00, 09:10, 09:20, 09:25 | 15:00–15:25 | Dagens bias beregnes og publiseres. Den siste kjøringen før åpning er den som logges. |
+| 09:00, 09:12, 09:22 | 15:00, 15:12, 15:22 | Dagens bias beregnes og publiseres. Den siste kjøringen før åpning er den som logges. |
 | ca. 11:00 og etter stengning | 17:00 / 22:30 | Fasit fylles inn og journalen oppdateres |
 
-GitHub kan starte kjøringer noen minutter forsinket, derfor gjøres det flere forsøk før åpning. Siden viser alltid når den sist ble oppdatert. I ukene der USA og Norge bytter sommertid på ulike datoer, skjer alt én time tidligere norsk tid. Siden viser riktig klokkeslett.
+GitHub sin timeplan er upresis og hopper iblant over kjøringer. Derfor starter én kjøring ca. 08:40 ET og venter selv til hvert klokkeslett, med reservekjøringer hvis den ikke starter. Siden viser alltid når den sist ble oppdatert. I ukene der USA og Norge bytter sommertid på ulike datoer, skjer alt én time tidligere norsk tid. Siden viser riktig klokkeslett.
 
 **Hvis noe feiler**, står det øverst på siden, og GitHub sender deg en e-post. Du ser alle kjøringene under fanen *Actions* i repoet. Der kan du også starte en kjøring manuelt: *NQ Bias* → *Run workflow*.
 

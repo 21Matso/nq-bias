@@ -272,7 +272,7 @@ def cmd_stats(args) -> None:
 
 def cmd_web(args) -> None:
     import web
-    web.run(args, sys.modules[__name__])
+    web.run_window(args, sys.modules[__name__])
 
 
 COMMANDS = {"run": cmd_run, "backtest": cmd_backtest, "update": cmd_update, "stats": cmd_stats, "web": cmd_web}

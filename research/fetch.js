@@ -46,7 +46,8 @@ async function fetchYear(job, year) {
           retryCount: 2, pauseBetweenRetriesMs: 1000, failAfterRetryCount: false,
         });
         const csv = "t,o,h,l,c\n" + rows.map(r => r.slice(0, 5).join(",")).join("\n");
-        fs.writeFileSync(path.join(OUT, `${job.inst}_${job.tf}_recent.csv.gz`), zlib.gzipSync(csv));
+        const tag = process.env.RECENT_TAG || "recent";
+        fs.writeFileSync(path.join(OUT, `${job.inst}_${job.tf}_${tag}.csv.gz`), zlib.gzipSync(csv));
         const last = rows.length ? new Date(rows[rows.length - 1][0]).toISOString() : "-";
         console.log(`recent ${job.inst}: ${rows.length} rader, siste ${last} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
       } catch (e) {
