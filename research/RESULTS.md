@@ -1,6 +1,6 @@
 # NQ første time – hypotesetester
 
-Generert 2026-11-06T11:46 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
+Generert 2026-11-06T11:49 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
 NQ steg i første time 52.6 % av dagene. Snitt +1.7 bp, standardavvik 54 bp.
 
 **Bestått** = q < 0,10 etter korreksjon for multippel testing (Benjamini–Hochberg) OG samme fortegn i alle tre delperioder (2011–15, 2016–20, 2021–26).
