@@ -272,18 +272,30 @@ def live_payload_v2(day, now_et, row_df, model, pred, summary, ctx_y, warnings, 
 def model_payload_v2(model: dict | None, summary: dict) -> dict:
     h = (summary or {}).get("honest") or {}
     pl = (summary or {}).get("placebo") or {}
+    base = (summary or {}).get("base_up") or 0.5
     level, text = "bad", "Ingen forskningsresultater ennå."
+    conf = None
     if h:
-        beats = h["hit"] > (pl.get("p95") or 0.52)
-        if h.get("p_binom", 1) < 0.01 and beats:
-            level, text = "good", ("Modellen har slått tilfeldig gjetting over mer enn ti år med dager den ikke hadde sett, "
-                                   "også når variabelutvalget bare brukte fortiden. Fordelen er liten i snitt og størst på dagene "
-                                   "den er mest sikker.")
-        elif h.get("p_binom", 1) < 0.10:
-            level, text = "meh", "Svakt, men målbart signal. Behandle biasen som én innsikt, ikke som en fasit."
-        else:
-            level, text = "bad", "Modellen har ikke vist seg bedre enn gjetting. Biasen bør ikke brukes."
-    out = {"version": 2, "level": level, "verdict": text, "research": summary}
+        tiers = {t["tier"]: t for t in h.get("tiers", [])}
+        rows = [tiers[k] for k in ("6–10 pp", "over 10 pp") if k in tiers]
+        n = sum(t["n"] for t in rows)
+        if n:
+            conf = {"n": n, "share": n / h["n"], "hit": sum(t["hit"] * t["n"] for t in rows) / n,
+                    "bp": sum(t["bp"] * t["n"] for t in rows) / n}
+        avg_edge = h["hit"] - max(base, 1 - base)
+        if conf and pl.get("conf_p95") and conf["hit"] > pl["conf_p95"]:
+            level = "good"
+            text = (f"I snitt over alle dager er modellen ikke bedre enn å alltid gjette opp ({h['hit'] * 100:.1f} % mot "
+                    f"{base * 100:.1f} %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. {conf['share'] * 100:.0f} % av dagene) "
+                    f"traff den {conf['hit'] * 100:.1f} %, over flaksnivået på {pl['conf_p95'] * 100:.1f} %. "
+                    "Bruk biasen bare på disse dagene; NØYTRAL betyr at modellen ikke vet.")
+        elif conf:
+            level = "meh"
+            text = (f"Dagene med bias traff {conf['hit'] * 100:.1f} %, men det er ikke sikkert over flaksnivået "
+                    f"({(pl.get('conf_p95') or 0) * 100:.1f} %). Behandle biasen som en svak indikasjon.")
+        if avg_edge > 0.02 and level == "good":
+            text = text.replace("I snitt over alle dager er modellen ikke bedre enn å alltid gjette opp", "Modellen er også bedre enn å alltid gjette opp i snitt")
+    out = {"version": 2, "level": level, "verdict": text, "research": summary, "confident": conf}
     if model:
         coefs = []
         if model.get("pipe") is not None:

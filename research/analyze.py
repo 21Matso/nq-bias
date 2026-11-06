@@ -644,19 +644,26 @@ def main() -> None:
     # placebo for hele prosedyren (utvalg + trening) på stokkede utfall
     rng0 = np.random.default_rng(7)
     nph = []
-    for _ in range(int(os.environ.get("N_PERM_NESTED", "12"))):
+    for _ in range(int(os.environ.get("N_PERM_NESTED", "30"))):
         dp = df.copy()
         ok = dp["y"].notna().to_numpy()
         vals = dp.loc[ok, ["fh", "y"]].to_numpy()
         dp.loc[ok, ["fh", "y"]] = vals[rng0.permutation(len(vals))]
         r, _, _ = walk_forward_nested(dp)
-        top = [t for t in r["tiers"] if t["tier"] == "over 10 pp"]
-        nph.append((r["hit"], top[0]["hit"] if top else np.nan, top[0]["n"] if top else 0))
+        tiers = {t["tier"]: t for t in r["tiers"]}
+        top = tiers.get("over 10 pp")
+        conf = [tiers[k] for k in ("6–10 pp", "over 10 pp") if k in tiers]
+        n_conf = sum(t["n"] for t in conf)
+        nph.append((r["hit"], top["hit"] if top else np.nan,
+                    sum(t["hit"] * t["n"] for t in conf) / n_conf if n_conf else np.nan, n_conf))
     if nph:
         a = np.array(nph, float)
-        results["placebo_nested"] = {"n": len(a), "mean": float(np.nanmean(a[:, 0])), "p95": float(np.nanpercentile(a[:, 0], 95)),
-                                     "max": float(np.nanmax(a[:, 0])), "top_mean": float(np.nanmean(a[:, 1])) if np.isfinite(a[:, 1]).any() else None,
-                                     "top_p95": float(np.nanpercentile(a[:, 1], 95)) if np.isfinite(a[:, 1]).any() else None}
+        def st(col):
+            v = a[:, col][np.isfinite(a[:, col])]
+            return (float(v.mean()), float(np.percentile(v, 95))) if len(v) else (None, None)
+        results["placebo_nested"] = {"n": len(a), "mean": st(0)[0], "p95": st(0)[1], "max": float(np.nanmax(a[:, 0])),
+                                     "top_mean": st(1)[0], "top_p95": st(1)[1],
+                                     "conf_mean": st(2)[0], "conf_p95": st(2)[1], "conf_n_mean": float(np.mean(a[:, 3]))}
     # profiler: opp-andel per kvintil for de viktigste signalene
     prof = {}
     for col in ["fh_mom20_z", "fh_mom5_z", "gap_z", "rel_es_z", "vix_ts", "on_range_z"]:
@@ -772,6 +779,7 @@ def write_report(R: dict) -> None:
     if pn:
         L.append(f"**Placebo for den ærlige prosedyren** ({pn['n']} stokkinger): snitt-treff {f(pn['mean'], 1, pct=True)}, "
                  f"95-persentil {f(pn['p95'], 1, pct=True)}, høyeste {f(pn['max'], 1, pct=True)}. "
+                 f"Dager med minst 6 pp: snitt {f(pn.get('conf_mean'), 1, pct=True)}, 95-persentil {f(pn.get('conf_p95'), 1, pct=True)}. "
                  f"I den sikreste klassen (over 10 pp): snitt {f(pn.get('top_mean'), 1, pct=True)}, 95-persentil {f(pn.get('top_p95'), 1, pct=True)}.\n")
     ch = R.get("nested_selection", {})
     if ch:

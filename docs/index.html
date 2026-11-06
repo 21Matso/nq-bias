@@ -315,9 +315,11 @@ function renderModel2(Mo){
   if (H) {
     var top = (H.tiers || []).filter(function(t){ return t.tier === "over 10 pp"; })[0];
     var mid = (H.tiers || []).filter(function(t){ return t.tier === "6–10 pp"; })[0];
+    var Cf = Mo.confident;
     h += '<div class="tiles">' +
-      '<div class="tile"><div class="k">Treff, alle dager</div><div class="v">' + pct(H.hit) + '</div><div class="s">' + H.n + " dager · p = " + num(H.p_binom, 3) + "</div></div>" +
-      '<div class="tile"><div class="k">Flaksnivå (placebo)</div><div class="v">' + pct(P.p95) + '</div><div class="s">95-persentil, stokkede utfall</div></div>' +
+      (Cf ? '<div class="tile"><div class="k">Treff på dager med bias</div><div class="v">' + pct(Cf.hit) + '</div><div class="s">' + Cf.n + " dager (" + pct(Cf.share, 0) + ") · " + sgn(Cf.bp, 1, " bp") + "</div></div>" : "") +
+      '<div class="tile"><div class="k">Flaksnivå, dager med bias</div><div class="v">' + pct(P.conf_p95) + '</div><div class="s">95-persentil i placebo-test</div></div>' +
+      '<div class="tile"><div class="k">Treff, alle dager</div><div class="v">' + pct(H.hit) + '</div><div class="s">«alltid opp» ville gitt ' + pct(Rs.base_up) + "</div></div>" +
       (mid ? '<div class="tile"><div class="k">Treff når «Svak»</div><div class="v">' + pct(mid.hit) + '</div><div class="s">' + mid.n + " dager · " + sgn(mid.bp, 1, " bp") + "</div></div>" : "") +
       (top ? '<div class="tile"><div class="k">Treff når «Tydelig»</div><div class="v">' + pct(top.hit) + '</div><div class="s">' + top.n + " dager · " + sgn(top.bp, 1, " bp") + "</div></div>" : "") +
       "</div>";
