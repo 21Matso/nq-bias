@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T13:26:58.035430+00:00",
-  "generated_oslo": "2026-11-06 14:26",
-  "phase": "prep",
+  "generated_utc": "2026-11-06T14:03:29.288759+00:00",
+  "generated_oslo": "2026-11-06 15:02",
+  "phase": "live",
   "next_open_date": "2026-11-06",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 06.11",
@@ -11,14 +11,26 @@
   "error": null
  },
  "journal": {
-  "logged": 0,
+  "logged": 1,
   "with_outcome": 0,
   "directional": 0,
   "hits": 0,
   "hit_rate": null,
   "neutral_days": 0,
   "by_strength": [],
-  "rows": []
+  "rows": [
+   {
+    "date": "2026-11-06",
+    "run_time_oslo": "15:02",
+    "p_cal": 0.4978,
+    "bias": "NØYTRAL",
+    "strength": "Nøytral",
+    "fh_ret_pct": null,
+    "nq_points": null,
+    "outcome": null,
+    "correct": null
+   }
+  ]
  },
  "model": {
   "version": 2,
@@ -1450,5 +1462,289 @@
   ],
   "first": "2011-09-20",
   "last": "2026-11-05"
+ },
+ "today": {
+  "model_version": 2,
+  "date": "2026-11-06",
+  "weekday": "fre",
+  "run_oslo": "15:02",
+  "run_et": "09:02",
+  "open_oslo": "15:30",
+  "minutes_before_open": 27.086499,
+  "p": 0.497835,
+  "p_raw": 0.497835,
+  "bias": "NØYTRAL",
+  "strength": "Nøytral",
+  "class_hist": {
+   "name": "Nøytral",
+   "n": 2428,
+   "hit_rate": 0.508237,
+   "signed_bp": -0.014655
+  },
+  "nq_price": 27160.5,
+  "typical_points": 110.178567,
+  "bull": [
+   {
+    "key": "on_range_z",
+    "label": "Overnight-range (størrelse)",
+    "value": "+1.66σ",
+    "pp": 2.925487,
+    "why": "Volatilitet",
+    "missing": false
+   },
+   {
+    "key": "gap_z",
+    "label": "Overnight-gap (σ)",
+    "value": "+1.54 % (+0.8σ)",
+    "pp": 2.409903,
+    "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
+    "missing": false
+   },
+   {
+    "key": "fh_mom5_z",
+    "label": "Første time, snitt 5 dager",
+    "value": "-0.18σ",
+    "pp": 1.759948,
+    "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
+    "missing": false
+   },
+   {
+    "key": "fh_mom20_z",
+    "label": "Første time, snitt 20 dager",
+    "value": "-0.04σ",
+    "pp": 1.129564,
+    "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
+    "missing": false
+   }
+  ],
+  "bear": [
+   {
+    "key": "rel_es_z",
+    "label": "NQ vs ES gap",
+    "value": "+0.67σ",
+    "pp": -5.827735,
+    "why": "Relativ verdi: NQ trekkes mot ES",
+    "missing": false
+   },
+   {
+    "key": "gap_x_thufri",
+    "label": "Gap torsdag/fredag",
+    "value": "gap +1.54 % (+0.8σ)",
+    "pp": -4.0003,
+    "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
+    "missing": false
+   },
+   {
+    "key": "vix_ts",
+    "label": "VIX/VIX3M − 1",
+    "value": "1.10",
+    "pp": -1.557657,
+    "why": "Backwardation → oversolgt",
+    "missing": false
+   }
+  ],
+  "similar": [
+   {
+    "name": "Alle dager",
+    "n": 3708,
+    "up": 0.52589,
+    "bp": 1.674696,
+    "n_recent": 753,
+    "up_recent": 0.528552
+   },
+   {
+    "name": "Alle fredager",
+    "n": 743,
+    "up": 0.522207,
+    "bp": -0.871741,
+    "n_recent": 150,
+    "up_recent": 0.56
+   },
+   {
+    "name": "Gap opp (0,3σ til 1σ)",
+    "n": 950,
+    "up": 0.522105,
+    "bp": 0.800872,
+    "n_recent": 193,
+    "up_recent": 0.502591
+   },
+   {
+    "name": "VIX over VIX3M (backwardation)",
+    "n": 245,
+    "up": 0.538776,
+    "bp": 14.464804,
+    "n_recent": 48,
+    "up_recent": 0.520833
+   }
+  ],
+  "market": [
+   {
+    "name": "NQ future",
+    "last": 27160.5,
+    "chg": 1.547866
+   },
+   {
+    "name": "ES future",
+    "last": 7402.0,
+    "chg": 0.281118
+   },
+   {
+    "name": "Nasdaq-100 (QQQ) premarket",
+    "last": 656.95,
+    "chg": 1.371787
+   },
+   {
+    "name": "S&P 500 (SPY) premarket",
+    "last": 734.5,
+    "chg": 0.186869
+   },
+   {
+    "name": "Halvledere (SMH) premarket",
+    "last": 469.99,
+    "chg": 5.400192
+   },
+   {
+    "name": "10-års Treasury future",
+    "last": 107.09375,
+    "chg": -0.203844
+   },
+   {
+    "name": "Dollarindeks (DXY)",
+    "last": 102.172997,
+    "chg": 0.568921
+   },
+   {
+    "name": "USD/JPY",
+    "last": 158.373993,
+    "chg": 0.360572
+   },
+   {
+    "name": "Bitcoin",
+    "last": 75587.9375,
+    "chg": -0.65336
+   },
+   {
+    "name": "Råolje (WTI)",
+    "last": 91.029999,
+    "chg": 0.352772
+   },
+   {
+    "name": "Gull",
+    "last": 4060.399902,
+    "chg": -1.180365
+   },
+   {
+    "name": "Euro Stoxx 50",
+    "last": 6142.919922,
+    "chg": -1.337098
+   }
+  ],
+  "regime": [
+   {
+    "name": "3-mnd rente (%)",
+    "level": 3.998,
+    "chg": 0.025
+   },
+   {
+    "name": "5-års rente (%)",
+    "level": 4.661,
+    "chg": -0.06
+   },
+   {
+    "name": "10-års rente (%)",
+    "level": 4.878,
+    "chg": -0.051
+   },
+   {
+    "name": "30-års rente (%)",
+    "level": 5.278,
+    "chg": -0.031
+   },
+   {
+    "name": "Rentekurve 10 år – 3 mnd (pp)",
+    "level": 0.88,
+    "chg": -0.076
+   },
+   {
+    "name": "Kreditt HYG/IEF (endring i %)",
+    "level": 0.840274,
+    "chg": -1.166539
+   },
+   {
+    "name": "VIX (i går)",
+    "level": 28.18,
+    "chg": null
+   },
+   {
+    "name": "VIX / VIX3M",
+    "level": 1.102935,
+    "chg": null,
+    "note": "backwardation (stress)"
+   }
+  ],
+  "events": [
+   {
+    "oslo": "14:30",
+    "et": "08:30",
+    "title": "Average Hourly Earnings m/m",
+    "impact": "High",
+    "forecast": "0.3%",
+    "previous": "0.1%",
+    "actual": "",
+    "where": "before"
+   },
+   {
+    "oslo": "14:30",
+    "et": "08:30",
+    "title": "Non-Farm Employment Change",
+    "impact": "High",
+    "forecast": "65K",
+    "previous": "29K",
+    "actual": "",
+    "where": "before"
+   },
+   {
+    "oslo": "14:30",
+    "et": "08:30",
+    "title": "Unemployment Rate",
+    "impact": "High",
+    "forecast": "4.2%",
+    "previous": "4.2%",
+    "actual": "",
+    "where": "before"
+   },
+   {
+    "oslo": "16:00",
+    "et": "10:00",
+    "title": "Prelim UoM Consumer Sentiment",
+    "impact": "Medium",
+    "forecast": "48.1",
+    "previous": "46.3",
+    "actual": "",
+    "where": "first_hour"
+   },
+   {
+    "oslo": "16:00",
+    "et": "10:00",
+    "title": "Prelim UoM Inflation Expectations",
+    "impact": "Medium",
+    "forecast": "",
+    "previous": "4.7%",
+    "actual": "",
+    "where": "first_hour"
+   }
+  ],
+  "flags": [],
+  "headlines": [
+   "U.S. economy added 165,000 jobs in October, way more than expected; unemployment rate slips to 4.1%",
+   "Democratic sweep gives markets a reason to rethink path of interest rates",
+   "Tesla to wind down Cybertruck production in Texas next year to ramp Cybercab, Musk says",
+   "Nasdaq drops into correction territory — here’s what typically happens next",
+   "Market sell-off hits hard: Advisors say 'stay the course with an eye on buying'",
+   "Moderna raises 2026 outlook as CEO says newer vaccines are gaining traction"
+  ],
+  "warnings": [],
+  "missing": [],
+  "data_source": "Dukascopy"
  }
 }
