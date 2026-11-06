@@ -208,7 +208,7 @@ class Trained:
     wf: WalkForward
     trained_on: str
     n_train: int
-    version: int = 2
+    version: int = 3
 
 
 def train_and_save(df: pd.DataFrame, progress=None) -> Trained:
@@ -226,7 +226,7 @@ def load_trained() -> Trained | None:
         return None
     try:
         tr = joblib.load(C.MODEL_PATH)
-        return tr if getattr(tr, "version", 0) == 2 else None
+        return tr if getattr(tr, "version", 0) == 3 else None
     except Exception:
         return None
 
