@@ -1,20 +1,20 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T10:33:43.039610+00:00",
-  "generated_oslo": "2026-11-06 11:30",
+  "generated_utc": "2026-11-06T10:40:25.756785+00:00",
+  "generated_oslo": "2026-11-06 11:35",
   "phase": "followup",
   "next_open_date": "2026-11-06",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 06.11",
   "next_bias_oslo": "15:00–15:25",
   "source_errors": [
-   "FRED DGS10: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED DGS2: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED T10Y2Y: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED DFII10: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED BAMLH0A0HYM2: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED DFF: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)",
-   "FRED NFCI: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)"
+   "FRED DGS10: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=45)",
+   "FRED DGS2: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=45)",
+   "FRED T10Y2Y: hoppet over (FRED svarte ikke)",
+   "FRED DFII10: hoppet over (FRED svarte ikke)",
+   "FRED BAMLH0A0HYM2: hoppet over (FRED svarte ikke)",
+   "FRED DFF: hoppet over (FRED svarte ikke)",
+   "FRED NFCI: hoppet over (FRED svarte ikke)"
   ],
   "error": null
  },
@@ -88,7 +88,8 @@
     "rho_1": 0.090756,
     "rho_2": 0.097346,
     "stable": true,
-    "coef": 0.048922
+    "coef": 0.048922,
+    "n": 712
    },
    {
     "label": "Megacap-earnings over natten",
@@ -98,7 +99,8 @@
     "rho_1": -0.06453,
     "rho_2": -0.09029,
     "stable": true,
-    "coef": -0.054816
+    "coef": -0.054816,
+    "n": 712
    },
    {
     "label": "Første time siste 20 dager",
@@ -108,7 +110,8 @@
     "rho_1": -0.043761,
     "rho_2": -0.125058,
     "stable": true,
-    "coef": -0.03117
+    "coef": -0.03117,
+    "n": 708
    },
    {
     "label": "Opsjonsforfall (3. fredag)",
@@ -118,7 +121,8 @@
     "rho_1": -0.069923,
     "rho_2": -0.065041,
     "stable": true,
-    "coef": -0.027645
+    "coef": -0.027645,
+    "n": 712
    },
    {
     "label": "Dollar overnight (DXY)",
@@ -128,7 +132,8 @@
     "rho_1": -0.076012,
     "rho_2": -0.055482,
     "stable": true,
-    "coef": -0.015191
+    "coef": -0.015191,
+    "n": 575
    },
    {
     "label": "Mandag",
@@ -138,7 +143,8 @@
     "rho_1": 0.015839,
     "rho_2": 0.11167,
     "stable": true,
-    "coef": 0.02176
+    "coef": 0.02176,
+    "n": 712
    },
    {
     "label": "VIX / VIX3M (terminstruktur)",
@@ -148,7 +154,8 @@
     "rho_1": -0.004894,
     "rho_2": 0.116842,
     "stable": false,
-    "coef": 0.0163
+    "coef": 0.0163,
+    "n": 712
    },
    {
     "label": "NQ vs ES overnight",
@@ -158,7 +165,8 @@
     "rho_1": -0.009766,
     "rho_2": -0.077651,
     "stable": true,
-    "coef": -0.037633
+    "coef": -0.037633,
+    "n": 711
    },
    {
     "label": "Første time siste 5 dager",
@@ -168,7 +176,8 @@
     "rho_1": 0.020426,
     "rho_2": -0.117965,
     "stable": false,
-    "coef": -0.031124
+    "coef": -0.031124,
+    "n": 712
    },
    {
     "label": "Avkastning siste 5 dager",
@@ -178,7 +187,8 @@
     "rho_1": -0.015256,
     "rho_2": -0.071072,
     "stable": true,
-    "coef": -0.024322
+    "coef": -0.024322,
+    "n": 712
    },
    {
     "label": "Gap × høy VIX",
@@ -188,7 +198,8 @@
     "rho_1": -0.021661,
     "rho_2": 0.120284,
     "stable": false,
-    "coef": 0.023941
+    "coef": 0.023941,
+    "n": 711
    },
    {
     "label": "Obligasjoner overnight (ZN)",
@@ -198,7 +209,8 @@
     "rho_1": 0.001759,
     "rho_2": 0.06764,
     "stable": true,
-    "coef": 5.5e-05
+    "coef": 5.5e-05,
+    "n": 578
    },
    {
     "label": "VIX-nivå (z, 1 år)",
@@ -208,7 +220,8 @@
     "rho_1": -0.005567,
     "rho_2": 0.103368,
     "stable": false,
-    "coef": 0.007901
+    "coef": 0.007901,
+    "n": 712
    },
    {
     "label": "VIX endring i går",
@@ -218,7 +231,8 @@
     "rho_1": -0.004207,
     "rho_2": 0.059673,
     "stable": false,
-    "coef": 0.005523
+    "coef": 0.005523,
+    "n": 712
    },
    {
     "label": "USD/JPY overnight",
@@ -228,7 +242,8 @@
     "rho_1": 0.012763,
     "rho_2": 0.039203,
     "stable": true,
-    "coef": 0.02214
+    "coef": 0.02214,
+    "n": 684
    },
    {
     "label": "Gårsdagens siste halvtime",
@@ -238,7 +253,8 @@
     "rho_1": 0.009661,
     "rho_2": 0.033788,
     "stable": true,
-    "coef": -0.006144
+    "coef": -0.006144,
+    "n": 712
    },
    {
     "label": "Bitcoin overnight",
@@ -248,7 +264,8 @@
     "rho_1": -0.102974,
     "rho_2": 0.070847,
     "stable": false,
-    "coef": -0.002991
+    "coef": -0.002991,
+    "n": 481
    },
    {
     "label": "Halvledere vs NQ overnight",
@@ -258,7 +275,8 @@
     "rho_1": -0.024247,
     "rho_2": -0.002899,
     "stable": true,
-    "coef": -0.014112
+    "coef": -0.014112,
+    "n": 707
    },
    {
     "label": "Avstand til 50-dagers snitt",
@@ -268,7 +286,8 @@
     "rho_1": 0.016936,
     "rho_2": -0.038782,
     "stable": false,
-    "coef": 0.004478
+    "coef": 0.004478,
+    "n": 678
    },
    {
     "label": "Premarket-trend siste 1,5 t",
@@ -278,7 +297,8 @@
     "rho_1": -0.015924,
     "rho_2": -0.001415,
     "stable": true,
-    "coef": -0.029937
+    "coef": -0.029937,
+    "n": 711
    },
    {
     "label": "FOMC-dag",
@@ -288,7 +308,8 @@
     "rho_1": 0.034513,
     "rho_2": -0.046798,
     "stable": false,
-    "coef": -0.007325
+    "coef": -0.007325,
+    "n": 712
    },
    {
     "label": "Overnight-bevegelse NQ (gap)",
@@ -298,7 +319,8 @@
     "rho_1": -0.005519,
     "rho_2": -0.006505,
     "stable": true,
-    "coef": -0.011105
+    "coef": -0.011105,
+    "n": 711
    },
    {
     "label": "FOMC-dag × høy VIX",
@@ -308,7 +330,8 @@
     "rho_1": 0.038175,
     "rho_2": -0.033974,
     "stable": false,
-    "coef": 0.009957
+    "coef": 0.009957,
+    "n": 712
    },
    {
     "label": "Gårsdagens RTH-bevegelse",
@@ -318,7 +341,8 @@
     "rho_1": 0.064616,
     "rho_2": -0.07375,
     "stable": false,
-    "coef": 0.02247
+    "coef": 0.02247,
+    "n": 712
    },
    {
     "label": "10-års rente, endring 5 dager",
@@ -328,7 +352,8 @@
     "rho_1": null,
     "rho_2": null,
     "stable": false,
-    "coef": 0.0
+    "coef": 0.0,
+    "n": 0
    },
    {
     "label": "High yield-spread, endring 5 dager",
@@ -338,7 +363,8 @@
     "rho_1": null,
     "rho_2": null,
     "stable": false,
-    "coef": 0.0
+    "coef": 0.0,
+    "n": 0
    }
   ],
   "rolling": [
