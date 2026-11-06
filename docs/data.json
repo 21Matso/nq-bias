@@ -1,21 +1,13 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T10:40:25.756785+00:00",
-  "generated_oslo": "2026-11-06 11:35",
+  "generated_utc": "2026-11-06T10:43:44.580268+00:00",
+  "generated_oslo": "2026-11-06 11:43",
   "phase": "followup",
   "next_open_date": "2026-11-06",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 06.11",
   "next_bias_oslo": "15:00–15:25",
-  "source_errors": [
-   "FRED DGS10: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=45)",
-   "FRED DGS2: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=45)",
-   "FRED T10Y2Y: hoppet over (FRED svarte ikke)",
-   "FRED DFII10: hoppet over (FRED svarte ikke)",
-   "FRED BAMLH0A0HYM2: hoppet over (FRED svarte ikke)",
-   "FRED DFF: hoppet over (FRED svarte ikke)",
-   "FRED NFCI: hoppet over (FRED svarte ikke)"
-  ],
+  "source_errors": [],
   "error": null
  },
  "journal": {
@@ -356,7 +348,7 @@
     "n": 0
    },
    {
-    "label": "High yield-spread, endring 5 dager",
+    "label": "Kreditt: HYG mot IEF, 5 dager",
     "group": "Makro",
     "rho": null,
     "t": null,
