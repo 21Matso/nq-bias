@@ -180,11 +180,27 @@ def fetch_earnings_dates(tickers: list[str], max_age_sec: float = 86400) -> dict
 # ---------------------------------------------------------------------------
 def fetch_fred(series: dict[str, str], max_age_sec: float = 6 * 3600) -> pd.DataFrame:
     def load():
-        frames = []
+        frames, failed = [], 0
         for sid in series:
+            if failed >= 2 and not frames:      # FRED svarer ikke: ikke bruk mer tid på det
+                _note_error(f"FRED {sid}: hoppet over (FRED svarte ikke)")
+                continue
+            start = (pd.Timestamp.now() - pd.Timedelta(days=3 * 365)).strftime("%Y-%m-%d")
+            url = C.FRED_URL.format(sid=sid) + f"&cosd={start}"   # kun 3 år: raskere svar
+            r, last_err = None, None
+            for attempt in range(3):          # FRED er treg mot skyservere; prøv igjen
+                try:
+                    r = requests.get(url, headers=HEADERS, timeout=(10, 45))
+                    r.raise_for_status()
+                    break
+                except Exception as e:
+                    r, last_err = None, e
+                    _time.sleep(3 * (attempt + 1))
+            if r is None:
+                failed += 1
+                _note_error(f"FRED {sid}: {last_err}")
+                continue
             try:
-                r = requests.get(C.FRED_URL.format(sid=sid), headers=HEADERS, timeout=20)
-                r.raise_for_status()
                 df = pd.read_csv(io.StringIO(r.text))
                 date_col = df.columns[0]
                 df[date_col] = pd.to_datetime(df[date_col])

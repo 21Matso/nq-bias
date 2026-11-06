@@ -153,7 +153,7 @@ def model_payload(tr) -> dict:
             stable = bool(np.isfinite(r["rho_1"]) and np.isfinite(r["rho_2"]) and np.sign(r["rho_1"]) == np.sign(r["rho_2"]))
             out["features"].append({"label": FEATURES[name].label, "group": FEATURES[name].group,
                                     "rho": r["rho"], "t": r["t"], "rho_1": r["rho_1"], "rho_2": r["rho_2"],
-                                    "stable": stable, "coef": coefs[name]})
+                                    "stable": stable, "coef": coefs[name], "n": int(r["n"])})
     if not wf.preds.empty:
         pr = wf.preds.tail(250)
         hit = ((pr["p_cal"] > 0.5).astype(int) == pr["y"]).astype(float)

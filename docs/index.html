@@ -315,12 +315,12 @@ function renderModel(Mo){
       "</tbody></table></div>";
   }
   if ((Mo.features || []).length) {
-    h += '<details><summary>Hver variabel for seg (' + Mo.features.length + ')</summary><div class="scroll"><table><thead><tr><th>Variabel</th><th class="n">ρ</th><th class="n">t</th><th class="n">1. halvdel</th><th class="n">2. halvdel</th><th>Stabil</th><th class="n">Vekt</th></tr></thead><tbody>' +
+    h += '<details><summary>Hver variabel for seg (' + Mo.features.length + ')</summary><div class="scroll"><table><thead><tr><th>Variabel</th><th class="n">ρ</th><th class="n">t</th><th class="n">1. halvdel</th><th class="n">2. halvdel</th><th>Stabil</th><th class="n">Vekt</th><th class="n">Dager</th></tr></thead><tbody>' +
       Mo.features.map(function(f){
         var sig = f.t != null && Math.abs(f.t) >= 2;
         return "<tr><td>" + esc(f.label) + '</td><td class="n">' + sgn(f.rho, 3) + '</td><td class="n"' + (sig ? ' style="font-weight:700"' : ' class="muted"') + ">" + sgn(f.t, 1) +
           '</td><td class="n">' + sgn(f.rho_1, 3) + '</td><td class="n">' + sgn(f.rho_2, 3) + "</td><td>" + (f.stable ? '<span class="up">ja</span>' : '<span class="down">nei</span>') +
-          '</td><td class="n">' + sgn(f.coef, 3) + "</td></tr>";
+          '</td><td class="n">' + sgn(f.coef, 3) + '</td><td class="n muted">' + (f.n == null ? "–" : f.n) + "</td></tr>";
       }).join("") + '</tbody></table></div><p class="muted" style="font-size:12.5px">ρ = rangkorrelasjon med første time. |t| ≥ 2 er grovt sett statistisk signifikant. «Stabil» betyr samme fortegn i begge halvdeler av perioden. Med 26 variabler vil omtrent én se signifikant ut ved ren tilfeldighet.</p></details>';
   }
   return h + "</div></section>";
