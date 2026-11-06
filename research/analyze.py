@@ -406,6 +406,109 @@ def walk_forward(df: pd.DataFrame, cols: list[str], name: str, c: float = 0.05, 
     return res, p
 
 
+CAND_CONT = ["gap_z", "asia_z", "london_z", "pre_news_z", "pre_30_z", "prev_rth_z", "prev_fh_z", "prev_last_z",
+             "fh_mom5_z", "fh_mom20_z", "ret5_z", "trend50_z", "on_pos", "on_range_z", "rel_es_z",
+             "x_usdjpy_z", "x_xauusd_z", "x_lightcmdusd_z", "vix_z", "vix_ts", "vix_chg", "y10_chg5", "credit5",
+             "gap_x_news", "gap_x_nonews", "pre_news_x_news", "gap_x_thufri", "gap_x_big", "gap_x_outside", "gap_x_earn", "gap_x_vix"]
+CAND_BIN = ["monday", "thu_fri", "tom", "opex", "opex_week", "pre_holiday", "post_holiday", "news_day", "earn", "vix_hi"]
+
+
+def select_features(tr: pd.DataFrame, q_max: float = 0.10) -> list[str]:
+    """Velger variabler KUN fra treningsdata: BH-korrigert p < q_max og samme fortegn i tre
+    like lange deler av treningsperioden."""
+    cands, pv, signs = [], [], []
+    thirds = np.array_split(np.arange(len(tr)), 3)
+    for col in CAND_CONT + CAND_BIN:
+        if col not in tr:
+            continue
+        d = tr[[col, "fh"]].dropna()
+        if len(d) < 250 or d[col].nunique() < 2:
+            continue
+        x = d[col].clip(-4, 4).to_numpy(float)
+        yv = d["fh"].to_numpy() * 1e4
+        if col in CAND_BIN:
+            if d[col].sum() < 30:
+                continue
+            t, p = stats.ttest_ind(yv[x == 1], yv[x == 0], equal_var=False)
+        else:
+            sd = x.std()
+            if sd == 0:
+                continue
+            _, t = nw_t(yv, (x - x.mean()) / sd)
+            p = 2 * stats.norm.sf(abs(t))
+        part = []
+        for idx in thirds:
+            sub = tr.iloc[idx][[col, "fh"]].dropna()
+            if len(sub) < 60 or sub[col].nunique() < 2:
+                part.append(0.0)
+                continue
+            part.append(float(np.sign(stats.spearmanr(sub[col], sub["fh"])[0])))
+        cands.append(col); pv.append(p); signs.append((np.sign(t), part))
+    if not cands:
+        return []
+    q = bh(pv)
+    out = []
+    for col, qq, (sg, part) in zip(cands, q, signs):
+        if qq < q_max and all(ps == sg for ps in part):
+            out.append(col)
+    return out
+
+
+def walk_forward_nested(df: pd.DataFrame, start_years: int = 3, c: float = 0.05):
+    """Som walk_forward, men variabelutvalget gjøres på nytt hvert år med bare fortiden."""
+    from sklearn.impute import SimpleImputer
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    d = df.dropna(subset=["y"]).copy()
+    y = d["y"].astype(int)
+    years = pd.DatetimeIndex(d.index).year
+    preds = pd.Series(np.nan, index=d.index)
+    chosen = {}
+    for yr in range(years.min() + start_years, years.max() + 1):
+        tr, te = years < yr, years == yr
+        if te.sum() == 0:
+            continue
+        sel = select_features(d[tr])
+        chosen[int(yr)] = sel
+        if not sel:
+            preds[te] = float(y[tr].mean())
+            continue
+        X = d[sel].astype(float).clip(-5, 5)
+        m = make_pipeline(SimpleImputer(strategy="median", keep_empty_features=True), StandardScaler(),
+                          LogisticRegression(C=c, max_iter=2000))
+        m.fit(X[tr], y[tr])
+        preds[te] = m.predict_proba(X[te])[:, 1]
+    res = score(preds.dropna(), y, d["fh"], "Ærlig: utvalg og trening kun på fortiden", sorted({c for v in chosen.values() for c in v}))
+    return res, preds.dropna(), chosen
+
+
+def score(p: pd.Series, y: pd.Series, fh_all: pd.Series, name: str, cols: list[str]) -> dict:
+    from sklearn.metrics import roc_auc_score
+    yy = y.loc[p.index]
+    fh = fh_all.loc[p.index]
+    base = yy.expanding().mean().shift(1).fillna(0.5)
+    hit = ((p > 0.5).astype(int) == yy)
+    res = {"name": name, "features": cols, "n": int(len(p)), "start": str(p.index.min()), "end": str(p.index.max()),
+           "hit": float(hit.mean()),
+           "p_binom": float(stats.binomtest(int(hit.sum()), len(hit), 0.5, alternative="greater").pvalue),
+           "brier": float(((p - yy) ** 2).mean()), "brier_base": float(((base - yy) ** 2).mean()),
+           "auc": float(roc_auc_score(yy, p)) if yy.nunique() > 1 and p.nunique() > 1 else None,
+           "bp_per_day": float((np.sign(p - 0.5) * fh).mean() * 1e4)}
+    conf = (p - 0.5).abs()
+    res["tiers"] = []
+    for lo, hi_, lab in [(0, 0.03, "under 3 pp"), (0.03, 0.06, "3–6 pp"), (0.06, 0.10, "6–10 pp"), (0.10, 1, "over 10 pp")]:
+        m = (conf >= lo) & (conf < hi_)
+        if m.sum():
+            res["tiers"].append({"tier": lab, "n": int(m.sum()), "hit": float(hit[m].mean()),
+                                 "bp": float((np.sign(p[m] - 0.5) * fh[m]).mean() * 1e4)})
+    res["by_year"] = [{"year": int(yr), "n": int((pd.DatetimeIndex(p.index).year == yr).sum()),
+                       "hit": float(hit[pd.DatetimeIndex(p.index).year == yr].mean())}
+                      for yr in sorted(set(pd.DatetimeIndex(p.index).year))]
+    res["hit_recent"] = float(hit.iloc[-500:].mean())
+    return res
+
+
 # ---------------------------------------------------------------------------
 def main() -> None:
     nq = load_series("usatechidxusd", "m5")
@@ -432,6 +535,17 @@ def main() -> None:
         sd = df[col].rolling(60, min_periods=30).std().shift(1)
         df[col + "_z"] = df[col] / sd
     df["vix_hi"] = df["vix_hi"].where(df["vix"].notna())
+    df["asia_z"] = df["on_asia_z"]
+    df["london_z"] = df["on_london_z"]
+    g = df["gap_z"]
+    df["gap_x_news"] = g * df["news_day"]
+    df["gap_x_nonews"] = g * (1 - df["news_day"])
+    df["pre_news_x_news"] = df["pre_news_z"] * df["news_day"]
+    df["gap_x_thufri"] = g * df["thu_fri"]
+    df["gap_x_big"] = g * (g.abs() > 1)
+    df["gap_x_outside"] = g * (df["gap_vs_range"] != 0)
+    df["gap_x_earn"] = g * df["earn"]
+    df["gap_x_vix"] = g * df["vix_hi"].fillna(0)
 
     results = {"generated": datetime.utcnow().isoformat() + "Z", "n_days": int(df["y"].notna().sum()),
                "first": str(df.index.min()), "last": str(df.index.max()),
@@ -472,10 +586,6 @@ def main() -> None:
     core = ["gap_z", "asia_z" if "asia_z" in df else "on_asia_z", "pre_news_z", "prev_rth_z", "prev_last_z",
             "fh_mom20_z", "ret5_z", "trend50_z", "on_pos", "rel_es_z", "vix_z", "vix_ts", "y10_chg5", "credit5",
             "tom", "monday", "thu_fri", "opex", "pre_holiday", "news_day", "earn"]
-    df["asia_z"] = df["on_asia_z"]
-    df["london_z"] = df["on_london_z"]
-    df["gap_x_news"] = df["gap_z"] * df["news_day"]
-    df["gap_x_vix"] = df["gap_z"] * df["vix_hi"].fillna(0)
     core = [c for c in core if c in df]
     passing = []
     for t in tests:
@@ -493,7 +603,42 @@ def main() -> None:
         r, pr = walk_forward(df, cols, name, c=c)
         models.append(r)
         preds[name] = pr
+    nested, npred, chosen = walk_forward_nested(df)
+    models.append(nested)
+    preds[nested["name"]] = npred
     results["models"] = models
+    results["nested_selection"] = chosen
+    # placebo for hele prosedyren (utvalg + trening) på stokkede utfall
+    rng0 = np.random.default_rng(7)
+    nph = []
+    for _ in range(int(os.environ.get("N_PERM_NESTED", "12"))):
+        dp = df.copy()
+        ok = dp["y"].notna().to_numpy()
+        vals = dp.loc[ok, ["fh", "y"]].to_numpy()
+        dp.loc[ok, ["fh", "y"]] = vals[rng0.permutation(len(vals))]
+        r, _, _ = walk_forward_nested(dp)
+        top = [t for t in r["tiers"] if t["tier"] == "over 10 pp"]
+        nph.append((r["hit"], top[0]["hit"] if top else np.nan, top[0]["n"] if top else 0))
+    if nph:
+        a = np.array(nph, float)
+        results["placebo_nested"] = {"n": len(a), "mean": float(np.nanmean(a[:, 0])), "p95": float(np.nanpercentile(a[:, 0], 95)),
+                                     "max": float(np.nanmax(a[:, 0])), "top_mean": float(np.nanmean(a[:, 1])) if np.isfinite(a[:, 1]).any() else None,
+                                     "top_p95": float(np.nanpercentile(a[:, 1], 95)) if np.isfinite(a[:, 1]).any() else None}
+    # profiler: opp-andel per kvintil for de viktigste signalene
+    prof = {}
+    for col in ["fh_mom20_z", "fh_mom5_z", "gap_z", "rel_es_z", "vix_ts", "on_range_z"]:
+        d = df[[col, "y", "fh"]].dropna()
+        if len(d) > 200:
+            qq = pd.qcut(d[col].rank(method="first"), 5, labels=False)
+            prof[col] = [{"q": int(k) + 1, "n": int((qq == k).sum()), "up": float(d["y"][qq == k].mean()),
+                          "bp": float(d["fh"][qq == k].mean() * 1e4)} for k in range(5)]
+    for name, mask, col in [("gap_news", df["news_day"] == 1, "gap_z"), ("pre_news_news", df["news_day"] == 1, "pre_news_z")]:
+        d = df[mask][[col, "y", "fh"]].dropna()
+        if len(d) > 100:
+            qq = pd.qcut(d[col].rank(method="first"), 5, labels=False)
+            prof[name] = [{"q": int(k) + 1, "n": int((qq == k).sum()), "up": float(d["y"][qq == k].mean()),
+                           "bp": float(d["fh"][qq == k].mean() * 1e4)} for k in range(5)]
+    results["profiles"] = prof
 
     # Placebo: samme modell på tilfeldig stokkede utfall. Viser hvor høy treffrate
     # ren flaks gir med dette oppsettet, og dermed hva et ekte resultat må slå.
@@ -590,6 +735,25 @@ def write_report(R: dict) -> None:
         L.append(f"## Placebo (flaksnivå)\nSamme modell trent på {pl['n']} tilfeldig stokkede utfall: snitt-treff "
                  f"{f(pl['mean'], 1, pct=True)}, 95-persentil {f(pl['p95'], 1, pct=True)}, høyeste {f(pl['max'], 1, pct=True)}. "
                  "En ekte modell må ligge klart over 95-persentilen for å regnes som bedre enn flaks.\n")
+    pn = R.get("placebo_nested")
+    if pn:
+        L.append(f"**Placebo for den ærlige prosedyren** ({pn['n']} stokkinger): snitt-treff {f(pn['mean'], 1, pct=True)}, "
+                 f"95-persentil {f(pn['p95'], 1, pct=True)}, høyeste {f(pn['max'], 1, pct=True)}. "
+                 f"I den sikreste klassen (over 10 pp): snitt {f(pn.get('top_mean'), 1, pct=True)}, 95-persentil {f(pn.get('top_p95'), 1, pct=True)}.\n")
+    ch = R.get("nested_selection", {})
+    if ch:
+        L.append("## Variabler valgt hvert år (kun med fortiden)\n")
+        for yr, cols in ch.items():
+            L.append(f"- {yr}: {', '.join(cols) if cols else '(ingen – brukte grunnraten)'}")
+        L.append("")
+    pr = R.get("profiles", {})
+    if pr:
+        L.append("## Profiler: opp-andel per kvintil (1 = laveste verdi)\n")
+        L.append("| Signal | Q1 | Q2 | Q3 | Q4 | Q5 |")
+        L.append("|---|---|---|---|---|---|")
+        for k, rows in pr.items():
+            L.append(f"| {k} | " + " | ".join(f"{f(r['up'], 0, pct=True)} ({f(r['bp'], 1, sign=True)} bp)" for r in rows) + " |")
+        L.append("")
     sc = R.get("source_check", {})
     if sc and "corr_fh" in sc:
         L.append(f"## Datakilde-sjekk\nDukascopy mot Yahoo NQ=F, siste {sc['n']} dager: korrelasjon i første time "
