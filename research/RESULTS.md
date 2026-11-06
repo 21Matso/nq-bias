@@ -1,6 +1,6 @@
 # NQ første time – hypotesetester
 
-Generert 2026-11-06T11:44 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
+Generert 2026-11-06T11:46 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
 NQ steg i første time 52.6 % av dagene. Snitt +1.7 bp, standardavvik 54 bp.
 
 **Bestått** = q < 0,10 etter korreksjon for multippel testing (Benjamini–Hochberg) OG samme fortegn i alle tre delperioder (2011–15, 2016–20, 2021–26).
@@ -28,7 +28,7 @@ NQ steg i første time 52.6 % av dagene. Snitt +1.7 bp, standardavvik 54 bp.
 | VIX-endring i går | 3707 | -0.011 | +1.0 | 0.455 | 48.7 % | -0.048 | +0.004 | +0.000 | +0.026 |  |
 | Kreditt HYG/IEF, 5 dager | 3703 | -0.018 | -0.9 | 0.458 | 49.6 % | -0.010 | -0.008 | -0.037 | -0.049 |  |
 | Olje overnight | 3403 | -0.003 | -0.8 | 0.515 | 49.3 % | +0.014 | -0.049 | +0.019 | -0.056 |  |
-| Gårsdagens siste time | 3654 | -0.004 | -0.5 | 0.729 | 50.2 % | -0.011 | -0.056 | +0.042 | +0.032 |  |
+| Gårsdagens siste time | 3654 | -0.004 | -0.5 | 0.710 | 50.2 % | -0.011 | -0.056 | +0.042 | +0.032 |  |
 | Dollarindeks overnight (2017+) | 2213 | +0.013 | +0.4 | 0.788 | 48.8 % | – | +0.068 | -0.014 | -0.046 |  |
 | Gull overnight | 3678 | +0.019 | +0.3 | 0.790 | 49.3 % | +0.050 | +0.009 | +0.004 | +0.010 |  |
 | US T-bond overnight (2018+) | 1951 | -0.018 | -0.3 | 0.790 | 49.0 % | – | -0.054 | -0.009 | +0.062 |  |
@@ -45,8 +45,8 @@ NQ steg i første time 52.6 % av dagene. Snitt +1.7 bp, standardavvik 54 bp.
 | Torsdag/fredag | 1491 | 51.5 % | 53.3 % | -0.4 | +3.1 | -1.9 | 0.128 | 51.5 % / 53.2 % |  |
 | 08:30-nyhetsdag (stor bevegelse 08:25–08:45) | 498 | 56.2 % | 52.0 % | +6.2 | +1.0 | +1.7 | 0.187 | 57.8 % / 53.2 % |  |
 | VIX over 1-års median | 1626 | 53.8 % | 51.7 % | +3.3 | +0.4 | +1.6 | 0.202 | 55.0 % / 53.2 % |  |
-| Månedsskifte | 719 | 52.9 % | 52.5 % | +2.6 | +1.4 | +0.5 | 0.734 | 64.9 % / 53.2 % |  |
-| Forfallsuke | 862 | 49.9 % | 53.4 % | +2.5 | +1.4 | +0.5 | 0.734 | 45.2 % / 53.2 % |  |
+| Månedsskifte | 718 | 52.9 % | 52.5 % | +3.1 | +1.3 | +0.8 | 0.555 | 65.6 % / 53.2 % |  |
+| Forfallsuke | 862 | 49.9 % | 53.4 % | +2.5 | +1.4 | +0.5 | 0.717 | 45.2 % / 53.2 % |  |
 | Dag før helligdag | 150 | 52.0 % | 52.6 % | +0.0 | +1.7 | -0.4 | 0.788 | 42.9 % / 53.2 % |  |
 | Dag etter helligdag | 150 | 49.3 % | 52.7 % | +3.0 | +1.6 | +0.3 | 0.790 | 42.9 % / 53.2 % |  |
 
@@ -140,7 +140,7 @@ Per år: 2014: 55 % · 2015: 51 % · 2016: 49 % · 2017: 47 % · 2018: 53 % · 2
 ## Placebo (flaksnivå)
 Samme modell trent på 20 tilfeldig stokkede utfall: snitt-treff 51.0 %, 95-persentil 52.4 %, høyeste 53.0 %. En ekte modell må ligge klart over 95-persentilen for å regnes som bedre enn flaks.
 
-**Placebo for den ærlige prosedyren** (12 stokkinger): snitt-treff 52.1 %, 95-persentil 52.7 %, høyeste 52.8 %. I den sikreste klassen (over 10 pp): snitt 50.8 %, 95-persentil 54.0 %.
+**Placebo for den ærlige prosedyren** (30 stokkinger): snitt-treff 52.3 %, 95-persentil 52.8 %, høyeste 52.9 %. Dager med minst 6 pp: snitt 55.4 %, 95-persentil 81.1 %. I den sikreste klassen (over 10 pp): snitt 55.3 %, 95-persentil 64.7 %.
 
 ## Variabler valgt hvert år (kun med fortiden)
 
