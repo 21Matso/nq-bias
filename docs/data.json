@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T14:39:40.255437+00:00",
-  "generated_oslo": "2026-11-06 15:39",
+  "generated_utc": "2026-11-06T15:39:29.516004+00:00",
+  "generated_oslo": "2026-11-06 16:39",
   "phase": "followup",
   "next_open_date": "2026-11-09",
   "next_open_oslo": "15:30",
@@ -12,11 +12,11 @@
  },
  "journal": {
   "logged": 1,
-  "with_outcome": 0,
+  "with_outcome": 1,
   "directional": 0,
   "hits": 0,
   "hit_rate": null,
-  "neutral_days": 0,
+  "neutral_days": 1,
   "by_strength": [],
   "rows": [
    {
@@ -25,10 +25,10 @@
     "p_cal": 0.4978,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
-    "fh_ret_pct": null,
-    "nq_points": null,
-    "outcome": null,
-    "correct": null
+    "fh_ret_pct": -0.012,
+    "nq_points": -3.3,
+    "outcome": "NED",
+    "correct": "nøytral"
    }
   ]
  },
@@ -37,7 +37,7 @@
   "level": "good",
   "verdict": "Over alle dager er modellen ikke bedre enn å alltid gjette opp (52.2 % mot 52.6 %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. 25 % av dagene) traff den 56.2 %, mot 51.9 % ved ren tilfeldighet (p = 0.009), og bedre enn alle placebo-kjøringene. Bruk biasen bare på disse dagene. NØYTRAL betyr at modellen ikke vet.",
   "research": {
-   "generated": "2026-11-06T11:54:20.873529Z",
+   "generated": "2026-11-06T14:40:27.467770Z",
    "n_days": 3708,
    "first": "2011-09-20",
    "last": "2026-11-05",
@@ -633,14 +633,14 @@
      "name": "Kreditt HYG/IEF, 5 dager",
      "kind": "cont",
      "n": 3703,
-     "q": 0.458392,
+     "q": 0.458384,
      "passes": false,
      "stable": true,
-     "rho": -0.018029,
-     "t": -0.941711,
-     "r1": -0.009569,
-     "r2": -0.007863,
-     "r3": -0.036739
+     "rho": -0.018026,
+     "t": -0.941723,
+     "r1": -0.009548,
+     "r2": -0.007875,
+     "r3": -0.036747
     },
     {
      "name": "Olje overnight",
