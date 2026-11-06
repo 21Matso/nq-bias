@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T11:47:00.917487+00:00",
-  "generated_oslo": "2026-11-06 12:46",
+  "generated_utc": "2026-11-06T11:48:57.108061+00:00",
+  "generated_oslo": "2026-11-06 12:48",
   "phase": "followup",
   "next_open_date": "2026-11-06",
   "next_open_oslo": "15:30",
@@ -23,9 +23,9 @@
  "model": {
   "version": 2,
   "level": "meh",
-  "verdict": "Svakt, men målbart signal. Behandle biasen som én innsikt, ikke som en fasit.",
+  "verdict": "Dagene med bias traff 56.2 %, men det er ikke sikkert over flaksnivået (0.0 %). Behandle biasen som en svak indikasjon.",
   "research": {
-   "generated": "2026-11-06T11:42:04.555234Z",
+   "generated": "2026-11-06T11:44:14.825479Z",
    "n_days": 3708,
    "first": "2011-09-20",
    "last": "2026-11-05",
@@ -598,13 +598,13 @@
      "name": "Kreditt HYG/IEF, 5 dager",
      "kind": "cont",
      "n": 3703,
-     "q": 0.458377,
+     "q": 0.45841,
      "passes": false,
      "stable": true,
-     "rho": -0.018023,
-     "t": -0.941734,
-     "r1": -0.009541,
-     "r2": -0.007861,
+     "rho": -0.018024,
+     "t": -0.941685,
+     "r1": -0.009558,
+     "r2": -0.007858,
      "r3": -0.036732
     },
     {
@@ -749,7 +749,13 @@
    ],
    "rolling": []
   },
-  "trained_on": "2026-11-06 12:47",
+  "confident": {
+   "n": 801,
+   "share": 0.248064,
+   "hit": 0.561798,
+   "bp": 6.343767
+  },
+  "trained_on": "2026-11-06 12:48",
   "n_train": 3708,
   "features": [
    {
