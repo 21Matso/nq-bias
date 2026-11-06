@@ -207,13 +207,28 @@ function renderArgs(T){
       return '<div class="arg"><div class="row1"><span class="lbl">' + esc(a.label) + '</span><span class="pp ' + (side === "bull" ? "up" : "down") + '">' + sgn(a.pp, 1, " pp") + "</span></div>" +
         '<div class="val">Nå: ' + esc(String(a.value).replace(/(\d)\.(\d)/g, "$1,$2").replace(/(^|[\s(])-(?=\d)/g, "$1−")) + "</div>" +
         '<div class="track"><i style="width:' + w + "%;background:var(--" + side + ')"></i></div>' +
-        '<div class="why">' + esc(a.why) + " <span>[" + esc(a.source) + "]</span></div></div>";
+        '<div class="why">' + esc(a.why) + (a.source ? " <span>[" + esc(a.source) + "]</span>" : "") + "</div></div>";
     }).join("");
   }
   return '<section><h2>Argumentene</h2><div class="args">' +
     '<div class="card"><h3 class="bull">▲ For bullish</h3>' + list(T.bull || [], "bull") + "</div>" +
     '<div class="card"><h3 class="bear">▼ For bearish</h3>' + list(T.bear || [], "bear") + "</div></div>" +
     '<p class="muted" style="font-size:12.5px;margin:8px 2px 0">pp = hvor mange prosentpoeng argumentet flytter sannsynligheten i dag.</p></section>';
+}
+
+function renderSimilar(T){
+  if (!T || !(T.similar || []).length) return "";
+  var base = T.similar[0];
+  var rows = T.similar.map(function(r, i){
+    var diff = r.up - base.up;
+    var strong = i > 0 && Math.abs(diff) >= 0.04 && r.n >= 100;
+    return "<tr" + (i === 0 ? ' class="muted"' : "") + "><td>" + esc(r.name) + '</td><td class="n">' + r.n +
+      '</td><td class="n"' + (strong ? ' style="font-weight:700"' : "") + '><span class="' + (i ? cls(diff) : "") + '">' + pct(r.up, 0) + "</span></td>" +
+      '<td class="n ' + cls(r.bp) + '">' + sgn(r.bp, 1) + '</td><td class="n muted">' + (r.up_recent == null ? "–" : pct(r.up_recent, 0)) + "</td></tr>";
+  }).join("");
+  return '<section><h2>Lignende dager 2011–2026</h2><div class="card"><div class="scroll"><table><thead><tr><th>Situasjon i dag</th><th class="n">Dager</th><th class="n">Opp</th><th class="n">Snitt bp</th><th class="n">3 år</th></tr></thead><tbody>' +
+    rows + '</tbody></table></div><p class="muted" style="font-size:12.5px;margin:8px 0 0">Hvor ofte NQ har steget i første time i samme situasjon som i dag, hver betingelse for seg. ' +
+    "«3 år» = opp-andel de siste tre årene. Uthevet = minst 4 prosentpoeng fra alle dager og minst 100 dager. Dette er beskrivende statistikk; selve biasen over kommer fra modellen, som veier dem sammen.</p></div></section>";
 }
 
 function renderEvents(T){
@@ -293,7 +308,46 @@ function wireCharts(){
   });
 }
 
+function renderModel2(Mo){
+  var Rs = Mo.research || {}, H = Rs.honest, P = Rs.placebo || {};
+  var h = '<section id="modell"><h2>Modellkvalitet – ærlig vurdering</h2><div class="card">';
+  h += '<div class="lvl ' + esc(Mo.level) + '">' + esc(Mo.verdict) + "</div>";
+  if (H) {
+    var top = (H.tiers || []).filter(function(t){ return t.tier === "over 10 pp"; })[0];
+    var mid = (H.tiers || []).filter(function(t){ return t.tier === "6–10 pp"; })[0];
+    h += '<div class="tiles">' +
+      '<div class="tile"><div class="k">Treff, alle dager</div><div class="v">' + pct(H.hit) + '</div><div class="s">' + H.n + " dager · p = " + num(H.p_binom, 3) + "</div></div>" +
+      '<div class="tile"><div class="k">Flaksnivå (placebo)</div><div class="v">' + pct(P.p95) + '</div><div class="s">95-persentil, stokkede utfall</div></div>' +
+      (mid ? '<div class="tile"><div class="k">Treff når «Svak»</div><div class="v">' + pct(mid.hit) + '</div><div class="s">' + mid.n + " dager · " + sgn(mid.bp, 1, " bp") + "</div></div>" : "") +
+      (top ? '<div class="tile"><div class="k">Treff når «Tydelig»</div><div class="v">' + pct(top.hit) + '</div><div class="s">' + top.n + " dager · " + sgn(top.bp, 1, " bp") + "</div></div>" : "") +
+      "</div>";
+    h += '<p class="muted" style="font-size:12.5px;margin:0">Walk-forward ' + esc(dateNo((H.start || "").slice(0, 10))) + " – " + esc(dateNo((H.end || "").slice(0, 10))) +
+      ": hvert år er spådd med en modell som bare kjente årene før, og der også valget av variabler bare brukte fortiden. Data: " + (Rs.n_days || "–") +
+      " handelsdager fra Dukascopy (Nasdaq 100, 5-minutters). Grunnrate: NQ steg i første time " + pct(Rs.base_up) + " av dagene.</p>";
+    if (Rs.rolling && Rs.rolling.length) h += '<h3 style="margin:16px 0 0;font-size:14px">Treffrate, rullerende 250 dager</h3>' +
+      rollingChart(Rs.rolling.map(function(r){ return {date: r.date, hit60: r.hit}; }));
+    h += '<h3 style="margin:16px 0 6px;font-size:14px">Treff etter hvor sikker modellen var</h3><div class="scroll"><table><thead><tr><th>Avstand fra 50 %</th><th class="n">Dager</th><th class="n">Treff</th><th class="n">bp i retning</th></tr></thead><tbody>' +
+      (H.tiers || []).map(function(t){ return "<tr><td>" + esc(t.tier) + '</td><td class="n">' + t.n + '</td><td class="n">' + pct(t.hit) + '</td><td class="n">' + sgn(t.bp, 1) + "</td></tr>"; }).join("") +
+      '</tbody></table></div><p class="muted" style="font-size:12.5px">Under 6 pp vises som NØYTRAL, fordi modellen ikke har hatt noen fordel der.</p>';
+    if ((H.by_year || []).length) h += '<p class="muted" style="font-size:12.5px">Per år: ' + H.by_year.map(function(y){ return y.year + ": " + pct(y.hit, 0); }).join(" · ") + "</p>";
+  }
+  if ((Mo.features || []).length) {
+    h += '<details><summary>Variablene modellen bruker nå (' + Mo.features.length + ')</summary><div class="scroll"><table><thead><tr><th>Variabel</th><th class="n">Vekt</th></tr></thead><tbody>' +
+      Mo.features.map(function(f){ return "<tr><td>" + esc(f.label) + '</td><td class="n ' + cls(f.coef) + '">' + sgn(f.coef, 3) + "</td></tr>"; }).join("") +
+      '</tbody></table></div><p class="muted" style="font-size:12.5px">Positiv vekt: høy verdi trekker mot bullish. Trent ' + esc(Mo.trained_on) + " på " + Mo.n_train + " dager.</p></details>";
+  }
+  if ((Rs.tests || []).length) {
+    h += '<details><summary>Alle hypotesene som er testet (' + Rs.tests.length + ')</summary><div class="scroll"><table><thead><tr><th>Hypotese</th><th class="n">Dager</th><th class="n">Effekt</th><th class="n">q</th><th>Besto</th></tr></thead><tbody>' +
+      Rs.tests.map(function(t){
+        var eff = t.kind === "bin" ? pct(t.up1, 0) + " opp vs " + pct(t.up0, 0) : "ρ " + sgn(t.rho, 3);
+        return "<tr><td>" + esc(t.name) + '</td><td class="n">' + t.n + '</td><td class="n">' + eff + '</td><td class="n">' + num(t.q, 3) + "</td><td>" + (t.passes ? '<span class="up">ja</span>' : '<span class="muted">nei</span>') + "</td></tr>";
+      }).join("") + '</tbody></table></div><p class="muted" style="font-size:12.5px">Besto = q under 0,10 etter korreksjon for at mange hypoteser testes samtidig, og samme fortegn i 2011–15, 2016–20 og 2021–26.</p></details>';
+  }
+  return h + "</div></section>";
+}
+
 function renderModel(Mo){
+  if (Mo && Mo.version === 2) return renderModel2(Mo);
   if (!Mo) return '<section id="modell"><h2>Modellkvalitet</h2><div class="card">Ingen modell trent ennå.</div></section>';
   var m = Mo.metrics || {}, c = m.p_cal || {};
   var h = '<section id="modell"><h2>Modellkvalitet – ærlig vurdering</h2><div class="card">';
@@ -361,7 +415,7 @@ function render(){
   var h = '<div class="status">' + statusText(M) + "</div>";
   if (M.error) h += '<div class="banner err"><b>Siste kjøring feilet.</b> ' + esc(M.error) + " Siden viser forrige vellykkede resultat.</div>";
   h += '<section id="idag">' + renderHero(data) + "</section>";
-  h += renderArgs(data.today) + renderEvents(data.today) + renderMarket(data.today) + renderModel(data.model) + renderJournal(data.journal) + renderNotes(data);
+  h += renderArgs(data.today) + renderSimilar(data.today) + renderEvents(data.today) + renderMarket(data.today) + renderModel(data.model) + renderJournal(data.journal) + renderNotes(data);
   h += '<div class="foot">Biasen beregnes automatisk hver handelsdag 30–5 minutter før NY-åpning, fra gratis data (Yahoo Finance, FRED, ForexFactory). Siden laster nye tall av seg selv. ' +
        "Den sier noe om sannsynlighet, ikke om sikkerhet. Dette er et analyseverktøy, ikke finansiell rådgivning.<br><br>" +
        '<button class="theme" id="theme">◐ Bytt mellom lyst og mørkt</button></div>';

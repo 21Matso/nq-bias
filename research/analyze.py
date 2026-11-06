@@ -82,6 +82,36 @@ class Px:
         return float(self.h[a:b].max()), float(self.l[a:b].min())
 
 
+def add_features(df: pd.DataFrame, h1_keys: list[str]) -> pd.DataFrame:
+    """Standardiserte variabler og interaksjoner (bruker bare fortidens volatilitet)."""
+    # standardisering med fortidens volatilitet
+    s = df["sigma"]
+    for c in ["gap", "on_asia", "on_london", "pre_news", "pre_30", "prev_rth", "prev_fh", "prev_last",
+              "fh_mom5", "fh_mom20", "on_range"]:
+        df[c + "_z"] = df[c] / s
+    df["ret5_z"] = df["ret5"] / (s * np.sqrt(5))
+    df["trend50_z"] = df["trend50"] / s
+    df["rel_es_z"] = (df["gap"] - df["es_gap"]) / s
+    for k in h1_keys:
+        col = f"x_{k}"
+        sd = df[col].rolling(60, min_periods=30).std().shift(1)
+        df[col + "_z"] = df[col] / sd
+    df["vix_hi"] = df["vix_hi"].where(df["vix"].notna())
+    df["asia_z"] = df["on_asia_z"]
+    df["london_z"] = df["on_london_z"]
+    g = df["gap_z"]
+    df["gap_x_news"] = g * df["news_day"]
+    df["gap_x_nonews"] = g * (1 - df["news_day"])
+    df["pre_news_x_news"] = df["pre_news_z"] * df["news_day"]
+    df["gap_x_thufri"] = g * df["thu_fri"]
+    df["gap_x_big"] = g * (g.abs() > 1)
+    df["gap_x_outside"] = g * (df["gap_vs_range"] != 0)
+    df["gap_x_earn"] = g * df["earn"]
+    df["gap_x_vix"] = g * df["vix_hi"].fillna(0)
+
+    return df
+
+
 def yahoo_daily() -> dict[str, pd.Series]:
     import yfinance as yf
     tick = ["QQQ", "^VIX", "^VIX3M", "^TNX", "HYG", "IEF"]
@@ -122,16 +152,26 @@ def logr(a, b):
     return math.log(a / b) if (a and b and np.isfinite(a) and np.isfinite(b) and a > 0 and b > 0) else np.nan
 
 
-def build_days(nq: pd.DataFrame, es: pd.DataFrame, h1: dict, ydaily: dict, earn: list) -> pd.DataFrame:
+def build_days(nq: pd.DataFrame, es: pd.DataFrame, h1: dict, ydaily: dict, earn: list,
+               live: pd.Timestamp | None = None, live_nq: pd.DataFrame | None = None,
+               live_es: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Én rad per handelsdag. Med `live` (et tidspunkt før 09:30 ET) legges dagens dag til
+    som siste rad, med priser fram til `live` og uten fasit. `live_nq/live_es` kan gi
+    egne prisserier for dagens rad (f.eks. Yahoo hvis Dukascopy er forsinket)."""
     P = Px(nq, pd.Timedelta(minutes=15))
     E = Px(es, pd.Timedelta(minutes=15))
     X = {k: Px(v, pd.Timedelta(hours=3)) for k, v in h1.items()}
+    LP = Px(live_nq, pd.Timedelta(minutes=15)) if live_nq is not None and len(live_nq) else P
+    LE = Px(live_es, pd.Timedelta(minutes=15)) if live_es is not None and len(live_es) else E
+    live_day = live.date() if live is not None else None
 
     qqq_days = set(ydaily["QQQ"].index.date) if len(ydaily.get("QQQ", [])) else None
     cand = sorted({ts.date() for ts in nq.index if ts.weekday() < 5})
     days = [d for d in cand if (qqq_days is None or d in qqq_days)]
     # handelsdager med komplett åpning
     days = [d for d in days if np.isfinite(P.at(at(d, 9, 30))) and np.isfinite(P.at(at(d, 10, 30)))]
+    if live_day is not None:
+        days = [d for d in days if d < live_day] + [live_day]
     earn_ts = np.array(sorted(pd.Timestamp(e).as_unit("ns").value for e in earn), dtype=np.int64)
 
     rows = []
@@ -140,32 +180,39 @@ def build_days(nq: pd.DataFrame, es: pd.DataFrame, h1: dict, ydaily: dict, earn:
             continue
         p = days[i - 1]
         nxt = days[i + 1] if i + 1 < len(days) else None
-        c_prev = P.at(at(p, 16, 0))
-        o = P.at(at(d, 9, 30))
+        is_live = d == live_day
+        if is_live:            # dagens rad: bruk live-serien og pris ved `live`
+            P_, E_ = LP, LE
+            t_open = min(live, at(d, 9, 30))
+        else:
+            P_, E_ = P, E
+            t_open = at(d, 9, 30)
+        c_prev = P_.at(at(p, 16, 0))
+        o = P_.at(t_open)
         r = {
             "date": d,
             "p0930": o,
-            "fh": logr(P.at(at(d, 10, 30)), o),
-            "fh30": logr(P.at(at(d, 10, 0)), o),
+            "fh": np.nan if is_live else logr(P_.at(at(d, 10, 30)), o),
+            "fh30": np.nan if is_live else logr(P_.at(at(d, 10, 0)), o),
             "gap": logr(o, c_prev),
-            "on_asia": logr(P.at(at(d, 3, 0)), c_prev),
-            "on_london": logr(P.at(at(d, 8, 25)), P.at(at(d, 3, 0))),
-            "pre_news": logr(o, P.at(at(d, 8, 25))),
-            "pre_30": logr(o, P.at(at(d, 9, 0))),
-            "news_move": logr(P.at(at(d, 8, 45)), P.at(at(d, 8, 25))),
-            "prev_rth": logr(c_prev, P.at(at(p, 9, 30))),
-            "prev_fh": logr(P.at(at(p, 10, 30)), P.at(at(p, 9, 30))),
-            "prev_last": logr(c_prev, P.at(at(p, 15, 0))),
-            "es_gap": logr(E.at(at(d, 9, 30)), E.at(at(p, 16, 0))),
-            "es_fh": logr(E.at(at(d, 10, 30)), E.at(at(d, 9, 30))),
+            "on_asia": logr(P_.at(at(d, 3, 0)), c_prev),
+            "on_london": logr(P_.at(at(d, 8, 25)), P_.at(at(d, 3, 0))),
+            "pre_news": logr(o, P_.at(at(d, 8, 25))),
+            "pre_30": logr(o, P_.at(at(d, 9, 0))),
+            "news_move": logr(P_.at(at(d, 8, 45)), P_.at(at(d, 8, 25))),
+            "prev_rth": logr(c_prev, P_.at(at(p, 9, 30))),
+            "prev_fh": logr(P_.at(at(p, 10, 30)), P_.at(at(p, 9, 30))),
+            "prev_last": logr(c_prev, P_.at(at(p, 15, 0))),
+            "es_gap": logr(E_.at(t_open), E_.at(at(p, 16, 0))),
+            "es_fh": np.nan if is_live else logr(E_.at(at(d, 10, 30)), E_.at(at(d, 9, 30))),
             "dow": d.weekday(),
-            "pre_holiday": int(nxt is not None and (nxt - d).days > (3 if d.weekday() == 4 else 1)),
+            "pre_holiday": 0 if is_live else int(nxt is not None and (nxt - d).days > (3 if d.weekday() == 4 else 1)),
             "post_holiday": int((d - p).days > (3 if d.weekday() == 0 else 1)),
         }
-        hi, lo = P.hl(at(p, 16, 0), at(d, 9, 30))
+        hi, lo = P_.hl(at(p, 16, 0), t_open)
         r["on_pos"] = (o - lo) / (hi - lo) if np.isfinite(hi) and hi > lo else np.nan
         r["on_range"] = logr(hi, lo)
-        phi, plo = P.hl(at(p, 9, 30), at(p, 16, 0))
+        phi, plo = P_.hl(at(p, 9, 30), at(p, 16, 0))
         r["gap_vs_range"] = (1 if o > phi else -1 if o < plo else 0) if np.isfinite(phi) else np.nan
         for k in X:
             r[f"x_{k}"] = logr(X[k].at(at(d, 9, 0)), X[k].at(at(p, 16, 0)))
@@ -194,6 +241,10 @@ def build_days(nq: pd.DataFrame, es: pd.DataFrame, h1: dict, ydaily: dict, earn:
     pos = months.groupby(months).cumcount()
     rev = months.groupby(months).cumcount(ascending=False)
     df["tom"] = ((pos < 3) | (rev == 0)).astype(int)
+    last = df.index[-1]   # siste rad er ikke nødvendigvis siste handelsdag i måneden
+    rest = [last + timedelta(days=k) for k in range(1, 8)]
+    more = any(x.month == last.month and x.weekday() < 5 for x in rest)
+    df.loc[last, "tom"] = int(pos.loc[last] < 3 or not more)
     df["opex"] = [int(x.weekday() == 4 and 15 <= x.day <= 21) for x in df.index]
     df["opex_week"] = [int(15 <= (x + timedelta(days=4 - x.weekday())).day <= 21) for x in df.index]
     df["monday"] = (df["dow"] == 0).astype(int)
@@ -522,30 +573,7 @@ def main() -> None:
     earn = earnings_dates() if os.environ.get("NO_YAHOO") != "1" else []
     df = build_days(nq, es, h1, ydaily, earn)
 
-    # standardisering med fortidens volatilitet
-    s = df["sigma"]
-    for c in ["gap", "on_asia", "on_london", "pre_news", "pre_30", "prev_rth", "prev_fh", "prev_last",
-              "fh_mom5", "fh_mom20", "on_range"]:
-        df[c + "_z"] = df[c] / s
-    df["ret5_z"] = df["ret5"] / (s * np.sqrt(5))
-    df["trend50_z"] = df["trend50"] / s
-    df["rel_es_z"] = (df["gap"] - df["es_gap"]) / s
-    for k in h1:
-        col = f"x_{k}"
-        sd = df[col].rolling(60, min_periods=30).std().shift(1)
-        df[col + "_z"] = df[col] / sd
-    df["vix_hi"] = df["vix_hi"].where(df["vix"].notna())
-    df["asia_z"] = df["on_asia_z"]
-    df["london_z"] = df["on_london_z"]
-    g = df["gap_z"]
-    df["gap_x_news"] = g * df["news_day"]
-    df["gap_x_nonews"] = g * (1 - df["news_day"])
-    df["pre_news_x_news"] = df["pre_news_z"] * df["news_day"]
-    df["gap_x_thufri"] = g * df["thu_fri"]
-    df["gap_x_big"] = g * (g.abs() > 1)
-    df["gap_x_outside"] = g * (df["gap_vs_range"] != 0)
-    df["gap_x_earn"] = g * df["earn"]
-    df["gap_x_vix"] = g * df["vix_hi"].fillna(0)
+    df = add_features(df, list(h1))
 
     results = {"generated": datetime.utcnow().isoformat() + "Z", "n_days": int(df["y"].notna().sum()),
                "first": str(df.index.min()), "last": str(df.index.max()),
@@ -608,6 +636,11 @@ def main() -> None:
     preds[nested["name"]] = npred
     results["models"] = models
     results["nested_selection"] = chosen
+    yy = df.loc[npred.index, "y"]
+    hit_s = ((npred > 0.5).astype(int) == yy).astype(float)
+    roll = hit_s.rolling(250, min_periods=150).mean().dropna()
+    roll = roll[~pd.DatetimeIndex(roll.index).to_period("M").duplicated(keep="last")]
+    results["nested_rolling"] = [{"date": str(k), "hit": float(v)} for k, v in roll.items()]
     # placebo for hele prosedyren (utvalg + trening) på stokkede utfall
     rng0 = np.random.default_rng(7)
     nph = []

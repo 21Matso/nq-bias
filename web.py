@@ -202,37 +202,163 @@ def decide_phase(now_et: pd.Timestamp, forced: str | None) -> str:
     return "followup"
 
 
+def flags_v2(day, row: pd.Series, earnings: dict) -> list[str]:
+    flags = []
+    if day in set(C.FOMC_DECISION_DATES):
+        t = pd.Timestamp(datetime.combine(day, time(14, 0)), tz=C.NY).tz_convert(C.OSLO)
+        flags.append(f"FOMC-rentebeslutning i dag kl. {t:%H:%M} norsk tid (etter første time)")
+    if row.get("opex") == 1:
+        flags.append("Månedlig opsjonsforfall (OPEX) i dag")
+    if row.get("news_day") == 1:
+        flags.append("Stor bevegelse rundt 08:30-tallene i dag – modellen behandler dette som en nyhetsdag")
+    if row.get("earn") == 1:
+        flags.append("Earnings fra et av de største Nasdaq-selskapene siden i går kveld")
+    later = sorted({t for t, lst in (earnings or {}).items() for ts in lst if ts.date() == day and ts.time() >= C.CLOSE_ET})
+    if later:
+        flags.append(f"Earnings etter stengning i dag: {', '.join(later)}")
+    if row.get("tom") == 1:
+        flags.append("Månedsskifte-vindu")
+    return flags
+
+
+def live_payload_v2(day, now_et, row_df, model, pred, summary, ctx_y, warnings, source) -> dict:
+    import bias2 as B
+    row = row_df.iloc[0]
+    p = pred["p"]
+    bias, strength = B.label(p)
+    def active(r):   # ja/nei-variabler og interaksjoner vises bare når de faktisk gjelder i dag
+        v = row.get(r["key"], np.nan)
+        if r["key"] in B.BINARY or "_x_" in r["key"]:
+            return np.isfinite(v) and v != 0
+        return True
+    rs = [r for r in pred["reasons"] if not r["missing"] and abs(r["pp"]) >= 0.15 and active(r)]
+    bull = sorted([r for r in rs if r["pp"] > 0], key=lambda r: -r["pp"])
+    bear = sorted([r for r in rs if r["pp"] < 0], key=lambda r: r["pp"])
+    open_et = pd.Timestamp(datetime.combine(day, C.OPEN_ET), tz=C.NY)
+    nq = ctx_y.get("nq_price", np.nan)
+    med = ctx_y.get("fh_abs_med", np.nan)
+    events = []
+    for ev in ctx_y.get("events", []):
+        t = ev["time"]
+        where = "before" if t.time() < C.OPEN_ET else "first_hour" if t.time() <= C.FIRST_HOUR_END_ET else "after"
+        events.append({"oslo": f"{t.tz_convert(C.OSLO):%H:%M}", "et": f"{t:%H:%M}", "title": ev["title"],
+                       "impact": ev["impact"], "forecast": ev["forecast"], "previous": ev["previous"],
+                       "actual": ev["actual"], "where": where})
+    vix = row.get("vix", np.nan)
+    vt = row.get("vix_ts", np.nan)
+    regime = [{"name": k, "level": lvl, "chg": chg} for k, (lvl, chg) in ctx_y.get("regime", {}).items()]
+    regime.append({"name": "VIX (i går)", "level": vix, "chg": None})
+    regime.append({"name": "VIX / VIX3M", "level": 1 + vt if np.isfinite(vt) else None, "chg": None,
+                   "note": ("backwardation (stress)" if np.isfinite(vt) and vt > 0 else "contango (normalt)")})
+    return {
+        "model_version": 2,
+        "date": str(day), "weekday": R.UKEDAG[day.weekday()],
+        "run_oslo": f"{now_et.tz_convert(C.OSLO):%H:%M}", "run_et": f"{now_et:%H:%M}",
+        "open_oslo": f"{open_et.tz_convert(C.OSLO):%H:%M}",
+        "minutes_before_open": (open_et - now_et).total_seconds() / 60,
+        "p": p, "p_raw": p, "bias": bias, "strength": strength,
+        "class_hist": B.class_hist(summary, strength),
+        "nq_price": nq, "typical_points": nq * med if np.isfinite(nq) and np.isfinite(med) else None,
+        "bull": bull, "bear": bear,
+        "similar": B.similar_days(ctx_y["table"], row),
+        "market": [{"name": k, "last": last, "chg": chg} for k, (last, chg) in ctx_y.get("market", {}).items()],
+        "regime": regime, "events": events, "flags": flags_v2(day, row, ctx_y.get("earnings", {})),
+        "headlines": [h for _, h in ctx_y.get("headlines", [])],
+        "warnings": warnings, "missing": [r["label"] for r in pred["reasons"] if r["missing"]],
+        "data_source": source,
+    }
+
+
+def model_payload_v2(model: dict | None, summary: dict) -> dict:
+    h = (summary or {}).get("honest") or {}
+    pl = (summary or {}).get("placebo") or {}
+    level, text = "bad", "Ingen forskningsresultater ennå."
+    if h:
+        beats = h["hit"] > (pl.get("p95") or 0.52)
+        if h.get("p_binom", 1) < 0.01 and beats:
+            level, text = "good", ("Modellen har slått tilfeldig gjetting over mer enn ti år med dager den ikke hadde sett, "
+                                   "også når variabelutvalget bare brukte fortiden. Fordelen er liten i snitt og størst på dagene "
+                                   "den er mest sikker.")
+        elif h.get("p_binom", 1) < 0.10:
+            level, text = "meh", "Svakt, men målbart signal. Behandle biasen som én innsikt, ikke som en fasit."
+        else:
+            level, text = "bad", "Modellen har ikke vist seg bedre enn gjetting. Biasen bør ikke brukes."
+    out = {"version": 2, "level": level, "verdict": text, "research": summary}
+    if model:
+        coefs = []
+        if model.get("pipe") is not None:
+            import bias2 as B
+            for col, c in zip(model["features"], model["pipe"][-1].coef_[0]):
+                coefs.append({"key": col, "label": B.LABELS.get(col, (col, ""))[0], "coef": float(c)})
+        out.update({"trained_on": model["trained_on"], "n_train": model["n"], "features": coefs,
+                    "first": model["first"], "last": model["last"]})
+    return out
+
+
 def run(args, nq) -> str:
-    """nq = nqbias-modulen (for å gjenbruke load_bundle, get_model, compute_live)."""
+    """nq = nqbias-modulen (for å gjenbruke load_bundle, markedsbilde, kalender)."""
+    import bias2 as B
+    from features import rth_daily_table
+
     now_et = D.now_ny()
     phase = decide_phase(now_et, getattr(args, "mode", None))
     payload = load_existing()
     R.console.print(f"[bold]Nettside-kjøring[/bold]  {now_et:%Y-%m-%d %H:%M} ET  ·  fase: {phase}")
 
-    from features import rth_daily_table
-    from model import load_trained
-
-    tr, error = None, None
+    model, error = None, None
+    summary = B.research_summary()
     try:
-        if phase == "live":
-            ctx = nq.compute_live(args, quiet_weekend=True)
-            if ctx is not None:
-                nq.log_live(ctx)
-                payload["today"] = live_payload(ctx)
-                tr = ctx["trained"]
+        bundle = nq.load_bundle(max_age_sec=300)          # Yahoo: markedsbilde, kalender, fasit
+        J.fill_outcomes(rth_daily_table(bundle["rth"]["QQQ"]))
+        inputs = B.load_inputs()
+        if phase == "live" and now_et.weekday() < 5:
+            warnings, source = [], "Dukascopy"
+            last = B.last_bar_end(inputs)
+            live_nq = live_es = None
+            if last is None or (now_et - last) > pd.Timedelta(minutes=20):
+                live_nq, live_es = B.yahoo_bars("NQ=F"), B.yahoo_bars("ES=F")
+                source = "Yahoo (Dukascopy var forsinket)"
+                warnings.append(f"Dukascopy-data var forsinket (siste bar {last}); dagens rad er beregnet med Yahoo-priser.")
+            df = B.table(inputs, live=now_et, live_nq=live_nq, live_es=live_es)
+            model = B.get_model(df)
+            row = df.iloc[[-1]]
+            if row.index[0] != now_et.date():
+                raise RuntimeError("fant ikke dagens rad i dataene")
+            pred = B.predict(model, row)
+            if not np.isfinite(row.iloc[0].get("gap", np.nan)):
+                warnings.insert(0, "VIKTIG: mangler fersk pris for NQ – biasen er usikker.")
+            prev_days = [d for d in rth_daily_table(bundle["rth"]["QQQ"]).index if d < now_et.date()]
+            nq_price = D.live_price(bundle["h24"].get("NQ=F"), now_et)
+            ctx_y = {"table": df, "nq_price": nq_price,
+                     "fh_abs_med": float(df["fh"].dropna().abs().iloc[-20:].median()),
+                     "market": nq.market_snapshot(bundle, now_et, prev_days[-1], strict=False) if prev_days else {},
+                     "regime": nq.regime_snapshot(bundle["fred"], bundle["daily"]),
+                     "events": nq.todays_events(now_et.date()), "earnings": bundle.get("earnings", {}),
+                     "headlines": D.fetch_headlines()}
+            payload["today"] = live_payload_v2(now_et.date(), now_et, row, model, pred, summary, ctx_y,
+                                               warnings + list(D.SOURCE_ERRORS), source)
+            bias, strength = B.label(pred["p"])
+            top = "; ".join(f"{r['label']} {r['pp']:+.1f}pp" for r in sorted(pred["reasons"], key=lambda r: -abs(r["pp"]))[:4])
+            open_et = pd.Timestamp(datetime.combine(now_et.date(), C.OPEN_ET), tz=C.NY)
+            J.log_prediction({"date": str(now_et.date()), "run_time_oslo": f"{now_et.tz_convert(C.OSLO):%H:%M}",
+                              "run_time_et": f"{now_et:%H:%M}",
+                              "minutes_before_open": round((open_et - now_et).total_seconds() / 60, 1),
+                              "p_raw": round(pred["p"], 4), "p_cal": round(pred["p"], 4), "bias": bias,
+                              "strength": strength, "top_reasons": top,
+                              "nq_price": round(nq_price, 2) if np.isfinite(nq_price) else np.nan})
         else:
-            bundle = nq.load_bundle(max_age_sec=300)
-            J.fill_outcomes(rth_daily_table(bundle["rth"]["QQQ"]))
-            tr = nq.get_model(bundle, retrain=False)   # trener på nytt én gang per dag
+            df = B.table(inputs)
+            model = B.get_model(df)          # trener på nytt én gang per dag
     except SystemExit:
         error = "Kjøringen feilet: " + ("; ".join(D.SOURCE_ERRORS) or "ukjent årsak (se loggen i GitHub Actions)")
     except Exception as e:  # siden skal fortsatt oppdateres med feilmeldingen
+        import traceback
+        traceback.print_exc()
         error = f"Kjøringen feilet: {type(e).__name__}: {e}"
-    if tr is None:
-        tr = load_trained()
+    if model is None:
+        model = B.load()
 
-    if tr is not None:
-        payload["model"] = model_payload(tr)
+    payload["model"] = model_payload_v2(model, summary)
     payload["journal"] = journal_payload()
     nxt = next_open(now_et)
     nxt_oslo = nxt.tz_convert(C.OSLO)

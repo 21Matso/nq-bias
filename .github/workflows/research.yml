@@ -5,7 +5,9 @@ name: Research
 on:
   push:
     branches: [main]
-    paths: ["research/*.py", "research/*.js", "research/package.json", ".github/workflows/research.yml"]
+    paths: ["research/analyze.py", "research/fetch.js", "research/package.json", ".github/workflows/research.yml"]
+  schedule:
+    - cron: "15 22 * * 1-5"   # hver handelsdag etter stengning: oppdater årets data og resultatene
   workflow_dispatch:
 
 permissions:

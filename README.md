@@ -59,41 +59,46 @@ Den lokale versjonen har sin egen journal på PC-en, adskilt fra nettsidens.
 - **Dagens hendelser.** Viktige USD-tall i dag. Tall som kommer *inne i* første time (typisk 10:00 ET, for eksempel ISM) markeres, fordi de kan snu alt.
 - **Modellkvalitet.** En ærlig vurdering av om modellen har slått gjetting på dager den aldri har sett.
 
-## 4. Metode
+## 4. Metode (nettsiden, modell v2)
 
 ### Mål
-Fortegnet på NQ fra 09:30 til 10:30 ET. Det måles på QQQ, som følger Nasdaq-100 nesten 1:1 og ikke har kontrakt-rull. Bevegelsen regnes om til NQ-poeng med NQ-prisen.
+Fortegnet på NQ fra 09:30 til 10:30 ET: er NQ høyere etter første time enn ved åpning?
 
-### Variabler
-Alle variablene er kjent før 09:30 ET. Det er testet i koden at endring av data etter 09:30 ikke påvirker dem.
+### Data
+- **Dukascopy**, gratis: Nasdaq 100 og S&P 500 i 5-minutters oppløsning fra september 2011, rundt 3700 handelsdager, og USD/JPY, gull, olje, US T-bond og DXY i timesoppløsning. Lastes ned av `research/fetch.js`. Ferske data hentes før hver kjøring; Dukascopy ligger bare noen minutter bak.
+- **Yahoo**, daglig: VIX, VIX3M, renter og HYG/IEF. Også earnings-datoer, markedsbildet på siden og fasiten i journalen.
+- Sjekket mot Yahoo NQ=F: korrelasjonen i første time er 1,000.
 
-| Gruppe | Variabler | Grunnlag |
-|---|---|---|
-| Pris rundt åpningen | Overnight-gap, premarket-trend (siste 1,5 t), gårsdagens dag og siste halvtime, første time siste 5/20 dager, 5-dagers avkastning, avstand til 50-dagers snitt | Liu & Tse (2017): overnight-avkastning predikerer de første 30 min *negativt*. Yu, Rentzler & Wolf: i NQ-futures henger nattens bevegelse mest sammen med reversering. Gao m.fl. (2018), Baltussen m.fl. (2021): intradag-momentum, sterkere på nyhets- og høyvolatilitetsdager. Heston, Korajczyk & Sadka (2010): samme tidspunkt gjentar seg over dager. |
-| Relativ styrke | NQ vs ES, halvledere vs NQ | ES har mest volum og prisoppdagelse |
-| Makro (kryssmarkeder) | 10-års Treasury-future, DXY, USD/JPY og bitcoin overnight; 10-års rente og high yield-spread siste 5 dager | Rente/aksje-kobling, finansielle forhold, carry/risk-off |
-| Volatilitet | VIX-nivå (z-score), VIX/VIX3M, VIX-endring, gap × høy VIX | Momentum og reversering er sterkere ved høy VIX |
-| Kalender | Mandag, månedsskifte, opsjonsforfall, FOMC-dag, FOMC × høy VIX, megacap-earnings over natten | Lucca & Moench (2015), med forbehold om at før-FOMC-driften svekket seg etter 2015 (Kurov m.fl.), men har levd videre i perioder med høy VIX (Martello & Ribeiro). Turn-of-month-effekten. |
+### Hypoteser (research/analyze.py)
+Over 40 hypoteser fra forskning og praksis er testet hver for seg: gap og overnight-økter, 08:30-reaksjon, gårsdagen, tidsmønstre, NQ mot ES, kryssmarkeder, VIX, renter, kreditt, kalender, og betingede varianter som gap på nyhetsdager, store gap og gap torsdag/fredag. For hver hypotese beregnes:
+- korrelasjon og Newey-West-t
+- treffrate
+- stabilitet i 2011–15, 2016–20 og 2021–26
+- korreksjon for multippel testing (Benjamini–Hochberg)
 
-Overskrifter og økonomisk kalender vises som kontekst, men inngår ikke i modellen. Det finnes ingen gratis historikk for forventet og faktisk utfall, så de kan ikke testes.
+Resultatene står i `research/RESULTS.md` og oppdateres hver kveld.
 
 ### Modell
-- Logistisk regresjon med sterk L2-krymping. Krympingen velges med tidsserie-kryssvalidering på treningsdataene.
-- **Walk-forward.** Modellen trenes på dagene før og predikerer de neste 20, og så rulles vinduet videre. Alle tall i «Modellkvalitet» kommer fra dager modellen ikke hadde sett.
-- **Kalibrering.** Ut-av-utvalg-prediksjonene bestemmer en tillitsfaktor. Har modellen ikke slått gjetting, går faktoren mot 0, og dagens sannsynlighet krympes mot grunnraten. Programmet kan altså ikke vise deg en sterk bias den ikke har dekning for.
+- Variablene velges med en fast regel: q under 0,10 og samme fortegn i alle tre deler av perioden. Utvalget gir logistisk regresjon med krymping.
+- **Ærlig test:** walk-forward der både variabelutvalget og treningen for hvert år bare bruker årene før. Treffraten på siden kommer derfra.
+- **Placebo:** hele prosedyren kjøres på tilfeldig stokkede utfall. Det viser hvilken treffrate ren flaks gir.
+- Under 6 prosentpoeng fra 50 % vises NØYTRAL. Der har modellen ikke hatt noen fordel.
+- **Lignende dager:** for hver betingelse i dag vises hvor ofte NQ har steget i samme situasjon siden 2011.
+
+Den lokale terminalversjonen (`nqbias.py run`) bruker fortsatt den første modellen (v1, 2 år Yahoo-data).
 
 ## 5. Viktige begrensninger
 
-1. **Lite historikk.** Yahoo gir bare ~2 år med timesdata gratis, altså ~500 handelsdager. Det holder til å avsløre et middels sterkt signal, men ikke et svakt et.
-2. **Forvent beskjedne tall.** En ærlig treffrate for første time ligger typisk på 52–58 %. Lover noe 70 %, er det nesten alltid overtilpasset.
-3. **Forsinkede data.** Yahoo sine futures-priser kan være forsinket ~10 min. Derfor bør programmet kjøres 15:20–15:29.
-4. **Journalen er fasiten.** Backtesten er et estimat. Først når journalen har ~100 dager med bias, vet du om dette fungerer i praksis.
-5. **Kilder kan endre seg.** Feiler en kilde, vises det under «Merknader». Variabelen settes da til nøytral verdi, og programmet kjører videre.
-6. **FOMC-datoer for 2027** er foreløpige. De ligger i `config.py` og kan oppdateres der.
+1. **Små marginer.** Treffraten ligger i beste fall noen prosentpoeng over 50 % i snitt, og er høyere bare på dagene modellen er mest sikker. Det er et filter, ikke en fasit.
+2. **Marked endrer seg.** Effekter som var sterke i 2011–15 kan svekkes. Utvalget gjøres på nytt hver dag, og den rullerende treffraten på siden viser om fordelen holder.
+3. **Kilder kan endre seg.** Dukascopy kan stramme inn tilgangen. Er dataene forsinket, brukes Yahoo for dagens rad, og det står under «Merknader».
+4. **Journalen er fasiten.** Den måler modellen i sanntid, fremover i tid.
 
 ## 6. Filer
 
 ```
+research/     15 års historikk, hypotesetester (RESULTS.md) og nedlasting
+bias2.py      modell v2 (brukes av nettsiden)
 docs/         nettsiden (index.html viser data.json)
 .github/      GitHub Actions: når programmet kjører automatisk
 web.py        lager data.json for nettsiden

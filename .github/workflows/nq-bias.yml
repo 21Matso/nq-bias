@@ -16,7 +16,7 @@ on:
     - cron: "30 21 * * 1-5"
   push:
     branches: [main]
-    paths: [".github/workflows/**", "*.py", "requirements.txt"]
+    paths: [".github/workflows/nq-bias.yml", "*.py", "research/analyze.py", "requirements.txt"]
   workflow_dispatch:
     inputs:
       mode:
@@ -44,8 +44,19 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Installer pakker
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          cd research && npm install --no-audit --no-fund
+
+      - name: Hent ferske Dukascopy-data (siste 12 dager)
+        continue-on-error: true
+        timeout-minutes: 6
+        run: cd research && RECENT_DAYS=12 node fetch.js
 
       - name: Kjør NQ Bias
         env:
@@ -56,7 +67,7 @@ jobs:
         run: |
           git config user.name "nq-bias-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in docs/data.json data/journal.csv data/model.joblib; do
+          for f in docs/data.json data/journal.csv data/model_v2.joblib; do
             if [ -f "$f" ]; then git add "$f"; fi
           done
           if git diff --cached --quiet; then
