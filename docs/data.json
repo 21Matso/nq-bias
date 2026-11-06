@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T11:53:59.446887+00:00",
-  "generated_oslo": "2026-11-06 12:53",
-  "phase": "followup",
+  "generated_utc": "2026-11-06T13:26:58.035430+00:00",
+  "generated_oslo": "2026-11-06 14:26",
+  "phase": "prep",
   "next_open_date": "2026-11-06",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 06.11",
@@ -22,10 +22,10 @@
  },
  "model": {
   "version": 2,
-  "level": "meh",
-  "verdict": "Dagene med bias traff 56.2 %, mot 50.0 % ved tilfeldighet, men det er ikke statistisk sikkert. Behandle biasen som en svak indikasjon.",
+  "level": "good",
+  "verdict": "Over alle dager er modellen ikke bedre enn å alltid gjette opp (52.2 % mot 52.6 %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. 25 % av dagene) traff den 56.2 %, mot 51.9 % ved ren tilfeldighet (p = 0.009), og bedre enn alle placebo-kjøringene. Bruk biasen bare på disse dagene. NØYTRAL betyr at modellen ikke vet.",
   "research": {
-   "generated": "2026-11-06T11:49:31.958896Z",
+   "generated": "2026-11-06T11:54:20.873529Z",
    "n_days": 3708,
    "first": "2011-09-20",
    "last": "2026-11-05",
@@ -160,7 +160,23 @@
       "hit": 0.544601
      }
     ],
-    "hit_recent": 0.532
+    "hit_recent": 0.532,
+    "conf6": {
+     "n": 801,
+     "hit": 0.561798,
+     "expected": 0.519255,
+     "excess": 34.076804,
+     "share_bull": 0.828964,
+     "p": 0.008708
+    },
+    "conf10": {
+     "n": 241,
+     "hit": 0.585062,
+     "expected": 0.515908,
+     "excess": 16.666151,
+     "share_bull": 0.771784,
+     "p": 0.018376
+    }
    },
    "placebo": {
     "n": 30,
@@ -171,7 +187,11 @@
     "top_p95": 0.646853,
     "conf_mean": 0.55408,
     "conf_p95": 0.810811,
-    "conf_n_mean": 45.466667
+    "conf_n_mean": 45.466667,
+    "excess6_mean": -0.363436,
+    "excess6_p95": 1.658129,
+    "excess10_mean": 0.181935,
+    "excess10_p95": 1.923537
    },
    "tests": [
     {
@@ -601,14 +621,14 @@
      "name": "Kreditt HYG/IEF, 5 dager",
      "kind": "cont",
      "n": 3703,
-     "q": 0.458361,
+     "q": 0.458392,
      "passes": false,
      "stable": true,
-     "rho": -0.018026,
-     "t": -0.941757,
-     "r1": -0.009546,
-     "r2": -0.007855,
-     "r3": -0.036737
+     "rho": -0.018029,
+     "t": -0.941711,
+     "r1": -0.009569,
+     "r2": -0.007863,
+     "r3": -0.036739
     },
     {
      "name": "Olje overnight",
@@ -1349,7 +1369,10 @@
    "n": 801,
    "share": 0.248064,
    "hit": 0.561798,
-   "bp": 6.343767
+   "bp": 6.343767,
+   "expected": 0.519255,
+   "p": 0.008708,
+   "excess": 34.076804
   },
   "trained_on": "2026-11-06 12:48",
   "n_train": 3708,
