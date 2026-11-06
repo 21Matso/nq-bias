@@ -75,11 +75,11 @@ FEATURES: dict[str, FeatureInfo] = {
         "Døgnåpent mål på spekulativ risikoappetitt.",
         "Risikoappetitt", "Makro"),
     "y10_chg5": FeatureInfo("10-års rente, endring 5 dager",
-        "Rentetrend over uken (FRED).",
-        "FRED DGS10", "Makro"),
-    "hy_chg5": FeatureInfo("High yield-spread, endring 5 dager",
-        "Økende kredittspread signaliserer stress.",
-        "FRED BAMLH0A0HYM2", "Makro"),
+        "Stigende lange renter er normalt motvind for tech med høy verdsettelse.",
+        "Yahoo ^TNX", "Makro"),
+    "hy_chg5": FeatureInfo("Kreditt: HYG mot IEF, 5 dager",
+        "Når high yield-obligasjoner gjør det bedre enn statsobligasjoner er det risk-on; svakere kreditt signaliserer stress.",
+        "Kredittspread-proxy (HYG/IEF)", "Makro"),
     # --- Volatilitet ----------------------------------------------------------
     "vix_z": FeatureInfo("VIX-nivå (z, 1 år)",
         "Høy VIX betyr større bevegelser og sterkere momentum/reversering.",
@@ -190,6 +190,29 @@ def _is_opex(d) -> int:
     if d.weekday() != 4:
         return 0
     return int(15 <= d.day <= 21)
+
+
+def _daily_asof(df: pd.DataFrame | None, p, n: int = 5) -> tuple[float, float]:
+    """Siste dagsverdi t.o.m. forrige handelsdag p, og endring over n observasjoner."""
+    if df is None or df.empty or "Close" not in df:
+        return np.nan, np.nan
+    s = df["Close"].dropna()
+    s = s[s.index <= pd.Timestamp(p)]
+    if len(s) <= n:
+        return np.nan, np.nan
+    return float(s.iloc[-1]), float(s.iloc[-1] - s.iloc[-1 - n])
+
+
+def _credit_asof(hyg: pd.DataFrame | None, ief: pd.DataFrame | None, p, n: int = 5) -> tuple[float, float]:
+    """log(HYG/IEF) og 5-dagers endring. Positiv endring = kreditt sterkere (risk-on)."""
+    if hyg is None or ief is None or hyg.empty or ief.empty:
+        return np.nan, np.nan
+    col = "Adj Close" if "Adj Close" in hyg and "Adj Close" in ief else "Close"
+    r = np.log(hyg[col] / ief[col]).dropna()
+    r = r[r.index <= pd.Timestamp(p)]
+    if len(r) <= n:
+        return np.nan, np.nan
+    return float(r.iloc[-1]), float(r.iloc[-1] - r.iloc[-1 - n])
 
 
 def _fred_asof(fred: pd.DataFrame, col: str, d, lag_days: int = 1) -> tuple[float, float]:
@@ -317,8 +340,8 @@ def build_features(bundle: dict, target_dates: list | None = None, live_cutoff: 
         v_ts = v_last / float(v3.iloc[-1]) - 1 if len(v3) and float(v3.iloc[-1]) > 0 else np.nan
         vix_hi = float(v_last > v_med) if np.isfinite(v_last) and np.isfinite(v_med) else 0.0
 
-        y10, y10_chg = _fred_asof(fred, "DGS10", d)
-        hy, hy_chg = _fred_asof(fred, "BAMLH0A0HYM2", d)
+        y10, y10_chg = _daily_asof(daily.get("^TNX"), p)
+        hy, hy_chg = _credit_asof(daily.get("HYG"), daily.get("IEF"), p)
 
         earn_names = []
         for t, lst in earnings.items():

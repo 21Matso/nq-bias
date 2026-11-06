@@ -52,6 +52,13 @@ DAILY_TICKERS = {
     "^VIX": "VIX",
     "^VIX3M": "VIX 3 mnd",
     "QQQ": "QQQ",
+    # Renter og kreditt fra Yahoo (FRED svarer ikke fra GitHub sine servere)
+    "^TNX": "10-års rente",
+    "^FVX": "5-års rente",
+    "^TYX": "30-års rente",
+    "^IRX": "3-mnd rente",
+    "HYG": "High yield-obligasjoner (HYG)",
+    "IEF": "7–10 års statsobligasjoner (IEF)",
 }
 
 # FRED-serier (gratis CSV uten API-nøkkel)

@@ -54,7 +54,7 @@ def feature_value_text(name: str, row: pd.Series) -> str:
     if name == "y10_chg5":
         return f"{v * 100:+.0f} bp" if np.isfinite(v) else "–"
     if name == "hy_chg5":
-        return f"{v * 100:+.0f} bp" if np.isfinite(v) else "–"
+        return _pct(v * 100, 2) if np.isfinite(v) else "–"
     if name == "earn":
         return row.get("raw_earn") or "Nei"
     if name in ("monday", "tom", "opex", "fomc", "fomc_hivix"):

@@ -15,6 +15,7 @@ Valg:
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from datetime import datetime, time, timedelta
 
@@ -40,7 +41,8 @@ def load_bundle(max_age_sec: float) -> dict:
             "pp": D.fetch_intraday(ETF_PP, prepost=True, max_age_sec=max_age_sec),
             "h24": D.fetch_intraday(H24, prepost=False, max_age_sec=max_age_sec),
             "daily": D.fetch_daily(list(C.DAILY_TICKERS), max_age_sec=max(max_age_sec, 1800)),
-            "fred": D.fetch_fred(C.FRED_SERIES),
+            # FRED svarer ikke fra GitHub sine servere; der brukes Yahoo-data i stedet
+            "fred": pd.DataFrame() if os.environ.get("GITHUB_ACTIONS") else D.fetch_fred(C.FRED_SERIES),
         }
     with R.console.status("Henter earnings-datoer for megacaps…"):
         bundle["earnings"] = D.fetch_earnings_dates(C.MEGACAPS)
@@ -92,7 +94,10 @@ def market_snapshot(bundle: dict, now_et: pd.Timestamp, prev_day, strict: bool) 
     return rows
 
 
-def regime_snapshot(fred: pd.DataFrame) -> dict:
+def regime_snapshot(fred: pd.DataFrame, daily: dict | None = None) -> dict:
+    """Rente- og kredittbilde. FRED hvis den svarer, ellers tilsvarende fra Yahoo."""
+    if fred is None or fred.empty:
+        return _regime_from_yahoo(daily or {})
     out = {}
     for sid, name in C.FRED_SERIES.items():
         if fred is None or fred.empty or sid not in fred:
@@ -100,6 +105,31 @@ def regime_snapshot(fred: pd.DataFrame) -> dict:
             continue
         s = fred[sid].dropna()
         out[name] = (float(s.iloc[-1]), float(s.iloc[-1] - s.iloc[-6])) if len(s) > 6 else (np.nan, np.nan)
+    return out
+
+
+def _regime_from_yahoo(daily: dict) -> dict:
+    def last_chg(t, n=5):
+        df = daily.get(t)
+        if df is None or df.empty:
+            return np.nan, np.nan
+        s = df["Close"].dropna()
+        return (float(s.iloc[-1]), float(s.iloc[-1] - s.iloc[-1 - n])) if len(s) > n else (np.nan, np.nan)
+    out = {
+        "3-mnd rente (%)": last_chg("^IRX"),
+        "5-års rente (%)": last_chg("^FVX"),
+        "10-års rente (%)": last_chg("^TNX"),
+        "30-års rente (%)": last_chg("^TYX"),
+    }
+    t10, i3 = daily.get("^TNX"), daily.get("^IRX")
+    if t10 is not None and i3 is not None and not t10.empty and not i3.empty:
+        curve = (t10["Close"] - i3["Close"]).dropna()
+        out["Rentekurve 10 år – 3 mnd (pp)"] = (float(curve.iloc[-1]), float(curve.iloc[-1] - curve.iloc[-6])) if len(curve) > 6 else (np.nan, np.nan)
+    hyg, ief = daily.get("HYG"), daily.get("IEF")
+    if hyg is not None and ief is not None and not hyg.empty and not ief.empty:
+        r = (hyg["Close"] / ief["Close"]).dropna()
+        if len(r) > 6:
+            out["Kreditt HYG/IEF (endring i %)"] = (float(r.iloc[-1]), float((r.iloc[-1] / r.iloc[-6] - 1) * 100))
     return out
 
 
@@ -182,7 +212,7 @@ def compute_live(args, quiet_weekend: bool = False) -> dict | None:
         "now_et": now_et, "now_oslo": now_et.tz_convert(C.OSLO),
         "nq_price": nq_price,
         "market": market_snapshot(bundle, now_et, prev_day, strict),
-        "regime": regime_snapshot(bundle["fred"]),
+        "regime": regime_snapshot(bundle["fred"], bundle["daily"]),
         "events": todays_events(day) if not replay else [],
         "flags": flags_for(day, row.iloc[0], bundle["earnings"]),
         "headlines": [] if (args.no_news or replay) else D.fetch_headlines(),
