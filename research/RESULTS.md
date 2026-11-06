@@ -1,6 +1,6 @@
 # NQ første time – hypotesetester
 
-Generert 2026-11-06T11:49 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
+Generert 2026-11-06T11:54 UTC. Data: 2011-09-20 → 2026-11-05, **3708 handelsdager**.  
 NQ steg i første time 52.6 % av dagene. Snitt +1.7 bp, standardavvik 54 bp.
 
 **Bestått** = q < 0,10 etter korreksjon for multippel testing (Benjamini–Hochberg) OG samme fortegn i alle tre delperioder (2011–15, 2016–20, 2021–26).
@@ -81,6 +81,7 @@ Testperiode 2014-01-02 → 2026-11-05, 3229 dager. **Treff 52.4 %** (p = 0.003),
 
 Per år: 2014: 52 % · 2015: 54 % · 2016: 50 % · 2017: 49 % · 2018: 48 % · 2019: 53 % · 2020: 55 % · 2021: 54 % · 2022: 51 % · 2023: 56 % · 2024: 52 % · 2025: 52 % · 2026: 55 %
 
+
 ### Kun variabler som besto testene
 
 Variabler: earn, fh_mom20_z, fh_mom5_z, gap_z, monday, on_range_z, opex, rel_es_z, vix_ts  
@@ -94,6 +95,7 @@ Testperiode 2014-01-02 → 2026-11-05, 3229 dager. **Treff 54.0 %** (p = 0.000),
 | over 10 pp | 390 | 61.8 % | +15.3 |
 
 Per år: 2014: 56 % · 2015: 52 % · 2016: 53 % · 2017: 53 % · 2018: 51 % · 2019: 58 % · 2020: 55 % · 2021: 56 % · 2022: 50 % · 2023: 57 % · 2024: 50 % · 2025: 57 % · 2026: 55 %
+
 
 ### Kun kalender
 
@@ -109,6 +111,7 @@ Testperiode 2014-01-02 → 2026-11-05, 3229 dager. **Treff 52.8 %** (p = 0.001),
 
 Per år: 2014: 50 % · 2015: 51 % · 2016: 53 % · 2017: 55 % · 2018: 51 % · 2019: 56 % · 2020: 53 % · 2021: 56 % · 2022: 51 % · 2023: 57 % · 2024: 53 % · 2025: 50 % · 2026: 51 %
 
+
 ### Kun gap-familien
 
 Variabler: gap_z, gap_x_news, gap_x_vix, pre_news_z  
@@ -122,6 +125,7 @@ Testperiode 2014-01-02 → 2026-11-05, 3229 dager. **Treff 51.9 %** (p = 0.016),
 | over 10 pp | 108 | 57.4 % | +16.0 |
 
 Per år: 2014: 58 % · 2015: 52 % · 2016: 48 % · 2017: 48 % · 2018: 49 % · 2019: 54 % · 2020: 54 % · 2021: 50 % · 2022: 51 % · 2023: 52 % · 2024: 52 % · 2025: 53 % · 2026: 54 %
+
 
 ### Ærlig: utvalg og trening kun på fortiden
 
@@ -137,10 +141,13 @@ Testperiode 2014-01-02 → 2026-11-05, 3229 dager. **Treff 52.2 %** (p = 0.008),
 
 Per år: 2014: 55 % · 2015: 51 % · 2016: 49 % · 2017: 47 % · 2018: 53 % · 2019: 54 % · 2020: 55 % · 2021: 49 % · 2022: 49 % · 2023: 56 % · 2024: 52 % · 2025: 53 % · 2026: 54 %
 
+Dager med minst 6 pp: 801 dager, treff 56.2 % mot 51.9 % ved tilfeldighet (samme andel bullish), +34 ekstra treff, p = 0.0087.  
+Dager med minst 10 pp: 241 dager, treff 58.5 % mot 51.6 % ved tilfeldighet (samme andel bullish), +17 ekstra treff, p = 0.0184.  
+
 ## Placebo (flaksnivå)
 Samme modell trent på 20 tilfeldig stokkede utfall: snitt-treff 51.0 %, 95-persentil 52.4 %, høyeste 53.0 %. En ekte modell må ligge klart over 95-persentilen for å regnes som bedre enn flaks.
 
-**Placebo for den ærlige prosedyren** (30 stokkinger): snitt-treff 52.3 %, 95-persentil 52.8 %, høyeste 52.9 %. Dager med minst 6 pp: snitt 55.4 %, 95-persentil 81.1 %. I den sikreste klassen (over 10 pp): snitt 55.3 %, 95-persentil 64.7 %.
+**Placebo for den ærlige prosedyren** (30 stokkinger): snitt-treff 52.3 %, 95-persentil 52.8 %, høyeste 52.9 %. Ekstra treff på dager med minst 6 pp: placebo snitt -0.4, 95-persentil +1.7; minst 10 pp: snitt +0.2, 95-persentil +1.9. I den sikreste klassen (over 10 pp): snitt 55.3 %, 95-persentil 64.7 %.
 
 ## Variabler valgt hvert år (kun med fortiden)
 
