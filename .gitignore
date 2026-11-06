@@ -4,3 +4,5 @@ __pycache__/
 data/cache/
 data/backtest_predictions.csv
 docs/data.tmp
+research/node_modules/
+research/package-lock.json

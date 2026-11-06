@@ -1,0 +1,6 @@
+{
+  "name": "nq-bias-research",
+  "private": true,
+  "description": "Laster ned lang intradag-historikk fra Dukascopy",
+  "dependencies": { "dukascopy-node": "1.51.1" }
+}

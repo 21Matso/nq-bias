@@ -1,0 +1,69 @@
+name: Research
+
+# Laster ned 15 år med Nasdaq-100-historikk (Dukascopy) og tester hypotesene for
+# NQ første time. Kjører når research-koden endres, eller manuelt.
+on:
+  push:
+    branches: [main]
+    paths: ["research/*.py", "research/*.js", "research/package.json", ".github/workflows/research.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nq-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer
+        run: |
+          cd research && npm install --no-audit --no-fund
+          pip install -r ../requirements.txt statsmodels
+
+      - name: Test tilgang til Dukascopy
+        run: cd research && PROBE=1 node fetch.js
+
+      - name: Last ned historikk
+        env:
+          FETCH_MINUTES: "100"
+        run: cd research && node fetch.js
+
+      - name: Lagre data
+        if: always()
+        run: |
+          git config user.name "nq-bias-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/data/*.csv.gz 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Ingen nye data"; exit 0; fi
+          git commit -m "Research: historikk $(date -u '+%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && exit 0; sleep 5; done
+          exit 1
+
+      - name: Analyser
+        if: hashFiles('research/analyze.py') != ''
+        run: python research/analyze.py
+
+      - name: Lagre resultater
+        if: hashFiles('research/analyze.py') != ''
+        run: |
+          for f in research/RESULTS.md research/results.json; do if [ -f "$f" ]; then git add "$f"; fi; done
+          if git diff --cached --quiet; then echo "Ingen endringer"; exit 0; fi
+          git commit -m "Research: resultater $(date -u '+%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && exit 0; sleep 5; done
+          exit 1
