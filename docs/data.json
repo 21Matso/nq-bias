@@ -1,11 +1,11 @@
 {
  "meta": {
-  "generated_utc": "2026-11-06T14:03:29.288759+00:00",
-  "generated_oslo": "2026-11-06 15:02",
-  "phase": "live",
-  "next_open_date": "2026-11-06",
+  "generated_utc": "2026-11-06T14:39:40.255437+00:00",
+  "generated_oslo": "2026-11-06 15:39",
+  "phase": "followup",
+  "next_open_date": "2026-11-09",
   "next_open_oslo": "15:30",
-  "next_open_label": "fre 06.11",
+  "next_open_label": "man 09.11",
   "next_bias_oslo": "15:00–15:25",
   "source_errors": [],
   "error": null
