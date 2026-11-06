@@ -1,0 +1,65 @@
+name: NQ Bias
+
+# Kjører automatisk hver handelsdag. Tidene står i UTC og dekker både sommer- og
+# vintertid i USA; programmet ser selv på klokka i New York og velger hva det gjør:
+#   08:15–08:59 ET  forbereder (trener modellen for dagen)
+#   09:00–09:29 ET  beregner dagens bias og logger den i journalen
+#   ellers          fyller inn fasit og oppdaterer journal og modellstatistikk
+# GitHub kan starte planlagte kjøringer noen minutter forsinket, derfor flere forsøk før åpning.
+on:
+  schedule:
+    - cron: "20 12 * * 1-5"
+    - cron: "0,10,20,25 13 * * 1-5"
+    - cron: "0,10,20,25 14 * * 1-5"
+    - cron: "0 15,16 * * 1-5"
+    - cron: "30 21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Fase (auto = velg ut fra klokka)"
+        default: auto
+        type: choice
+        options: [auto, prep, live, followup]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nq-bias
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer pakker
+        run: pip install -r requirements.txt
+
+      - name: Kjør NQ Bias
+        env:
+          COLUMNS: "140"
+        run: python nqbias.py web --mode "${{ github.event.inputs.mode || 'auto' }}"
+
+      - name: Lagre resultat
+        run: |
+          git config user.name "nq-bias-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json data/journal.csv data/model.joblib 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Ingen endringer"
+            exit 0
+          fi
+          git commit -m "Oppdatering $(TZ=Europe/Oslo date '+%Y-%m-%d %H:%M') norsk tid"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep 5
+          done
+          exit 1

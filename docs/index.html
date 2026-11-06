@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#121212">
+<title>NQ Bias</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23121212'/%3E%3Cpath d='M8 21l5-6 4 3 7-9' stroke='%2332c26a' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f4f2; --card:#ffffff; --line:#e4e3df; --ink:#0f0f0e; --ink2:#55544f; --ink3:#8a8983;
+  --bull:#0f8a3c; --bull-soft:#e3f4e8; --bear:#c62f2f; --bear-soft:#fbe6e4;
+  --neu:#a86a00; --neu-soft:#fbf0d9; --accent:#2a78d6; --track:#ebeae6;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    --bg:#0e0e0d; --card:#181817; --line:#2a2a28; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8b8a83;
+    --bull:#32c26a; --bull-soft:#13291b; --bear:#f0605a; --bear-soft:#2e1514;
+    --neu:#f0b23c; --neu-soft:#2d2410; --accent:#5aa0f0; --track:#2a2a28; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e0e0d; --card:#181817; --line:#2a2a28; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8b8a83;
+  --bull:#32c26a; --bull-soft:#13291b; --bear:#f0605a; --bear-soft:#2e1514;
+  --neu:#f0b23c; --neu-soft:#2d2410; --accent:#5aa0f0; --track:#2a2a28; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-variant-numeric:tabular-nums;padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 48px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:860px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-weight:700;letter-spacing:.02em;font-size:16px;white-space:nowrap}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto}
+nav a{color:var(--ink2);text-decoration:none;font-size:13px;padding:6px 8px;border-radius:8px;white-space:nowrap}
+@media(max-width:380px){nav a{padding:6px 5px;font-size:12.5px}.brand{font-size:15px}}
+nav a:hover{background:var(--card);color:var(--ink)}
+.status{color:var(--ink3);font-size:12.5px;padding:10px 0 0}
+section{margin-top:22px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin:0 0 8px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card+.card{margin-top:10px}
+.banner{border-radius:12px;padding:12px 14px;font-size:14px;margin-top:14px;border:1px solid var(--line);background:var(--card)}
+.banner.err{border-color:var(--bear);background:var(--bear-soft)}
+.banner.info{border-color:var(--line)}
+.hero{padding:20px 18px}
+.hero .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hero .when{color:var(--ink3);font-size:13px}
+.verdict{display:flex;align-items:center;gap:12px;margin:10px 0 4px;flex-wrap:wrap}
+.pill{font-weight:800;font-size:30px;letter-spacing:.04em;padding:6px 16px;border-radius:12px;line-height:1.1}
+.pill.bull{background:var(--bull-soft);color:var(--bull)}
+.pill.bear{background:var(--bear-soft);color:var(--bear)}
+.pill.neu{background:var(--neu-soft);color:var(--neu)}
+.strength{font-size:15px;font-weight:600;color:var(--ink2)}
+.prob{font-size:15px;color:var(--ink2);margin-top:6px}
+.prob b{color:var(--ink);font-size:20px}
+.meter{position:relative;height:10px;background:var(--track);border-radius:5px;margin:16px 0 6px;overflow:visible}
+.meter .fill{position:absolute;top:0;bottom:0;border-radius:5px}
+.meter .mid{position:absolute;left:50%;top:-4px;bottom:-4px;width:2px;background:var(--ink3);transform:translateX(-1px)}
+.meter .dot{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);border:3px solid var(--card)}
+.scale{display:flex;justify-content:space-between;color:var(--ink3);font-size:11.5px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:14px}
+.fact{background:var(--bg);border-radius:10px;padding:10px 12px}
+.fact .k{color:var(--ink3);font-size:12px}
+.fact .v{font-size:16px;font-weight:600;margin-top:2px}
+.fact .s{color:var(--ink3);font-size:12px}
+.outcome{margin-top:12px;padding:10px 12px;border-radius:10px;font-weight:600}
+.outcome.ok{background:var(--bull-soft);color:var(--bull)}
+.outcome.bad{background:var(--bear-soft);color:var(--bear)}
+.outcome.neu{background:var(--neu-soft);color:var(--neu)}
+.args{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:760px){.args{grid-template-columns:1fr 1fr}}
+.args h3{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:6px}
+.args h3.bull{color:var(--bull)} .args h3.bear{color:var(--bear)}
+.arg{padding:10px 0;border-top:1px solid var(--line)}
+.arg:first-of-type{border-top:0;padding-top:0}
+.arg .row1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.arg .lbl{font-weight:600;font-size:14px}
+.arg .pp{font-family:var(--mono);font-size:13px;font-weight:700;white-space:nowrap}
+.arg .val{color:var(--ink2);font-size:13px;margin-top:1px}
+.arg .why{color:var(--ink3);font-size:12.5px;margin-top:4px}
+.arg .track{height:6px;background:var(--track);border-radius:3px;margin-top:6px;overflow:hidden}
+.arg .track i{display:block;height:100%;border-radius:3px}
+.empty{color:var(--ink3);font-size:13.5px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;color:var(--ink3);font-weight:600;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;white-space:nowrap}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+.up{color:var(--bull)} .down{color:var(--bear)} .muted{color:var(--ink3)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.tag.high{background:var(--bear-soft);color:var(--bear)} .tag.med{background:var(--neu-soft);color:var(--neu)}
+.tag.hour{background:var(--neu-soft);color:var(--neu)}
+.flags{margin:10px 0 0;padding:0;list-style:none}
+.flags li{padding:6px 0;font-size:13.5px;border-top:1px dashed var(--line)}
+.grid2{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
+.tile{background:var(--bg);border-radius:10px;padding:10px 12px}
+.tile .k{color:var(--ink3);font-size:12px} .tile .v{font-size:20px;font-weight:700;margin-top:2px} .tile .s{color:var(--ink3);font-size:11.5px}
+.lvl{border-left:4px solid var(--ink3);padding:8px 12px;border-radius:6px;background:var(--bg);font-size:14px}
+.lvl.good{border-color:var(--bull)} .lvl.meh{border-color:var(--neu)} .lvl.bad{border-color:var(--bear)}
+details{margin-top:12px}
+summary{cursor:pointer;color:var(--accent);font-size:14px;font-weight:600;padding:6px 0}
+.chart{position:relative;margin-top:12px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%);opacity:0;transition:opacity .1s}
+ul.plain{margin:0;padding-left:18px} ul.plain li{margin:4px 0;font-size:13.5px;color:var(--ink2)}
+.foot{color:var(--ink3);font-size:12.5px;margin-top:28px;line-height:1.55}
+.foot a{color:var(--accent)}
+.skel{color:var(--ink3);padding:40px 0;text-align:center}
+.theme{background:none;border:1px solid var(--line);color:var(--ink2);border-radius:8px;padding:5px 8px;font-size:13px;cursor:pointer}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">NQ&nbsp;BIAS</div>
+  <nav><a href="#idag">I dag</a><a href="#marked">Marked</a><a href="#modell">Modell</a><a href="#journal">Journal</a></nav>
+</div></header>
+<main class="wrap" id="app"><div class="skel">Laster…</div></main>
+
+<script>
+(function(){
+"use strict";
+var $app = document.getElementById("app");
+var data = null, lastLoad = 0;
+
+// ---------- tema ----------
+try { var t = localStorage.getItem("nqb-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch(e){}
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute("data-theme");
+  var dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("nqb-theme", next); } catch(e){}
+}
+
+// ---------- hjelpere ----------
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function num(x, d){ if (x == null || !isFinite(x)) return "–"; return Number(x).toLocaleString("nb-NO",{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function sgn(x, d, unit){ if (x == null || !isFinite(x)) return "–"; return (x > 0 ? "+" : x < 0 ? "−" : "") + num(Math.abs(x), d) + (unit || ""); }
+function pct(x, d){ return x == null ? "–" : num(x * 100, d == null ? 1 : d) + " %"; }
+function cls(x){ return x == null || !isFinite(x) || x === 0 ? "muted" : x > 0 ? "up" : "down"; }
+function osloDate(d){ return new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Oslo",year:"numeric",month:"2-digit",day:"2-digit"}).format(d); }
+function osloHM(d){ return new Intl.DateTimeFormat("nb-NO",{timeZone:"Europe/Oslo",hour:"2-digit",minute:"2-digit"}).format(d); }
+function ago(iso){
+  var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (m < 1) return "akkurat nå"; if (m < 60) return m + " min siden";
+  var h = Math.floor(m / 60); if (h < 24) return h + " t " + (m % 60) + " min siden";
+  return Math.floor(h / 24) + " døgn siden";
+}
+function biasClass(b){ return b === "BULLISH" ? "bull" : b === "BEARISH" ? "bear" : "neu"; }
+function dateNo(s){ if(!s) return ""; var p = s.split("-"); return p[2] + "." + p[1] + "." + p[0]; }
+
+// ---------- seksjoner ----------
+function renderHero(d){
+  var T = d.today, M = d.meta, J = d.journal || {rows:[]};
+  if (!T) return '<div class="card">Ingen bias er beregnet ennå. Første bias publiseres ' + esc(M.next_open_label) + " ca. " + esc(M.next_bias_oslo) + ".</div>";
+  var todayOslo = osloDate(new Date());
+  var isToday = T.date === todayOslo;
+  var bc = biasClass(T.bias);
+  var p = T.p, pos = Math.max(0, Math.min(100, p * 100));
+  var colour = "var(--" + bc + ")";
+  var fillL = Math.min(pos, 50), fillW = Math.abs(pos - 50);
+  var title = isToday ? "Dagens bias" : "Siste bias · " + esc(T.weekday) + " " + esc(dateNo(T.date));
+  var h = '<div class="card hero"><div class="top"><h2 style="margin:0">' + title + '</h2>' +
+    '<span class="when">Beregnet ' + esc(T.run_oslo) + " norsk tid · NY " + "åpning " + esc(T.open_oslo) + "</span></div>";
+  h += '<div class="verdict"><span class="pill ' + bc + '">' + (T.bias === "BULLISH" ? "▲ " : T.bias === "BEARISH" ? "▼ " : "■ ") + esc(T.bias) + "</span>" +
+       '<span class="strength">' + esc(T.strength) + "</span></div>";
+  h += '<div class="prob">Sannsynlighet for at NQ står høyere 1 time etter åpning: <b>' + pct(p) + '</b> <span class="muted">(rå modell ' + pct(T.p_raw) + ")</span></div>";
+  h += '<div class="meter" role="img" aria-label="Sannsynlighet ' + pct(p) + '"><div class="fill" style="left:' + fillL + "%;width:" + fillW + "%;background:" + colour + ';opacity:.35"></div>' +
+       '<div class="mid"></div><div class="dot" style="left:' + pos + "%;background:" + colour + '"></div></div>' +
+       '<div class="scale"><span>0 % · bearish</span><span>50 %</span><span>bullish · 100 %</span></div>';
+  h += '<div class="facts">';
+  if (T.class_hist) h += '<div class="fact"><div class="k">Treff historisk i klassen «' + esc(T.class_hist.name) + '»</div><div class="v">' + pct(T.class_hist.hit_rate, 0) +
+       '</div><div class="s">' + T.class_hist.n + " dager modellen ikke hadde sett · " + sgn(T.class_hist.signed_bp, 1) + " bp i snitt</div></div>";
+  if (T.typical_points != null) h += '<div class="fact"><div class="k">Typisk bevegelse første time</div><div class="v">±' + num(T.typical_points, 0) +
+       ' poeng</div><div class="s">median siste 20 dager · NQ ' + num(T.nq_price, 0) + "</div></div>";
+  h += "</div>";
+  var jr = (J.rows || []).filter(function(r){ return r.date === T.date; })[0];
+  if (jr && jr.outcome) {
+    var oc = jr.correct === "ja" ? "ok" : jr.correct === "nei" ? "bad" : "neu";
+    var txt = jr.correct === "ja" ? "✓ Traff" : jr.correct === "nei" ? "✗ Bommet" : "Nøytral dag";
+    h += '<div class="outcome ' + oc + '">Fasit: NQ gikk ' + esc(jr.outcome) + " " + sgn(jr.nq_points, 0, " poeng") + " (" + sgn(jr.fh_ret_pct, 2, " %") + ") · " + txt + "</div>";
+  } else if (isToday) {
+    h += '<div class="outcome neu" style="font-weight:500">Fasit fylles inn automatisk etter første time.</div>';
+  }
+  h += "</div>";
+  if (!isToday) h = '<div class="banner info">Neste bias publiseres <b>' + esc(M.next_open_label) + " ca. " + esc(M.next_bias_oslo) + "</b> norsk tid (NY åpner " + esc(M.next_open_oslo) + ").</div>" + h;
+  return h;
+}
+
+function renderArgs(T){
+  if (!T) return "";
+  var all = (T.bull || []).concat(T.bear || []);
+  var max = Math.max.apply(null, all.map(function(a){ return Math.abs(a.pp); }).concat([0.5]));
+  function list(arr, side){
+    if (!arr.length) return '<div class="empty">Ingen vesentlige argumenter.</div>';
+    return arr.map(function(a){
+      var w = Math.max(3, Math.abs(a.pp) / max * 100);
+      return '<div class="arg"><div class="row1"><span class="lbl">' + esc(a.label) + '</span><span class="pp ' + (side === "bull" ? "up" : "down") + '">' + sgn(a.pp, 1, " pp") + "</span></div>" +
+        '<div class="val">Nå: ' + esc(String(a.value).replace(/(\d)\.(\d)/g, "$1,$2").replace(/(^|[\s(])-(?=\d)/g, "$1−")) + "</div>" +
+        '<div class="track"><i style="width:' + w + "%;background:var(--" + side + ')"></i></div>' +
+        '<div class="why">' + esc(a.why) + " <span>[" + esc(a.source) + "]</span></div></div>";
+    }).join("");
+  }
+  return '<section><h2>Argumentene</h2><div class="args">' +
+    '<div class="card"><h3 class="bull">▲ For bullish</h3>' + list(T.bull || [], "bull") + "</div>" +
+    '<div class="card"><h3 class="bear">▼ For bearish</h3>' + list(T.bear || [], "bear") + "</div></div>" +
+    '<p class="muted" style="font-size:12.5px;margin:8px 2px 0">pp = hvor mange prosentpoeng argumentet flytter sannsynligheten i dag.</p></section>';
+}
+
+function renderEvents(T){
+  if (!T) return "";
+  var rows = (T.events || []).map(function(e){
+    var where = e.where === "first_hour" ? '<span class="tag hour">⚠ i første time</span>' : e.where === "before" ? '<span class="muted">før åpning</span>' : '<span class="muted">etter 1. time</span>';
+    var imp = e.impact === "High" ? '<span class="tag high">Høy</span>' : '<span class="tag med">Middels</span>';
+    return "<tr><td>" + esc(e.oslo) + "</td><td>" + esc(e.title) + "<br>" + where + "</td><td>" + imp + '</td><td class="n">' + esc(e.forecast || "–") +
+      '</td><td class="n">' + esc(e.previous || "–") + '</td><td class="n">' + esc(e.actual || "–") + "</td></tr>";
+  }).join("");
+  var h = '<section><h2>Hendelser i dag (USD)</h2><div class="card">';
+  h += rows ? '<div class="scroll"><table><thead><tr><th>Oslo</th><th>Hendelse</th><th>Viktighet</th><th class="n">Forv.</th><th class="n">Forrige</th><th class="n">Faktisk</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+            : '<div class="empty">Ingen viktige USD-hendelser i dag (eller kalenderen var utilgjengelig).</div>';
+  if ((T.flags || []).length) h += '<ul class="flags">' + T.flags.map(function(f){ return "<li>• " + esc(f) + "</li>"; }).join("") + "</ul>";
+  return h + "</div></section>";
+}
+
+function renderMarket(T){
+  if (!T) return "";
+  var mk = (T.market || []).map(function(m){
+    return "<tr><td>" + esc(m.name) + '</td><td class="n">' + num(m.last, 2) + '</td><td class="n ' + cls(m.chg) + '">' + sgn(m.chg, 2, " %") + "</td></tr>";
+  }).join("");
+  var rg = (T.regime || []).map(function(r){
+    return "<tr><td>" + esc(r.name) + (r.note ? '<br><span class="muted">' + esc(r.note) + "</span>" : "") + '</td><td class="n">' + num(r.level, 2) +
+      '</td><td class="n muted">' + (r.chg == null ? "" : sgn(r.chg, 2)) + "</td></tr>";
+  }).join("");
+  var h = '<section id="marked"><h2>Markedsbilde</h2><div class="grid2">' +
+    '<div class="card"><h3 style="margin:0 0 6px;font-size:14px">Siden gårsdagens stengning</h3><div class="scroll"><table><thead><tr><th>Marked</th><th class="n">Siste</th><th class="n">Endring</th></tr></thead><tbody>' + mk + "</tbody></table></div></div>" +
+    '<div class="card"><h3 style="margin:0 0 6px;font-size:14px">Makro-regime</h3><div class="scroll"><table><thead><tr><th>Serie</th><th class="n">Nivå</th><th class="n">Endr. 5 obs</th></tr></thead><tbody>' + rg + "</tbody></table></div></div></div>";
+  if ((T.headlines || []).length) h += '<div class="card"><h3 style="margin:0 0 6px;font-size:14px">Overskrifter <span class="muted" style="font-weight:400">(kun kontekst, ikke i modellen)</span></h3><ul class="plain">' +
+    T.headlines.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>";
+  return h + "</section>";
+}
+
+function rollingChart(series){
+  if (!series || series.length < 5) return "";
+  var W = Math.round(Math.max(280, Math.min(780, ($app.clientWidth || 600) - 66))), H = 170, L = 34, R = 10, Tp = 10, B = 22;
+  var lo = 0.3, hi = 0.8;
+  series.forEach(function(s){ lo = Math.min(lo, s.hit60 - 0.02); hi = Math.max(hi, s.hit60 + 0.02); });
+  var x = function(i){ return L + i / (series.length - 1) * (W - L - R); };
+  var y = function(v){ return Tp + (hi - v) / (hi - lo) * (H - Tp - B); };
+  var path = series.map(function(s, i){ return (i ? "L" : "M") + x(i).toFixed(1) + "," + y(s.hit60).toFixed(1); }).join("");
+  var ticks = [0.4, 0.5, 0.6, 0.7].filter(function(v){ return v > lo && v < hi; });
+  var g = ticks.map(function(v){ return '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="var(--line)" stroke-width="1"' + (v === 0.5 ? ' stroke-dasharray="4 3" stroke="var(--ink3)"' : "") + '/>' +
+    '<text x="' + (L - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="var(--ink3)">' + Math.round(v * 100) + "%</text>"; }).join("");
+  var first = series[0].date, last = series[series.length - 1].date;
+  var svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Treffrate siste 60 dager, rullerende">' + g +
+    '<text x="' + L + '" y="' + (H - 4) + '" font-size="11" fill="var(--ink3)">' + dateNo(first) + "</text>" +
+    '<text x="' + (W - R) + '" y="' + (H - 4) + '" text-anchor="end" font-size="11" fill="var(--ink3)">' + dateNo(last) + "</text>" +
+    '<text x="' + (W - R) + '" y="' + (y(0.5) - 5) + '" text-anchor="end" font-size="11" fill="var(--ink3)">gjetting (50 %)</text>' +
+    '<path d="' + path + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>' +
+    '<line class="xh" y1="' + Tp + '" y2="' + (H - B) + '" stroke="var(--ink3)" stroke-width="1" opacity="0"/>' +
+    '<circle class="hd" r="4" fill="var(--accent)" stroke="var(--card)" stroke-width="2" opacity="0"/>' +
+    '<rect class="hit" x="' + L + '" y="0" width="' + (W - L - R) + '" height="' + H + '" fill="transparent"/></svg>';
+  return '<div class="chart" data-series=\'' + esc(JSON.stringify(series)) + '\' data-geo="' + [W, H, L, R, Tp, B, lo, hi].join(",") + '">' + svg + '<div class="tip"></div></div>';
+}
+
+function wireCharts(){
+  Array.prototype.forEach.call(document.querySelectorAll(".chart"), function(el){
+    var s = JSON.parse(el.getAttribute("data-series"));
+    var g = el.getAttribute("data-geo").split(",").map(Number);
+    var W = g[0], H = g[1], L = g[2], R = g[3], Tp = g[4], B = g[5], lo = g[6], hi = g[7];
+    var svg = el.querySelector("svg"), tip = el.querySelector(".tip"), xh = el.querySelector(".xh"), hd = el.querySelector(".hd");
+    function move(ev){
+      var r = svg.getBoundingClientRect();
+      var cx = ((ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left) / r.width * W;
+      var i = Math.round((cx - L) / (W - L - R) * (s.length - 1)); i = Math.max(0, Math.min(s.length - 1, i));
+      var px = L + i / (s.length - 1) * (W - L - R), py = Tp + (hi - s[i].hit60) / (hi - lo) * (H - Tp - B);
+      xh.setAttribute("x1", px); xh.setAttribute("x2", px); xh.setAttribute("opacity", 1);
+      hd.setAttribute("cx", px); hd.setAttribute("cy", py); hd.setAttribute("opacity", 1);
+      tip.textContent = dateNo(s[i].date) + " · " + pct(s[i].hit60);
+      tip.style.left = (px / W * r.width) + "px"; tip.style.top = (py / H * r.height) + "px"; tip.style.opacity = 1;
+    }
+    function leave(){ xh.setAttribute("opacity", 0); hd.setAttribute("opacity", 0); tip.style.opacity = 0; }
+    svg.addEventListener("mousemove", move); svg.addEventListener("touchmove", move, {passive:true});
+    svg.addEventListener("mouseleave", leave); svg.addEventListener("touchend", leave);
+  });
+}
+
+function renderModel(Mo){
+  if (!Mo) return '<section id="modell"><h2>Modellkvalitet</h2><div class="card">Ingen modell trent ennå.</div></section>';
+  var m = Mo.metrics || {}, c = m.p_cal || {};
+  var h = '<section id="modell"><h2>Modellkvalitet – ærlig vurdering</h2><div class="card">';
+  h += '<div class="lvl ' + esc(Mo.level) + '">' + esc(Mo.verdict) + "</div>";
+  if (m.n) {
+    h += '<div class="tiles">' +
+      '<div class="tile"><div class="k">Treffrate</div><div class="v">' + pct(c.accuracy) + '</div><div class="s">p = ' + num(c.p_value, 3) + "</div></div>" +
+      '<div class="tile"><div class="k">«Alltid opp» ville gitt</div><div class="v">' + pct(m.always_up_accuracy) + '</div><div class="s">grunnrate</div></div>' +
+      '<div class="tile"><div class="k">Snitt i biasens retning</div><div class="v ' + cls(c.signed_bp) + '">' + sgn(c.signed_bp, 1, " bp") + '</div><div class="s">per dag, før kostnader</div></div>' +
+      '<div class="tile"><div class="k">Tillitsfaktor</div><div class="v">' + num(Mo.calib_b, 2) + '</div><div class="s">0 = ignorer · 1 = full tillit</div></div></div>';
+    h += '<p class="muted" style="font-size:12.5px;margin:0">Walk-forward ' + esc(dateNo((m.start || "").slice(0, 10))) + " – " + esc(dateNo((m.end || "").slice(0, 10))) + ": " + m.n +
+      " dager som modellen aldri hadde sett. Brier " + num(c.brier, 4) + " mot naiv " + num(c.brier_naive, 4) + " (lavere er bedre). AUC " + num(c.auc, 3) +
+      ". Trent " + esc(Mo.trained_on) + " på " + Mo.n_train + " dager.</p>";
+  }
+  if (Mo.rolling && Mo.rolling.length) h += '<h3 style="margin:16px 0 0;font-size:14px">Treffrate, rullerende 60 dager</h3>' + rollingChart(Mo.rolling);
+  if ((Mo.buckets || []).length) {
+    h += '<h3 style="margin:16px 0 6px;font-size:14px">Treff etter hvor sikker modellen var</h3><div class="scroll"><table><thead><tr><th>Klasse</th><th class="n">Dager</th><th class="n">Treff</th><th class="n">bp i retning</th></tr></thead><tbody>' +
+      Mo.buckets.map(function(b){ return "<tr><td>" + esc(b.name) + '</td><td class="n">' + b.n + '</td><td class="n">' + (b.n ? pct(b.hit_rate) : "–") + '</td><td class="n">' + (b.n ? sgn(b.signed_bp, 1) : "–") + "</td></tr>"; }).join("") +
+      "</tbody></table></div>";
+  }
+  if ((Mo.features || []).length) {
+    h += '<details><summary>Hver variabel for seg (' + Mo.features.length + ')</summary><div class="scroll"><table><thead><tr><th>Variabel</th><th class="n">ρ</th><th class="n">t</th><th class="n">1. halvdel</th><th class="n">2. halvdel</th><th>Stabil</th><th class="n">Vekt</th></tr></thead><tbody>' +
+      Mo.features.map(function(f){
+        var sig = f.t != null && Math.abs(f.t) >= 2;
+        return "<tr><td>" + esc(f.label) + '</td><td class="n">' + sgn(f.rho, 3) + '</td><td class="n"' + (sig ? ' style="font-weight:700"' : ' class="muted"') + ">" + sgn(f.t, 1) +
+          '</td><td class="n">' + sgn(f.rho_1, 3) + '</td><td class="n">' + sgn(f.rho_2, 3) + "</td><td>" + (f.stable ? '<span class="up">ja</span>' : '<span class="down">nei</span>') +
+          '</td><td class="n">' + sgn(f.coef, 3) + "</td></tr>";
+      }).join("") + '</tbody></table></div><p class="muted" style="font-size:12.5px">ρ = rangkorrelasjon med første time. |t| ≥ 2 er grovt sett statistisk signifikant. «Stabil» betyr samme fortegn i begge halvdeler av perioden. Med 26 variabler vil omtrent én se signifikant ut ved ren tilfeldighet.</p></details>';
+  }
+  return h + "</div></section>";
+}
+
+function renderJournal(J){
+  if (!J) return "";
+  var h = '<section id="journal"><h2>Journal – sanntidstesten</h2><div class="card">';
+  h += '<div class="tiles" style="margin-top:0">' +
+    '<div class="tile"><div class="k">Treffrate</div><div class="v">' + (J.directional ? pct(J.hit_rate) : "–") + '</div><div class="s">' + J.hits + " av " + J.directional + " dager med bias</div></div>" +
+    '<div class="tile"><div class="k">Dager logget</div><div class="v">' + J.logged + '</div><div class="s">' + J.neutral_days + " nøytrale</div></div>" +
+    (J.by_strength || []).map(function(b){ return '<div class="tile"><div class="k">' + esc(b.name) + '</div><div class="v">' + pct(b.hit_rate) + '</div><div class="s">av ' + b.n + " dager</div></div>"; }).join("") + "</div>";
+  if (J.directional < 60) h += '<p class="muted" style="font-size:12.5px;margin:0 0 10px">For få dager til å konkludere ennå. Selv med 60 % ekte treffrate trengs rundt 100 dager før det skiller seg tydelig fra 50 %.</p>';
+  var rows = (J.rows || []).map(function(r){
+    var res = r.correct === "ja" ? '<span class="up">✓</span>' : r.correct === "nei" ? '<span class="down">✗</span>' : r.correct === "nøytral" ? '<span class="muted">–</span>' : '<span class="muted">venter</span>';
+    return "<tr><td>" + esc(dateNo(r.date)) + '</td><td><span class="' + (r.bias === "BULLISH" ? "up" : r.bias === "BEARISH" ? "down" : "muted") + '">' + esc(r.bias) + '</span> <span class="muted">' + esc(r.strength) + "</span></td>" +
+      '<td class="n">' + pct(r.p_cal) + '</td><td class="n ' + cls(r.nq_points) + '">' + (r.nq_points == null ? "–" : sgn(r.nq_points, 0)) + '</td><td class="n">' + res + "</td></tr>";
+  }).join("");
+  h += rows ? '<div class="scroll"><table><thead><tr><th>Dato</th><th>Bias</th><th class="n">P(opp)</th><th class="n">NQ-poeng</th><th class="n">Traff</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+            : '<div class="empty">Ingen dager logget ennå. Den første loggføres ved neste kjøring før åpning.</div>';
+  return h + "</div></section>";
+}
+
+function renderNotes(d){
+  var T = d.today || {}, list = [].concat(T.warnings || []);
+  if ((T.missing || []).length) list.push("Manglet data for: " + T.missing.join(", ") + " (satt til nøytral verdi).");
+  ((d.meta || {}).source_errors || []).forEach(function(e){ if (list.indexOf(e) < 0) list.push(e); });
+  if (!list.length) return "";
+  return '<section><h2>Merknader</h2><div class="card"><ul class="plain">' + list.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div></section>";
+}
+
+function statusText(M){
+  return "Oppdatert " + esc(ago(M.generated_utc)) + " (" + esc(osloHM(new Date(M.generated_utc))) + ") · Neste NY-åpning " + esc(M.next_open_label) + " kl. " + esc(M.next_open_oslo);
+}
+function render(){
+  if (!data) return;
+  var M = data.meta || {};
+  var h = '<div class="status">' + statusText(M) + "</div>";
+  if (M.error) h += '<div class="banner err"><b>Siste kjøring feilet.</b> ' + esc(M.error) + " Siden viser forrige vellykkede resultat.</div>";
+  h += '<section id="idag">' + renderHero(data) + "</section>";
+  h += renderArgs(data.today) + renderEvents(data.today) + renderMarket(data.today) + renderModel(data.model) + renderJournal(data.journal) + renderNotes(data);
+  h += '<div class="foot">Biasen beregnes automatisk hver handelsdag 30–5 minutter før NY-åpning, fra gratis data (Yahoo Finance, FRED, ForexFactory). Siden laster nye tall av seg selv. ' +
+       "Den sier noe om sannsynlighet, ikke om sikkerhet. Dette er et analyseverktøy, ikke finansiell rådgivning.<br><br>" +
+       '<button class="theme" id="theme">◐ Bytt mellom lyst og mørkt</button></div>';
+  $app.innerHTML = h;
+  document.getElementById("theme").onclick = toggleTheme;
+  wireCharts();
+}
+
+function load(){
+  fetch("data.json?t=" + Date.now(), {cache:"no-store"}).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status); return r.json();
+  }).then(function(j){
+    var changed = !data || !data.meta || data.meta.generated_utc !== (j.meta || {}).generated_utc;
+    data = j; lastLoad = Date.now();
+    if (changed) render();
+  })
+  .catch(function(e){
+    if (!data) $app.innerHTML = '<div class="banner err">Fikk ikke lastet data (' + esc(e.message) + "). Prøv å laste siden på nytt om litt.</div>";
+  });
+}
+load();
+setInterval(function(){ if (!document.hidden) load(); }, 120000);
+setInterval(function(){
+  var el = document.querySelector(".status");
+  if (!document.hidden && data && el) el.innerHTML = statusText(data.meta || {});
+}, 30000);
+var rz; window.addEventListener("resize", function(){ clearTimeout(rz); rz = setTimeout(render, 250); });
+document.addEventListener("visibilitychange", function(){ if (!document.hidden && Date.now() - lastLoad > 60000) load(); });
+})();
+</script>
+</body>
+</html>

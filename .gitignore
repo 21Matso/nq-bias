@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+data/cache/
+data/backtest_predictions.csv
+docs/data.tmp

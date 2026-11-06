@@ -1,0 +1,23 @@
+{
+ "meta": {
+  "generated_utc": "2026-11-06T08:06:44.597566+00:00",
+  "generated_oslo": "2026-11-06 09:06",
+  "phase": "init",
+  "next_open_date": "2026-11-06",
+  "next_open_oslo": "15:30",
+  "next_open_label": "fre 06.11",
+  "next_bias_oslo": "15:00–15:25",
+  "source_errors": [],
+  "error": null
+ },
+ "journal": {
+  "logged": 0,
+  "with_outcome": 0,
+  "directional": 0,
+  "hits": 0,
+  "hit_rate": null,
+  "neutral_days": 0,
+  "by_strength": [],
+  "rows": []
+ }
+}
