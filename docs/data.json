@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-09T14:00:28.833025+00:00",
-  "generated_oslo": "2026-11-09 15:00",
+  "generated_utc": "2026-11-09T14:12:16.334863+00:00",
+  "generated_oslo": "2026-11-09 15:12",
   "phase": "live",
   "next_open_date": "2026-11-09",
   "next_open_oslo": "15:30",
@@ -21,8 +21,8 @@
   "rows": [
    {
     "date": "2026-11-09",
-    "run_time_oslo": "15:00",
-    "p_cal": 0.6079,
+    "run_time_oslo": "15:12",
+    "p_cal": 0.6069,
     "bias": "BULLISH",
     "strength": "Tydelig",
     "fh_ret_pct": null,
@@ -1473,12 +1473,12 @@
   "model_version": 2,
   "date": "2026-11-09",
   "weekday": "man",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.98851,
-  "p": 0.607897,
-  "p_raw": 0.607897,
+  "minutes_before_open": 17.971216,
+  "p": 0.606862,
+  "p_raw": 0.606862,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1487,38 +1487,38 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 27341.5,
-  "typical_points": 110.912807,
+  "nq_price": 27316.0,
+  "typical_points": 110.809364,
   "bull": [
    {
     "key": "monday",
     "label": "Mandag",
     "value": "Ja",
-    "pp": 3.437059,
+    "pp": 3.440264,
     "why": "Ukedagseffekt",
-    "missing": false
-   },
-   {
-    "key": "gap_z",
-    "label": "Overnight-gap (σ)",
-    "value": "+0.95 % (+0.5σ)",
-    "pp": 1.364176,
-    "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
    {
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.14σ",
-    "pp": 1.307016,
+    "pp": 1.308235,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
+    "missing": false
+   },
+   {
+    "key": "gap_z",
+    "label": "Overnight-gap (σ)",
+    "value": "+0.88 % (+0.4σ)",
+    "pp": 1.25043,
+    "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+1.15σ",
-    "pp": 1.017106,
+    "pp": 1.018055,
     "why": "Volatilitet",
     "missing": false
    },
@@ -1526,7 +1526,7 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.03σ",
-    "pp": 0.925763,
+    "pp": 0.926627,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    }
@@ -1536,7 +1536,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.04",
-    "pp": -1.140733,
+    "pp": -1.141797,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1578,63 +1578,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 27341.5,
-    "chg": 0.973115
+    "last": 27316.0,
+    "chg": 0.878942
    },
    {
     "name": "ES future",
-    "last": 7471.0,
-    "chg": 0.952638
+    "last": 7464.75,
+    "chg": 0.868185
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 662.05,
-    "chg": 0.888426
+    "last": 661.69,
+    "chg": 0.833566
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 742.07,
-    "chg": 0.915219
+    "last": 741.64,
+    "chg": 0.856743
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 464.97,
-    "chg": 0.267395
+    "last": 464.5209,
+    "chg": 0.170549
    },
    {
     "name": "10-års Treasury future",
-    "last": 107.21875,
-    "chg": 0.087515
+    "last": 107.25,
+    "chg": 0.116686
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 101.862999,
-    "chg": -0.408677
+    "last": 101.817001,
+    "chg": -0.453649
    },
    {
     "name": "USD/JPY",
-    "last": 157.912003,
-    "chg": -0.359657
+    "last": 157.968002,
+    "chg": -0.324322
    },
    {
     "name": "Bitcoin",
-    "last": 74615.429688,
-    "chg": -1.50534
+    "last": 74403.007812,
+    "chg": -1.785744
    },
    {
     "name": "Råolje (WTI)",
-    "last": 86.940002,
-    "chg": -4.029136
+    "last": 86.699997,
+    "chg": -4.294072
    },
    {
     "name": "Gull",
-    "last": 4131.399902,
-    "chg": 1.389022
+    "last": 4131.600098,
+    "chg": 1.393935
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6263.100098,
-    "chg": 1.556318
+    "last": 6271.069824,
+    "chg": 1.685547
    }
   ],
   "regime": [
