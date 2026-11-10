@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-10T14:12:15.909858+00:00",
-  "generated_oslo": "2026-11-10 15:12",
+  "generated_utc": "2026-11-10T14:22:15.440824+00:00",
+  "generated_oslo": "2026-11-10 15:22",
   "phase": "live",
   "next_open_date": "2026-11-10",
   "next_open_oslo": "15:30",
@@ -27,8 +27,8 @@
   "rows": [
    {
     "date": "2026-11-10",
-    "run_time_oslo": "15:12",
-    "p_cal": 0.5511,
+    "run_time_oslo": "15:22",
+    "p_cal": 0.5514,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
     "fh_ret_pct": null,
@@ -1490,12 +1490,12 @@
   "model_version": 2,
   "date": "2026-11-10",
   "weekday": "tir",
-  "run_oslo": "15:12",
-  "run_et": "09:12",
+  "run_oslo": "15:22",
+  "run_et": "09:22",
   "open_oslo": "15:30",
-  "minutes_before_open": 17.974554,
-  "p": 0.551093,
-  "p_raw": 0.551093,
+  "minutes_before_open": 7.987082,
+  "p": 0.551404,
+  "p_raw": 0.551404,
   "bias": "NØYTRAL",
   "strength": "Nøytral",
   "class_hist": {
@@ -1504,14 +1504,14 @@
    "hit_rate": 0.50844,
    "signed_bp": -0.013824
   },
-  "nq_price": 27717.75,
-  "typical_points": 112.439093,
+  "nq_price": 27738.5,
+  "typical_points": 112.523267,
   "bull": [
    {
     "key": "gap_x_news",
     "label": "Gap på 08:30-nyhetsdag",
-    "value": "gap -1.07 % (-0.5σ)",
-    "pp": 2.215464,
+    "value": "gap -1.05 % (-0.5σ)",
+    "pp": 2.186317,
     "why": "Gapet på dager med store makrotall har historisk blitt delvis reversert i første time.",
     "missing": false
    },
@@ -1519,7 +1519,7 @@
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
     "value": "-0.22σ",
-    "pp": 2.083878,
+    "pp": 2.122832,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
@@ -1527,7 +1527,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.01σ",
-    "pp": 0.272149,
+    "pp": 0.272114,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    }
@@ -1536,8 +1536,8 @@
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "-1.07 % (-0.5σ)",
-    "pp": -1.739507,
+    "value": "-1.05 % (-0.5σ)",
+    "pp": -1.718555,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
@@ -1545,7 +1545,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "0.96",
-    "pp": -0.489261,
+    "pp": -0.489198,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1595,63 +1595,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 27717.75,
-    "chg": -1.024826
+    "last": 27738.5,
+    "chg": -0.950732
    },
    {
     "name": "ES future",
-    "last": 7529.75,
-    "chg": -0.564543
+    "last": 7530.25,
+    "chg": -0.55794
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 672.39,
-    "chg": -0.938477
+    "last": 672.11,
+    "chg": -0.979729
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 748.62,
-    "chg": -0.530153
+    "last": 748.48,
+    "chg": -0.548755
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 477.55,
-    "chg": -2.014895
+    "last": 476.0,
+    "chg": -2.332929
    },
    {
     "name": "10-års Treasury future",
-    "last": 106.4375,
-    "chg": -0.540225
+    "last": 106.40625,
+    "chg": -0.569426
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 102.009003,
-    "chg": 0.328497
+    "last": 102.001999,
+    "chg": 0.321609
    },
    {
     "name": "USD/JPY",
-    "last": 158.492996,
-    "chg": 0.38254
+    "last": 158.503006,
+    "chg": 0.38888
    },
    {
     "name": "Bitcoin",
-    "last": 73775.992188,
-    "chg": -1.37639
+    "last": 73754.476562,
+    "chg": -1.405152
    },
    {
     "name": "Råolje (WTI)",
-    "last": 84.550003,
-    "chg": -2.883063
+    "last": 84.5,
+    "chg": -2.940498
    },
    {
     "name": "Gull",
-    "last": 4066.0,
-    "chg": -2.047699
+    "last": 4063.699951,
+    "chg": -2.103109
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6350.629883,
-    "chg": 0.952836
+    "last": 6351.060059,
+    "chg": 0.959674
    }
   ],
   "regime": [
