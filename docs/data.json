@@ -1,22 +1,22 @@
 {
  "meta": {
-  "generated_utc": "2026-11-11T14:23:34.600707+00:00",
-  "generated_oslo": "2026-11-11 15:23",
-  "phase": "live",
-  "next_open_date": "2026-11-11",
+  "generated_utc": "2026-11-11T15:41:15.878390+00:00",
+  "generated_oslo": "2026-11-11 16:40",
+  "phase": "followup",
+  "next_open_date": "2026-11-12",
   "next_open_oslo": "15:30",
-  "next_open_label": "ons 11.11",
+  "next_open_label": "tor 12.11",
   "next_bias_oslo": "15:00–15:25",
   "source_errors": [],
   "error": null
  },
  "journal": {
   "logged": 4,
-  "with_outcome": 3,
+  "with_outcome": 4,
   "directional": 1,
   "hits": 1,
   "hit_rate": 1.0,
-  "neutral_days": 2,
+  "neutral_days": 3,
   "by_strength": [
    {
     "name": "Tydelig",
@@ -31,10 +31,10 @@
     "p_cal": 0.5319,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
-    "fh_ret_pct": null,
-    "nq_points": null,
-    "outcome": null,
-    "correct": null
+    "fh_ret_pct": 0.081,
+    "nq_points": 22.9,
+    "outcome": "OPP",
+    "correct": "nøytral"
    },
    {
     "date": "2026-11-10",
