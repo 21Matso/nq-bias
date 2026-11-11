@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-11T14:22:13.122986+00:00",
-  "generated_oslo": "2026-11-11 15:22",
+  "generated_utc": "2026-11-11T14:23:34.600707+00:00",
+  "generated_oslo": "2026-11-11 15:23",
   "phase": "live",
   "next_open_date": "2026-11-11",
   "next_open_oslo": "15:30",
@@ -27,7 +27,7 @@
   "rows": [
    {
     "date": "2026-11-11",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:23",
     "p_cal": 0.5319,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
@@ -1501,10 +1501,10 @@
   "model_version": 2,
   "date": "2026-11-11",
   "weekday": "ons",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:23",
+  "run_et": "09:23",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.984601,
+  "minutes_before_open": 6.868853,
   "p": 0.531938,
   "p_raw": 0.531938,
   "bias": "NØYTRAL",
@@ -1515,8 +1515,8 @@
    "hit_rate": 0.508642,
    "signed_bp": 0.011747
   },
-  "nq_price": 28351.0,
-  "typical_points": 115.007918,
+  "nq_price": 28353.5,
+  "typical_points": 115.01806,
   "bull": [
    {
     "key": "gap_z",
@@ -1598,18 +1598,18 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 28351.0,
-    "chg": 1.851037
+    "last": 28353.5,
+    "chg": 1.860018
    },
    {
     "name": "ES future",
-    "last": 7615.0,
-    "chg": 0.931111
+    "last": 7614.5,
+    "chg": 0.924484
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 687.96,
-    "chg": 1.948697
+    "last": 687.62,
+    "chg": 1.898312
    },
    {
     "name": "S&P 500 (SPY) premarket",
@@ -1623,38 +1623,38 @@
    },
    {
     "name": "10-års Treasury future",
-    "last": 106.078125,
-    "chg": -0.132392
+    "last": 106.0625,
+    "chg": -0.147102
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 102.862,
-    "chg": 0.592633
+    "last": 102.866997,
+    "chg": 0.59752
    },
    {
     "name": "USD/JPY",
-    "last": 159.574997,
-    "chg": 0.487404
+    "last": 159.563004,
+    "chg": 0.479851
    },
    {
     "name": "Bitcoin",
-    "last": 73565.367188,
-    "chg": -0.142961
+    "last": 73555.117188,
+    "chg": -0.156874
    },
    {
     "name": "Råolje (WTI)",
-    "last": 87.139999,
-    "chg": 0.926573
+    "last": 87.160004,
+    "chg": 0.949742
    },
    {
     "name": "Gull",
-    "last": 4036.800049,
-    "chg": -0.04952
+    "last": 4037.0,
+    "chg": -0.044569
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6369.629883,
-    "chg": 0.507298
+    "last": 6370.740234,
+    "chg": 0.524818
    }
   ],
   "regime": [
