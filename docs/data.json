@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-12T14:00:29.058164+00:00",
-  "generated_oslo": "2026-11-12 15:00",
+  "generated_utc": "2026-11-12T14:12:14.778632+00:00",
+  "generated_oslo": "2026-11-12 15:12",
   "phase": "live",
   "next_open_date": "2026-11-12",
   "next_open_oslo": "15:30",
@@ -27,8 +27,8 @@
   "rows": [
    {
     "date": "2026-11-12",
-    "run_time_oslo": "15:00",
-    "p_cal": 0.5542,
+    "run_time_oslo": "15:12",
+    "p_cal": 0.559,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
     "fh_ret_pct": null,
@@ -1517,12 +1517,12 @@
   "model_version": 2,
   "date": "2026-11-12",
   "weekday": "tor",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.989486,
-  "p": 0.554181,
-  "p_raw": 0.554181,
+  "minutes_before_open": 17.977079,
+  "p": 0.558967,
+  "p_raw": 0.558967,
   "bias": "NØYTRAL",
   "strength": "Nøytral",
   "class_hist": {
@@ -1531,22 +1531,22 @@
    "hit_rate": 0.508844,
    "signed_bp": 0.014132
   },
-  "nq_price": 28099.5,
-  "typical_points": 113.98769,
+  "nq_price": 28102.5,
+  "typical_points": 113.99986,
   "bull": [
    {
     "key": "gap_x_thufri",
     "label": "Gap torsdag/fredag",
-    "value": "gap -1.21 % (-0.5σ)",
-    "pp": 2.884898,
+    "value": "gap -1.34 % (-0.6σ)",
+    "pp": 3.17912,
     "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
     "missing": false
    },
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "-0.24σ",
-    "pp": 2.275074,
+    "value": "-0.29σ",
+    "pp": 2.748711,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
@@ -1554,7 +1554,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.09σ",
-    "pp": 0.978405,
+    "pp": 0.976261,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    }
@@ -1563,16 +1563,16 @@
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "-1.21 % (-0.5σ)",
-    "pp": -1.841333,
+    "value": "-1.34 % (-0.6σ)",
+    "pp": -2.020391,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
    {
     "key": "gap_x_outside",
     "label": "Gap utenfor gårsdagens range",
-    "value": "gap -1.21 % (-0.5σ)",
-    "pp": -1.080192,
+    "value": "gap -1.34 % (-0.6σ)",
+    "pp": -1.188253,
     "why": "Åpning utenfor gårsdagens høy/lav har reversert oftere.",
     "missing": false
    },
@@ -1580,7 +1580,7 @@
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+0.77σ",
-    "pp": -0.290731,
+    "pp": -0.290094,
     "why": "Volatilitet",
     "missing": false
    },
@@ -1588,7 +1588,7 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "+0.03σ",
-    "pp": -0.213091,
+    "pp": -0.212624,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    }
@@ -1630,63 +1630,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 28099.5,
-    "chg": -1.350746
+    "last": 28102.5,
+    "chg": -1.340214
    },
    {
     "name": "ES future",
-    "last": 7588.25,
-    "chg": -0.716342
+    "last": 7592.5,
+    "chg": -0.660735
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 681.59,
-    "chg": -1.273213
+    "last": 680.8093,
+    "chg": -1.386295
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 755.05,
-    "chg": -0.623854
+    "last": 754.5,
+    "chg": -0.696242
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 488.32,
-    "chg": -3.728094
+    "last": 485.5,
+    "chg": -4.284055
    },
    {
     "name": "10-års Treasury future",
-    "last": 105.828125,
-    "chg": -0.235675
+    "last": 105.90625,
+    "chg": -0.162027
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 102.949997,
-    "chg": 0.020399
+    "last": 102.875,
+    "chg": -0.052464
    },
    {
     "name": "USD/JPY",
-    "last": 159.695999,
-    "chg": -0.096345
+    "last": 159.664001,
+    "chg": -0.116362
    },
    {
     "name": "Bitcoin",
-    "last": 72418.9375,
-    "chg": -2.882027
+    "last": 72153.796875,
+    "chg": -3.237596
    },
    {
     "name": "Råolje (WTI)",
-    "last": 86.980003,
-    "chg": 0.752927
+    "last": 86.580002,
+    "chg": 0.289586
    },
    {
     "name": "Gull",
-    "last": 3899.5,
-    "chg": -2.319584
+    "last": 3895.100098,
+    "chg": -2.429799
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6387.339844,
-    "chg": -0.081188
+    "last": 6393.52002,
+    "chg": 0.01549
    }
   ],
   "regime": [
@@ -1751,7 +1751,7 @@
    "Nebius falls 10% as company expects increased 2026 capex spend, issues weak outlook",
    "Oil prices jump after Trump says no Iran deal needed: 'We've got their Strait'",
    "Unions helped Democrats win big in 2026. Now they want action",
-   "Scott Colom wins Mississippi Senate election over incumbent Republican Hyde-Smith"
+   "As credit card balances hit a record high, medical bills can become 'shadow debt,' expert says"
   ],
   "warnings": [],
   "missing": [],
