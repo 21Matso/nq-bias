@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_utc": "2026-11-12T14:22:11.623270+00:00",
+  "generated_utc": "2026-11-12T14:23:08.816059+00:00",
   "generated_oslo": "2026-11-12 15:22",
   "phase": "live",
   "next_open_date": "2026-11-12",
@@ -1520,7 +1520,7 @@
   "run_oslo": "15:22",
   "run_et": "09:22",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.990422,
+  "minutes_before_open": 7.198446,
   "p": 0.560273,
   "p_raw": 0.560273,
   "bias": "BULLISH",
@@ -1531,8 +1531,8 @@
    "hit_rate": 0.552585,
    "signed_bp": 2.710066
   },
-  "nq_price": 28086.0,
-  "typical_points": 113.932926,
+  "nq_price": 28080.5,
+  "typical_points": 113.910615,
   "bull": [
    {
     "key": "gap_x_thufri",
@@ -1630,23 +1630,23 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 28086.0,
-    "chg": -1.398141
+    "last": 28080.5,
+    "chg": -1.41745
    },
    {
     "name": "ES future",
-    "last": 7590.0,
-    "chg": -0.693445
+    "last": 7588.75,
+    "chg": -0.7098
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 680.58,
-    "chg": -1.419509
+    "last": 680.45,
+    "chg": -1.438339
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 754.16,
-    "chg": -0.740991
+    "last": 754.0,
+    "chg": -0.76205
    },
    {
     "name": "Halvledere (SMH) premarket",
@@ -1660,60 +1660,60 @@
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 102.900002,
-    "chg": -0.028174
+    "last": 102.899002,
+    "chg": -0.029145
    },
    {
     "name": "USD/JPY",
-    "last": 159.649994,
-    "chg": -0.125125
+    "last": 159.656006,
+    "chg": -0.121364
    },
    {
     "name": "Bitcoin",
-    "last": 71961.570312,
-    "chg": -3.495383
+    "last": 71896.351562,
+    "chg": -3.582845
    },
    {
     "name": "Råolje (WTI)",
-    "last": 86.300003,
-    "chg": -0.034749
+    "last": 86.269997,
+    "chg": -0.069507
    },
    {
     "name": "Gull",
-    "last": 3889.600098,
-    "chg": -2.567571
+    "last": 3891.800049,
+    "chg": -2.512463
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6392.5,
-    "chg": -0.000466
+    "last": 6394.200195,
+    "chg": 0.026131
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.118,
-    "chg": 0.131
+    "level": 4.107,
+    "chg": 0.12
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.889,
-    "chg": 0.281
+    "level": 4.866,
+    "chg": 0.258
    },
    {
     "name": "10-års rente (%)",
-    "level": 5.046,
-    "chg": 0.209
+    "level": 5.024,
+    "chg": 0.187
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.385,
-    "chg": 0.134
+    "level": 5.367,
+    "chg": 0.116
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.928,
-    "chg": 0.078
+    "level": 0.917,
+    "chg": 0.067
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1747,9 +1747,9 @@
   "flags": [],
   "headlines": [
    "Trump says ‘we don’t need a deal with Iran’",
-   "‘A dark day for Nvidia’: Here’s what analysts are saying as markets brace for news on Huang's fate",
+   "Jensen and Lori Huang's Nvidia fortune is jointly controlled. How that makes things complicated now that he's resigned",
    "Nebius falls 10% as company expects increased 2026 capex spend, issues weak outlook",
-   "Oil prices jump after Trump says no Iran deal needed: 'We've got their Strait'",
+   "Oil prices mixed after Trump says no Iran deal needed: 'We've got their Strait'",
    "Unions helped Democrats win big in 2026. Now they want action",
    "As credit card balances hit a record high, medical bills can become 'shadow debt,' expert says"
   ],
