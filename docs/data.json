@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generated_utc": "2026-11-12T22:15:58.202326+00:00",
-  "generated_oslo": "2026-11-12 23:15",
-  "phase": "followup",
+  "generated_utc": "2026-11-13T14:00:44.392760+00:00",
+  "generated_oslo": "2026-11-13 15:00",
+  "phase": "live",
   "next_open_date": "2026-11-13",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 13.11",
@@ -11,7 +11,7 @@
   "error": null
  },
  "journal": {
-  "logged": 5,
+  "logged": 6,
   "with_outcome": 5,
   "directional": 2,
   "hits": 2,
@@ -30,6 +30,17 @@
    }
   ],
   "rows": [
+   {
+    "date": "2026-11-13",
+    "run_time_oslo": "15:00",
+    "p_cal": 0.4951,
+    "bias": "NØYTRAL",
+    "strength": "Nøytral",
+    "fh_ret_pct": null,
+    "nq_points": null,
+    "outcome": null,
+    "correct": null
+   },
    {
     "date": "2026-11-12",
     "run_time_oslo": "15:22",
@@ -90,13 +101,13 @@
  "model": {
   "version": 2,
   "level": "good",
-  "verdict": "Over alle dager er modellen ikke bedre enn å alltid gjette opp (52.2 % mot 52.6 %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. 25 % av dagene) traff den 56.2 %, mot 51.9 % ved ren tilfeldighet (p = 0.008), og bedre enn alle placebo-kjøringene. Bruk biasen bare på disse dagene. NØYTRAL betyr at modellen ikke vet.",
+  "verdict": "Over alle dager er modellen ikke bedre enn å alltid gjette opp (52.2 % mot 52.6 %). Men på dagene den gir bias (minst 6 pp fra 50 %, ca. 25 % av dagene) traff den 56.2 %, mot 52.0 % ved ren tilfeldighet (p = 0.008), og bedre enn alle placebo-kjøringene. Bruk biasen bare på disse dagene. NØYTRAL betyr at modellen ikke vet.",
   "research": {
-   "generated": "2026-11-11T22:58:08.731745Z",
-   "n_days": 3712,
+   "generated": "2026-11-12T22:53:10.344680Z",
+   "n_days": 3713,
    "first": "2011-09-20",
-   "last": "2026-11-11",
-   "base_up": 0.526131,
+   "last": "2026-11-12",
+   "base_up": 0.526259,
    "honest": {
     "name": "Ærlig: utvalg og trening kun på fortiden",
     "features": [
@@ -125,15 +136,15 @@
      "vix_ts",
      "vix_z"
     ],
-    "n": 3233,
+    "n": 3234,
     "start": "2014-01-02",
-    "end": "2026-11-11",
-    "hit": 0.522116,
-    "p_binom": 0.00625,
-    "brier": 0.249773,
-    "brier_base": 0.24982,
-    "auc": 0.512881,
-    "bp_per_day": 1.63758,
+    "end": "2026-11-12",
+    "hit": 0.522263,
+    "p_binom": 0.005953,
+    "brier": 0.249757,
+    "brier_base": 0.249812,
+    "auc": 0.51304,
+    "bp_per_day": 1.664679,
     "tiers": [
      {
       "tier": "under 3 pp",
@@ -143,9 +154,9 @@
      },
      {
       "tier": "3–6 pp",
-      "n": 765,
-      "hit": 0.500654,
-      "bp": 0.066226
+      "n": 766,
+      "hit": 0.501305,
+      "bp": 0.18269
      },
      {
       "tier": "6–10 pp",
@@ -223,42 +234,42 @@
      },
      {
       "year": 2026,
-      "n": 217,
-      "hit": 0.552995
+      "n": 218,
+      "hit": 0.555046
      }
     ],
-    "hit_recent": 0.536,
+    "hit_recent": 0.538,
     "conf6": {
      "n": 802,
      "hit": 0.562344,
-     "expected": 0.519447,
-     "excess": 34.403341,
+     "expected": 0.519543,
+     "excess": 34.326531,
      "share_bull": 0.829177,
-     "p": 0.008208
+     "p": 0.008331
     },
     "conf10": {
      "n": 241,
      "hit": 0.585062,
-     "expected": 0.516057,
-     "excess": 16.630374,
+     "expected": 0.516136,
+     "excess": 16.611317,
      "share_bull": 0.771784,
-     "p": 0.018585
+     "p": 0.018697
     }
    },
    "placebo": {
     "n": 30,
-    "mean": 0.523136,
-    "p95": 0.527915,
-    "max": 0.529848,
-    "top_mean": 0.523669,
-    "top_p95": 0.666667,
-    "conf_mean": 0.489622,
-    "conf_p95": 0.575333,
-    "conf_n_mean": 42.533333,
-    "excess6_mean": -0.447448,
-    "excess6_p95": 2.674544,
-    "excess10_mean": -0.233529,
-    "excess10_p95": 0.706681
+    "mean": 0.524717,
+    "p95": 0.529066,
+    "max": 0.529994,
+    "top_mean": 0.408047,
+    "top_p95": 0.526797,
+    "conf_mean": 0.46134,
+    "conf_p95": 0.532125,
+    "conf_n_mean": 24.2,
+    "excess6_mean": -0.256421,
+    "excess6_p95": 0.458256,
+    "excess10_mean": -0.237683,
+    "excess10_p95": 0.0
    },
    "tests": [
     {
@@ -277,34 +288,34 @@
     {
      "name": "Første time, snitt 5 dager",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.001673,
+     "n": 3700,
+     "q": 0.001599,
      "passes": true,
      "stable": true,
-     "rho": -0.058958,
-     "t": -3.863988,
+     "rho": -0.05927,
+     "t": -3.875038,
      "r1": -0.078779,
      "r2": -0.067831,
-     "r3": -0.045212
+     "r3": -0.045939
     },
     {
      "name": "Første time, snitt 20 dager",
      "kind": "cont",
-     "n": 3697,
-     "q": 0.001673,
+     "n": 3698,
+     "q": 0.001599,
      "passes": true,
      "stable": true,
-     "rho": -0.062363,
-     "t": -3.897368,
+     "rho": -0.06224,
+     "t": -3.894857,
      "r1": -0.06694,
      "r2": -0.07292,
-     "r3": -0.063306
+     "r3": -0.063005
     },
     {
      "name": "Store gap (|gap| > 1σ)",
      "kind": "cond",
      "n": 369,
-     "q": 0.001899,
+     "q": 0.001877,
      "passes": true,
      "stable": true,
      "rho": -0.16036,
@@ -316,59 +327,59 @@
     {
      "name": "Gap utenfor gårsdagens range",
      "kind": "cond",
-     "n": 1433,
-     "q": 0.002207,
+     "n": 1434,
+     "q": 0.001877,
      "passes": true,
      "stable": true,
-     "rho": -0.060061,
-     "t": -3.667193,
+     "rho": -0.061145,
+     "t": -3.708377,
      "r1": -0.104818,
      "r2": -0.072449,
-     "r3": -0.033811
+     "r3": -0.036257
     },
     {
      "name": "Overnight-gap (σ)",
      "kind": "cont",
-     "n": 3658,
-     "q": 0.010775,
+     "n": 3659,
+     "q": 0.009811,
      "passes": true,
      "stable": true,
-     "rho": -0.024418,
-     "t": -3.187195,
+     "rho": -0.024999,
+     "t": -3.214198,
      "r1": -0.055331,
      "r2": -0.027952,
-     "r3": -0.009927
+     "r3": -0.011315
     },
     {
      "name": "Opsjonsforfall (fredag)",
      "kind": "bin",
      "n": 172,
-     "q": 0.013705,
+     "q": 0.013411,
      "passes": true,
      "stable": true,
      "up1": 0.389535,
-     "up0": 0.532768,
+     "up0": 0.5329,
      "bp1": -9.083525,
-     "bp0": 2.264591
+     "bp0": 2.289164
     },
     {
      "name": "NQ vs ES gap",
      "kind": "cont",
-     "n": 3658,
-     "q": 0.015897,
+     "n": 3659,
+     "q": 0.015821,
      "passes": true,
      "stable": true,
-     "rho": -0.03758,
-     "t": -2.94983,
+     "rho": -0.038192,
+     "t": -2.982161,
      "r1": -0.04495,
      "r2": -0.012706,
-     "r3": -0.056354
+     "r3": -0.057821
     },
     {
      "name": "Gap i samme retning som gårsdagen",
      "kind": "cond",
      "n": 1879,
-     "q": 0.015897,
+     "q": 0.015821,
      "passes": false,
      "stable": false,
      "rho": -0.026672,
@@ -380,53 +391,53 @@
     {
      "name": "Gap når VIX er høy",
      "kind": "cond",
-     "n": 1616,
-     "q": 0.017722,
-     "passes": false,
-     "stable": false,
-     "rho": -0.032805,
-     "t": -2.883063,
+     "n": 1617,
+     "q": 0.016086,
+     "passes": true,
+     "stable": true,
+     "rho": -0.034018,
+     "t": -2.913443,
      "r1": -0.099553,
      "r2": -0.043139,
-     "r3": 5.3e-05
+     "r3": -0.003063
+    },
+    {
+     "name": "Asia-økt (16:00→03:00)",
+     "kind": "cont",
+     "n": 3659,
+     "q": 0.019134,
+     "passes": false,
+     "stable": false,
+     "rho": -0.001666,
+     "t": -2.774564,
+     "r1": -0.057756,
+     "r2": 0.003538,
+     "r3": 0.01897
+    },
+    {
+     "name": "VIX/VIX3M − 1",
+     "kind": "cont",
+     "n": 3713,
+     "q": 0.019134,
+     "passes": true,
+     "stable": true,
+     "rho": 0.041272,
+     "t": 2.789135,
+     "r1": 0.037951,
+     "r2": 0.050633,
+     "r3": 0.038319
     },
     {
      "name": "Mandag",
      "kind": "bin",
      "n": 696,
-     "q": 0.018663,
+     "q": 0.019134,
      "passes": true,
      "stable": true,
      "up1": 0.579023,
-     "up0": 0.513926,
+     "up0": 0.514087,
      "bp1": 6.883712,
-     "bp0": 0.551466
-    },
-    {
-     "name": "VIX/VIX3M − 1",
-     "kind": "cont",
-     "n": 3712,
-     "q": 0.020129,
-     "passes": true,
-     "stable": true,
-     "rho": 0.041031,
-     "t": 2.784087,
-     "r1": 0.037951,
-     "r2": 0.050633,
-     "r3": 0.037696
-    },
-    {
-     "name": "Asia-økt (16:00→03:00)",
-     "kind": "cont",
-     "n": 3658,
-     "q": 0.020273,
-     "passes": false,
-     "stable": false,
-     "rho": -0.001077,
-     "t": -2.755693,
-     "r1": -0.057756,
-     "r2": 0.003538,
-     "r3": 0.020433
+     "bp0": 0.580875
     },
     {
      "name": "Siste time før åpning på nyhetsdager",
@@ -444,154 +455,154 @@
     {
      "name": "Overnight-range (størrelse)",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.024611,
+     "n": 3700,
+     "q": 0.024866,
      "passes": true,
      "stable": true,
-     "rho": 0.041846,
-     "t": 2.643569,
+     "rho": 0.041861,
+     "t": 2.640076,
      "r1": 0.028819,
      "r2": 0.061622,
-     "r3": 0.024964
+     "r3": 0.024702
+    },
+    {
+     "name": "Gap torsdag/fredag",
+     "kind": "cond",
+     "n": 1477,
+     "q": 0.043125,
+     "passes": true,
+     "stable": true,
+     "rho": -0.05762,
+     "t": -2.424412,
+     "r1": -0.055855,
+     "r2": -0.08115,
+     "r3": -0.051281
     },
     {
      "name": "Megacap-earnings over natten",
      "kind": "bin",
      "n": 423,
-     "q": 0.049615,
+     "q": 0.048515,
      "passes": true,
      "stable": true,
      "up1": 0.475177,
-     "up0": 0.532685,
+     "up0": 0.532827,
      "bp1": -4.793082,
-     "bp0": 2.578826
-    },
-    {
-     "name": "Gap torsdag/fredag",
-     "kind": "cond",
-     "n": 1476,
-     "q": 0.049615,
-     "passes": true,
-     "stable": true,
-     "rho": -0.05625,
-     "t": -2.369686,
-     "r1": -0.055855,
-     "r2": -0.08115,
-     "r3": -0.048074
+     "bp0": 2.605178
     },
     {
      "name": "VIX-nivå (z)",
      "kind": "cont",
-     "n": 3593,
-     "q": 0.105885,
+     "n": 3594,
+     "q": 0.106152,
      "passes": false,
      "stable": false,
-     "rho": 0.025562,
-     "t": 2.030025,
+     "rho": 0.025695,
+     "t": 2.028974,
      "r1": 0.022814,
      "r2": 0.065564,
-     "r3": -0.004918
+     "r3": -0.00447
     },
     {
      "name": "Torsdag/fredag",
      "kind": "bin",
-     "n": 1492,
-     "q": 0.111191,
+     "n": 1493,
+     "q": 0.120175,
      "passes": false,
      "stable": false,
-     "up1": 0.514745,
+     "up1": 0.51507,
      "up0": 0.533784,
-     "bp1": -0.431943,
+     "bp1": -0.371856,
      "bp0": 3.197632
     },
     {
      "name": "Siste time før åpning (08:25→09:30)",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.147603,
+     "n": 3700,
+     "q": 0.146051,
      "passes": false,
      "stable": false,
-     "rho": -0.010373,
-     "t": -1.841137,
+     "rho": -0.010597,
+     "t": -1.845867,
      "r1": -0.083555,
      "r2": -0.007071,
-     "r3": 0.015881
+     "r3": 0.015525
     },
     {
      "name": "Gårsdagens RTH",
      "kind": "cont",
-     "n": 3658,
-     "q": 0.172732,
+     "n": 3659,
+     "q": 0.170365,
      "passes": false,
      "stable": true,
-     "rho": -0.014203,
-     "t": -1.675531,
+     "rho": -0.014134,
+     "t": -1.671377,
      "r1": -0.003995,
      "r2": -0.037877,
-     "r3": -0.003345
+     "r3": -0.003189
     },
     {
      "name": "Avkastning 5 dager",
      "kind": "cont",
-     "n": 3618,
-     "q": 0.172732,
+     "n": 3619,
+     "q": 0.170365,
      "passes": false,
      "stable": true,
-     "rho": -0.030369,
-     "t": -1.675913,
+     "rho": -0.030542,
+     "t": -1.682071,
      "r1": -0.054122,
      "r2": -0.035653,
-     "r3": -0.012644
+     "r3": -0.012966
     },
     {
      "name": "10-års rente, 5 dager",
      "kind": "cont",
-     "n": 3707,
-     "q": 0.172732,
+     "n": 3708,
+     "q": 0.170365,
      "passes": false,
      "stable": false,
-     "rho": -0.029181,
-     "t": -1.721059,
+     "rho": -0.028682,
+     "t": -1.701072,
      "r1": -0.04757,
      "r2": 0.007048,
-     "r3": -0.042512
+     "r3": -0.041469
     },
     {
      "name": "08:30-nyhetsdag (stor bevegelse 08:25–08:45)",
      "kind": "bin",
      "n": 499,
-     "q": 0.172732,
+     "q": 0.170365,
      "passes": false,
      "stable": false,
      "up1": 0.563126,
-     "up0": 0.520386,
+     "up0": 0.520535,
      "bp1": 6.267058,
-     "bp0": 1.035488
+     "bp0": 1.062943
     },
     {
      "name": "VIX over 1-års median",
      "kind": "bin",
-     "n": 1630,
-     "q": 0.172732,
+     "n": 1631,
+     "q": 0.170365,
      "passes": false,
      "stable": true,
-     "up1": 0.538037,
+     "up1": 0.53832,
      "up0": 0.516811,
-     "bp1": 3.482292,
+     "bp1": 3.534895,
      "bp0": 0.37375
     },
     {
      "name": "Avstand til 50-dagers snitt",
      "kind": "cont",
-     "n": 2501,
-     "q": 0.186237,
+     "n": 2502,
+     "q": 0.175442,
      "passes": false,
      "stable": true,
-     "rho": -0.01854,
-     "t": -1.609058,
+     "rho": -0.019304,
+     "t": -1.638264,
      "r1": -0.033307,
      "r2": -0.022839,
-     "r3": -0.019597
+     "r3": -0.021085
     },
     {
      "name": "Earnings-dager: gap",
@@ -622,219 +633,219 @@
     {
      "name": "Posisjon i overnight-range (0–1)",
      "kind": "cont",
-     "n": 3682,
-     "q": 0.271803,
+     "n": 3683,
+     "q": 0.253117,
      "passes": false,
      "stable": false,
-     "rho": -0.018954,
-     "t": -1.355804,
+     "rho": -0.019539,
+     "t": -1.394655,
      "r1": -0.041675,
      "r2": -0.021953,
-     "r3": 0.003905
+     "r3": 0.00238
     },
     {
      "name": "Gap på dager UTEN 08:30-nyhet",
      "kind": "cond",
-     "n": 3162,
-     "q": 0.3688,
+     "n": 3163,
+     "q": 0.350378,
      "passes": false,
      "stable": false,
-     "rho": 0.004939,
-     "t": -1.160448,
+     "rho": 0.004225,
+     "t": -1.191173,
      "r1": -0.05277,
      "r2": -0.002406,
-     "r3": 0.038412
+     "r3": 0.036642
     },
     {
      "name": "Gårsdagens første time",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.37136,
+     "n": 3700,
+     "q": 0.371716,
      "passes": false,
      "stable": true,
-     "rho": -0.019101,
-     "t": -1.136312,
+     "rho": -0.019103,
+     "t": -1.135727,
      "r1": -0.015585,
      "r2": -0.023876,
-     "r3": -0.021202
+     "r3": -0.021225
     },
     {
      "name": "Siste halvtime før åpning",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.461122,
+     "n": 3700,
+     "q": 0.450186,
      "passes": false,
      "stable": false,
-     "rho": -0.007572,
-     "t": -0.976061,
+     "rho": -0.008053,
+     "t": -0.994186,
      "r1": -0.059675,
      "r2": -0.015679,
-     "r3": 0.027369
+     "r3": 0.026221
     },
     {
      "name": "Olje overnight",
      "kind": "cont",
-     "n": 3407,
-     "q": 0.461122,
+     "n": 3408,
+     "q": 0.46327,
      "passes": false,
      "stable": false,
-     "rho": -0.004171,
-     "t": -0.937691,
+     "rho": -0.004078,
+     "t": -0.934539,
      "r1": 0.01447,
      "r2": -0.049495,
-     "r3": 0.01581
+     "r3": 0.01592
     },
     {
      "name": "Kreditt HYG/IEF, 5 dager",
      "kind": "cont",
-     "n": 3707,
-     "q": 0.461122,
+     "n": 3708,
+     "q": 0.46327,
      "passes": false,
      "stable": true,
-     "rho": -0.017975,
-     "t": -0.947703,
-     "r1": -0.009547,
-     "r2": -0.007859,
-     "r3": -0.036629
+     "rho": -0.017528,
+     "t": -0.9415,
+     "r1": -0.00955,
+     "r2": -0.007847,
+     "r3": -0.035324
     },
     {
      "name": "VIX-endring i går",
      "kind": "cont",
-     "n": 3711,
-     "q": 0.486637,
+     "n": 3712,
+     "q": 0.505717,
      "passes": false,
      "stable": false,
-     "rho": -0.011979,
-     "t": 0.880672,
+     "rho": -0.012621,
+     "t": 0.853585,
      "r1": -0.047513,
      "r2": 0.004199,
-     "r3": -0.003203
+     "r3": -0.004804
     },
     {
      "name": "Månedsskifte",
      "kind": "bin",
      "n": 718,
-     "q": 0.580429,
+     "q": 0.590039,
      "passes": false,
      "stable": false,
      "up1": 0.529248,
-     "up0": 0.525384,
+     "up0": 0.525543,
      "bp1": 3.121356,
-     "bp0": 1.407198
+     "bp0": 1.436537
     },
     {
      "name": "Gårsdagens siste time",
      "kind": "cont",
-     "n": 3658,
-     "q": 0.681933,
+     "n": 3659,
+     "q": 0.675603,
      "passes": false,
      "stable": false,
-     "rho": -0.004412,
-     "t": -0.581802,
+     "rho": -0.004707,
+     "t": -0.589545,
      "r1": -0.010974,
      "r2": -0.055752,
-     "r3": 0.04015
+     "r3": 0.039371
     },
     {
      "name": "Forfallsuke",
      "kind": "bin",
      "n": 862,
-     "q": 0.751197,
+     "q": 0.764093,
      "passes": false,
      "stable": true,
      "up1": 0.49884,
-     "up0": 0.534386,
+     "up0": 0.534549,
      "bp1": 2.477473,
-     "bp0": 1.515334
+     "bp0": 1.546117
     },
     {
      "name": "Dag før helligdag",
      "kind": "bin",
      "n": 150,
-     "q": 0.783615,
+     "q": 0.778758,
      "passes": false,
      "stable": false,
      "up1": 0.52,
-     "up0": 0.52639,
+     "up0": 0.526523,
      "bp1": 0.046334,
-     "bp0": 1.810032
+     "bp0": 1.834581
     },
     {
      "name": "Gull overnight",
      "kind": "cont",
-     "n": 3682,
-     "q": 0.795465,
+     "n": 3683,
+     "q": 0.797852,
      "passes": false,
      "stable": true,
-     "rho": 0.019122,
-     "t": 0.359608,
+     "rho": 0.018419,
+     "t": 0.316703,
      "r1": 0.049689,
      "r2": 0.00925,
-     "r3": 0.004357
+     "r3": 0.002672
     },
     {
      "name": "US T-bond overnight (2018+)",
      "kind": "cont",
-     "n": 1955,
-     "q": 0.795465,
+     "n": 1956,
+     "q": 0.797852,
      "passes": false,
      "stable": false,
-     "rho": -0.017868,
-     "t": -0.305335,
+     "rho": -0.018405,
+     "t": -0.319375,
      "r1": null,
      "r2": -0.053838,
-     "r3": -0.008743
+     "r3": -0.009396
     },
     {
      "name": "Dollarindeks overnight (2017+)",
      "kind": "cont",
-     "n": 2217,
-     "q": 0.795465,
+     "n": 2218,
+     "q": 0.797852,
      "passes": false,
      "stable": false,
-     "rho": 0.012575,
-     "t": 0.309827,
+     "rho": 0.012503,
+     "t": 0.307595,
      "r1": null,
      "r2": 0.068377,
-     "r3": -0.015119
+     "r3": -0.01526
     },
     {
      "name": "Dag etter helligdag",
      "kind": "bin",
      "n": 150,
-     "q": 0.795465,
+     "q": 0.797852,
      "passes": false,
      "stable": false,
      "up1": 0.493333,
-     "up0": 0.527513,
+     "up0": 0.527645,
      "bp1": 3.032585,
-     "bp0": 1.684278
+     "bp0": 1.708862
     },
     {
      "name": "London-økt (03:00→08:25)",
      "kind": "cont",
-     "n": 3699,
-     "q": 0.96142,
+     "n": 3700,
+     "q": 0.951086,
      "passes": false,
      "stable": false,
-     "rho": -0.001985,
-     "t": -0.075201,
+     "rho": -0.002416,
+     "t": -0.087907,
      "r1": 0.016428,
      "r2": -0.02635,
-     "r3": 0.00802
+     "r3": 0.007054
     },
     {
      "name": "USD/JPY overnight",
      "kind": "cont",
-     "n": 3682,
-     "q": 0.988353,
+     "n": 3683,
+     "q": 0.992355,
      "passes": false,
      "stable": true,
-     "rho": 0.020244,
-     "t": 0.014598,
+     "rho": 0.020038,
+     "t": 0.009582,
      "r1": 0.024512,
      "r2": 0.004699,
-     "r3": 0.032049
+     "r3": 0.03149
     }
    ],
    "rolling": [
@@ -1427,312 +1438,296 @@
      "hit": 0.532
     },
     {
-     "date": "2026-11-11",
-     "hit": 0.544
+     "date": "2026-11-12",
+     "hit": 0.548
     }
    ]
   },
   "confident": {
    "n": 802,
-   "share": 0.248067,
+   "share": 0.24799,
    "hit": 0.562344,
    "bp": 6.558528,
-   "expected": 0.519447,
-   "p": 0.008208,
-   "excess": 34.403341
+   "expected": 0.519543,
+   "p": 0.008331,
+   "excess": 34.326531
   },
-  "trained_on": "2026-11-12 15:00",
-  "n_train": 3712,
+  "trained_on": "2026-11-13 15:00",
+  "n_train": 3713,
   "features": [
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "coef": 0.083679
+    "coef": 0.084338
    },
    {
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
-    "coef": -0.076523
+    "coef": -0.07683
    },
    {
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
-    "coef": -0.067277
+    "coef": -0.067089
    },
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
-    "coef": 0.077168
+    "coef": 0.077046
    },
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "coef": -0.101716
+    "coef": -0.102148
    },
    {
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
-    "coef": -0.021556
+    "coef": -0.021456
    },
    {
     "key": "gap_x_news",
     "label": "Gap på 08:30-nyhetsdag",
-    "coef": -0.05551
+    "coef": -0.055154
    },
    {
     "key": "gap_x_thufri",
     "label": "Gap torsdag/fredag",
-    "coef": -0.089586
+    "coef": -0.090372
    },
    {
     "key": "gap_x_big",
     "label": "Stort gap (over 1σ)",
-    "coef": -0.03301
+    "coef": -0.031638
    },
    {
     "key": "gap_x_outside",
     "label": "Gap utenfor gårsdagens range",
-    "coef": 0.043952
+    "coef": 0.042852
    },
    {
     "key": "gap_x_vix",
     "label": "Gap når VIX er høy",
-    "coef": 0.00251
+    "coef": 0.001536
    },
    {
     "key": "monday",
     "label": "Mandag",
-    "coef": 0.069651
+    "coef": 0.06937
    },
    {
     "key": "opex",
     "label": "Opsjonsforfall (fredag)",
-    "coef": -0.10371
+    "coef": -0.103785
    },
    {
     "key": "earn",
     "label": "Megacap-earnings over natten",
-    "coef": -0.06285
+    "coef": -0.063008
    }
   ],
   "first": "2011-09-20",
-  "last": "2026-11-11"
+  "last": "2026-11-12"
  },
  "today": {
   "model_version": 2,
-  "date": "2026-11-12",
-  "weekday": "tor",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "date": "2026-11-13",
+  "weekday": "fre",
+  "run_oslo": "15:00",
+  "run_et": "09:00",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.198446,
-  "p": 0.560273,
-  "p_raw": 0.560273,
-  "bias": "BULLISH",
-  "strength": "Svak",
+  "minutes_before_open": 29.641224,
+  "p": 0.495072,
+  "p_raw": 0.495072,
+  "bias": "NØYTRAL",
+  "strength": "Nøytral",
   "class_hist": {
-   "name": "Svak",
-   "n": 561,
-   "hit_rate": 0.552585,
-   "signed_bp": 2.710066
+   "name": "Nøytral",
+   "n": 2432,
+   "hit_rate": 0.509046,
+   "signed_bp": 0.050836
   },
-  "nq_price": 28080.5,
-  "typical_points": 113.910615,
+  "nq_price": 28441.5,
+  "typical_points": 117.866216,
   "bull": [
-   {
-    "key": "gap_x_thufri",
-    "label": "Gap torsdag/fredag",
-    "value": "gap -1.42 % (-0.6σ)",
-    "pp": 3.370159,
-    "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
-    "missing": false
-   },
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "-0.31σ",
-    "pp": 2.877909,
+    "value": "-0.11σ",
+    "pp": 1.169188,
     "why": "Relativ verdi: NQ trekkes mot ES",
-    "missing": false
-   },
-   {
-    "key": "fh_mom5_z",
-    "label": "Første time, snitt 5 dager",
-    "value": "-0.09σ",
-    "pp": 0.975644,
-    "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    }
   ],
   "bear": [
    {
-    "key": "gap_z",
-    "label": "Overnight-gap (σ)",
-    "value": "-1.42 % (-0.6σ)",
-    "pp": -2.13672,
-    "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
-    "missing": false
-   },
-   {
-    "key": "gap_x_outside",
-    "label": "Gap utenfor gårsdagens range",
-    "value": "gap -1.42 % (-0.6σ)",
-    "pp": -1.258433,
-    "why": "Åpning utenfor gårsdagens høy/lav har reversert oftere.",
+    "key": "fh_mom5_z",
+    "label": "Første time, snitt 5 dager",
+    "value": "+0.29σ",
+    "pp": -2.52917,
+    "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
-    "value": "+0.77σ",
-    "pp": -0.28991,
+    "value": "+0.56σ",
+    "pp": -1.046594,
     "why": "Volatilitet",
     "missing": false
    },
    {
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
-    "value": "+0.03σ",
-    "pp": -0.21249,
+    "value": "+0.05σ",
+    "pp": -0.480221,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
+    "missing": false
+   },
+   {
+    "key": "vix_ts",
+    "label": "VIX/VIX3M − 1",
+    "value": "0.93",
+    "pp": -0.304518,
+    "why": "Backwardation → oversolgt",
+    "missing": false
+   },
+   {
+    "key": "gap_x_thufri",
+    "label": "Gap torsdag/fredag",
+    "value": "gap +0.14 % (+0.1σ)",
+    "pp": -0.246455,
+    "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
     "missing": false
    }
   ],
   "similar": [
    {
     "name": "Alle dager",
-    "n": 3712,
-    "up": 0.526131,
-    "bp": 1.738762,
-    "n_recent": 752,
-    "up_recent": 0.529255
+    "n": 3713,
+    "up": 0.526259,
+    "bp": 1.762338,
+    "n_recent": 753,
+    "up_recent": 0.52988
    },
    {
-    "name": "Alle torsdager",
-    "n": 748,
-    "up": 0.508021,
-    "bp": 0.007016,
-    "n_recent": 148,
-    "up_recent": 0.466216
+    "name": "Alle fredager",
+    "n": 744,
+    "up": 0.521505,
+    "bp": -0.873262,
+    "n_recent": 150,
+    "up_recent": 0.553333
    },
    {
-    "name": "Gap ned (−1σ til −0,3σ)",
-    "n": 665,
-    "up": 0.542857,
-    "bp": 1.270893,
-    "n_recent": 135,
-    "up_recent": 0.533333
-   },
-   {
-    "name": "Åpning under gårsdagens lav",
-    "n": 540,
-    "up": 0.574074,
-    "bp": 8.919356,
-    "n_recent": 114,
-    "up_recent": 0.578947
+    "name": "Nesten flat åpning",
+    "n": 1671,
+    "up": 0.518253,
+    "bp": 1.134623,
+    "n_recent": 309,
+    "up_recent": 0.527508
    }
   ],
   "market": [
    {
     "name": "NQ future",
-    "last": 28080.5,
-    "chg": -1.41745
+    "last": 28441.5,
+    "chg": 0.187578
    },
    {
     "name": "ES future",
-    "last": 7588.75,
-    "chg": -0.7098
+    "last": 7648.75,
+    "chg": 0.426719
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 680.45,
-    "chg": -1.438339
+    "last": 689.31,
+    "chg": 0.159832
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 754.0,
-    "chg": -0.76205
+    "last": 760.29,
+    "chg": 0.408081
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 484.11,
-    "chg": -4.558092
+    "last": 500.75,
+    "chg": -0.25397
    },
    {
     "name": "10-års Treasury future",
-    "last": 105.953125,
-    "chg": -0.117838
+    "last": 105.25,
+    "chg": -0.088994
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 102.899002,
-    "chg": -0.029145
+    "last": 103.198997,
+    "chg": 0.031015
    },
    {
     "name": "USD/JPY",
-    "last": 159.656006,
-    "chg": -0.121364
+    "last": 159.908005,
+    "chg": 0.015012
    },
    {
     "name": "Bitcoin",
-    "last": 71896.351562,
-    "chg": -3.582845
+    "last": 69483.867188,
+    "chg": -2.610035
    },
    {
     "name": "Råolje (WTI)",
-    "last": 86.269997,
-    "chg": -0.069507
+    "last": 89.169998,
+    "chg": 0.258596
    },
    {
     "name": "Gull",
-    "last": 3891.800049,
-    "chg": -2.512463
+    "last": 3884.100098,
+    "chg": 0.118574
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6394.200195,
-    "chg": 0.026131
+    "last": 6397.490234,
+    "chg": -0.191115
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.107,
-    "chg": 0.12
+    "level": 4.112,
+    "chg": 0.112
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.866,
-    "chg": 0.258
+    "level": 4.96,
+    "chg": 0.312
    },
    {
     "name": "10-års rente (%)",
-    "level": 5.024,
-    "chg": 0.187
+    "level": 5.131,
+    "chg": 0.272
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.367,
-    "chg": 0.116
+    "level": 5.462,
+    "chg": 0.202
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.917,
-    "chg": 0.067
+    "level": 1.019,
+    "chg": 0.16
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
-    "level": 0.850561,
-    "chg": 0.5707
+    "level": 0.853342,
+    "chg": 1.555239
    },
    {
     "name": "VIX (i går)",
-    "level": 17.49,
+    "level": 18.700001,
     "chg": null
    },
    {
     "name": "VIX / VIX3M",
-    "level": 0.909044,
+    "level": 0.932203,
     "chg": null,
     "note": "contango (normalt)"
    }
@@ -1741,22 +1736,32 @@
    {
     "oslo": "14:30",
     "et": "08:30",
-    "title": "Unemployment Claims",
-    "impact": "Medium",
-    "forecast": "194K",
-    "previous": "189K",
+    "title": "Core PPI m/m",
+    "impact": "High",
+    "forecast": "0.3%",
+    "previous": "0.7%",
+    "actual": "",
+    "where": "before"
+   },
+   {
+    "oslo": "14:30",
+    "et": "08:30",
+    "title": "PPI m/m",
+    "impact": "High",
+    "forecast": "0.4%",
+    "previous": "1.3%",
     "actual": "",
     "where": "before"
    }
   ],
   "flags": [],
   "headlines": [
-   "Trump says ‘we don’t need a deal with Iran’",
-   "Jensen and Lori Huang's Nvidia fortune is jointly controlled. How that makes things complicated now that he's resigned",
-   "Nebius falls 10% as company expects increased 2026 capex spend, issues weak outlook",
-   "Oil prices mixed after Trump says no Iran deal needed: 'We've got their Strait'",
-   "Unions helped Democrats win big in 2026. Now they want action",
-   "As credit card balances hit a record high, medical bills can become 'shadow debt,' expert says"
+   "Wholesale prices rose 0.3% in October, putting annual rate at 6.5%, the highest in nearly four years",
+   "Bessent: Treasury has wanted Megaspeed restrictions for months, but Commerce is in charge",
+   "Outlook outage continues as Microsoft flags 'encouraging recovery signals'",
+   "What's ahead for AI financing after Nvidia CEO Jensen Huang departs",
+   "Trump says he wants to ‘get Cuba done’ before leaving office, would consider military force",
+   "U.S. seizes $1.2 billion in cryptocurrency stolen from Binance"
   ],
   "warnings": [],
   "missing": [],
