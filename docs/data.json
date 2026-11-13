@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-13T14:12:13.280073+00:00",
-  "generated_oslo": "2026-11-13 15:12",
+  "generated_utc": "2026-11-13T14:22:12.600362+00:00",
+  "generated_oslo": "2026-11-13 15:22",
   "phase": "live",
   "next_open_date": "2026-11-13",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-13",
-    "run_time_oslo": "15:12",
-    "p_cal": 0.4919,
+    "run_time_oslo": "15:22",
+    "p_cal": 0.4895,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
     "fh_ret_pct": null,
@@ -1533,12 +1533,12 @@
   "model_version": 2,
   "date": "2026-11-13",
   "weekday": "fre",
-  "run_oslo": "15:12",
-  "run_et": "09:12",
+  "run_oslo": "15:22",
+  "run_et": "09:22",
   "open_oslo": "15:30",
-  "minutes_before_open": 17.992117,
-  "p": 0.491899,
-  "p_raw": 0.491899,
+  "minutes_before_open": 7.991309,
+  "p": 0.489502,
+  "p_raw": 0.489502,
   "bias": "NØYTRAL",
   "strength": "Nøytral",
   "class_hist": {
@@ -1547,22 +1547,22 @@
    "hit_rate": 0.509046,
    "signed_bp": 0.050836
   },
-  "nq_price": 28421.0,
-  "typical_points": 117.78126,
+  "nq_price": 28431.25,
+  "typical_points": 117.823738,
   "bull": [
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "-0.09σ",
-    "pp": 0.928582,
+    "value": "-0.07σ",
+    "pp": 0.764888,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "+0.22 % (+0.1σ)",
-    "pp": 0.189069,
+    "value": "+0.31 % (+0.1σ)",
+    "pp": 0.312339,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    }
@@ -1572,7 +1572,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "+0.29σ",
-    "pp": -2.528751,
+    "pp": -2.5283,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1580,31 +1580,31 @@
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+0.56σ",
-    "pp": -1.046421,
+    "pp": -1.046235,
     "why": "Volatilitet",
+    "missing": false
+   },
+   {
+    "key": "gap_x_thufri",
+    "label": "Gap torsdag/fredag",
+    "value": "gap +0.31 % (+0.1σ)",
+    "pp": -0.65341,
+    "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
     "missing": false
    },
    {
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "+0.05σ",
-    "pp": -0.480141,
+    "pp": -0.480056,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
-    "missing": false
-   },
-   {
-    "key": "gap_x_thufri",
-    "label": "Gap torsdag/fredag",
-    "value": "gap +0.22 % (+0.1σ)",
-    "pp": -0.450946,
-    "why": "Åpningsreverseringen er sterkest mot slutten av uka (Boyarchenko m.fl.).",
     "missing": false
    },
    {
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "0.93",
-    "pp": -0.304467,
+    "pp": -0.304413,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1638,63 +1638,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 28421.0,
-    "chg": 0.115365
+    "last": 28431.25,
+    "chg": 0.151471
    },
    {
     "name": "ES future",
-    "last": 7644.25,
-    "chg": 0.367635
+    "last": 7646.5,
+    "chg": 0.397177
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 689.51,
-    "chg": 0.188893
+    "last": 689.951,
+    "chg": 0.252972
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 760.47,
-    "chg": 0.431853
+    "last": 760.32,
+    "chg": 0.412043
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 501.22,
-    "chg": -0.160349
+    "last": 502.3427,
+    "chg": 0.063285
    },
    {
     "name": "10-års Treasury future",
-    "last": 105.234375,
-    "chg": -0.103827
+    "last": 105.21875,
+    "chg": -0.118659
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.212997,
-    "chg": 0.044586
+    "last": 103.222,
+    "chg": 0.053312
    },
    {
     "name": "USD/JPY",
-    "last": 159.899002,
-    "chg": 0.009381
+    "last": 159.972,
+    "chg": 0.055038
    },
    {
     "name": "Bitcoin",
-    "last": 69219.867188,
-    "chg": -2.980063
+    "last": 69166.671875,
+    "chg": -3.054622
    },
    {
     "name": "Råolje (WTI)",
-    "last": 89.07,
-    "chg": 0.146163
+    "last": 89.18,
+    "chg": 0.269842
    },
    {
     "name": "Gull",
-    "last": 3886.600098,
-    "chg": 0.183016
+    "last": 3887.399902,
+    "chg": 0.203632
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6386.77002,
-    "chg": -0.358364
+    "last": 6383.97998,
+    "chg": -0.401892
    }
   ],
   "regime": [
