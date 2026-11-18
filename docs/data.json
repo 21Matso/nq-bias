@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-18T14:12:15.936945+00:00",
-  "generated_oslo": "2026-11-18 15:12",
+  "generated_utc": "2026-11-18T14:22:20.126428+00:00",
+  "generated_oslo": "2026-11-18 15:22",
   "phase": "live",
   "next_open_date": "2026-11-18",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-18",
-    "run_time_oslo": "15:12",
-    "p_cal": 0.5009,
+    "run_time_oslo": "15:22",
+    "p_cal": 0.4998,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
     "fh_ret_pct": null,
@@ -1555,12 +1555,12 @@
   "model_version": 2,
   "date": "2026-11-18",
   "weekday": "ons",
-  "run_oslo": "15:12",
-  "run_et": "09:12",
+  "run_oslo": "15:22",
+  "run_et": "09:22",
   "open_oslo": "15:30",
-  "minutes_before_open": 17.986291,
-  "p": 0.500869,
-  "p_raw": 0.500869,
+  "minutes_before_open": 7.989626,
+  "p": 0.499831,
+  "p_raw": 0.499831,
   "bias": "NØYTRAL",
   "strength": "Nøytral",
   "class_hist": {
@@ -1569,14 +1569,14 @@
    "hit_rate": 0.509039,
    "signed_bp": 0.102875
   },
-  "nq_price": 27296.75,
-  "typical_points": 127.385691,
+  "nq_price": 27249.5,
+  "typical_points": 127.16519,
   "bull": [
    {
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.24σ",
-    "pp": 2.38416,
+    "pp": 2.384167,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1584,15 +1584,15 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.05σ",
-    "pp": 1.216374,
+    "pp": 1.216378,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "+0.69 % (+0.3σ)",
-    "pp": 0.866937,
+    "value": "+0.51 % (+0.2σ)",
+    "pp": 0.607913,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    }
@@ -1602,15 +1602,15 @@
     "key": "earn",
     "label": "Megacap-earnings over natten",
     "value": "Ja",
-    "pp": -4.365195,
+    "pp": -4.365208,
     "why": "Selskapsnyheter",
     "missing": false
    },
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "+0.18σ",
-    "pp": -1.500605,
+    "value": "+0.16σ",
+    "pp": -1.33445,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
@@ -1618,7 +1618,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.02",
-    "pp": -1.010049,
+    "pp": -1.010052,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1641,12 +1641,12 @@
     "up_recent": 0.542484
    },
    {
-    "name": "Gap opp (0,3σ til 1σ)",
-    "n": 953,
-    "up": 0.52256,
-    "bp": 0.989734,
-    "n_recent": 194,
-    "up_recent": 0.505155
+    "name": "Nesten flat åpning",
+    "n": 1673,
+    "up": 0.517633,
+    "bp": 0.973969,
+    "n_recent": 309,
+    "up_recent": 0.521036
    },
    {
     "name": "VIX over VIX3M (backwardation)",
@@ -1668,63 +1668,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 27296.75,
-    "chg": 0.777147
+    "last": 27249.5,
+    "chg": 0.602704
    },
    {
     "name": "ES future",
-    "last": 7388.25,
-    "chg": 0.336117
+    "last": 7380.0,
+    "chg": 0.224078
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 661.04,
-    "chg": 0.610318
+    "last": 660.25,
+    "chg": 0.49008
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 734.21,
-    "chg": 0.248499
+    "last": 733.49,
+    "chg": 0.150191
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 468.22,
-    "chg": 1.740512
+    "last": 467.57,
+    "chg": 1.599272
    },
    {
     "name": "10-års Treasury future",
-    "last": 105.59375,
-    "chg": 0.0
+    "last": 105.625,
+    "chg": 0.029595
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.795998,
-    "chg": 0.279202
+    "last": 103.796997,
+    "chg": 0.280168
    },
    {
     "name": "USD/JPY",
-    "last": 159.373993,
-    "chg": 0.022591
+    "last": 159.324997,
+    "chg": -0.008159
    },
    {
     "name": "Bitcoin",
-    "last": 63865.800781,
-    "chg": -0.076585
+    "last": 63918.191406,
+    "chg": 0.005384
    },
    {
     "name": "Råolje (WTI)",
-    "last": 83.959999,
-    "chg": -2.030336
+    "last": 84.019997,
+    "chg": -1.960327
    },
    {
     "name": "Gull",
-    "last": 3785.800049,
-    "chg": -1.672638
+    "last": 3784.300049,
+    "chg": -1.711597
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6206.200195,
-    "chg": -0.237744
+    "last": 6205.220215,
+    "chg": -0.253497
    }
   ],
   "regime": [
@@ -1787,11 +1787,11 @@
   ],
   "headlines": [
    "Nvidia’s Kress faces a divided workforce as some employees push for Huang’s return",
-   "Jensen Huang has agreed to appear before Senate banking committee, Chairman Scott says",
+   "Retail investor enthusiasm for Anthropic IPO to rival SpaceX debut",
    "Fed’s Waller says central bank may need to ‘shock people’ with half-point rate hike",
-   "Trump arrives in China for historic meeting with Xi, Putin",
-   "Target posts best sales growth in five years, raises guidance",
-   "Cantor Fitzgerald's Nvidia business interests targeted in Democrats' Lutnick probe"
+   "Trump admin insists recent closely timed tech outages aren't connected",
+   "Hims & Hers launches new peptide treatments — while admitting there's more to learn about efficacy",
+   "Trump arrives in China for historic meeting with Xi, Putin"
   ],
   "warnings": [],
   "missing": [],
