@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-19T14:23:20.672593+00:00",
-  "generated_oslo": "2026-11-19 15:22",
+  "generated_utc": "2026-11-19T14:24:44.500182+00:00",
+  "generated_oslo": "2026-11-19 15:24",
   "phase": "live",
   "next_open_date": "2026-11-19",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-19",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:24",
     "p_cal": 0.5346,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
@@ -1566,10 +1566,10 @@
   "model_version": 2,
   "date": "2026-11-19",
   "weekday": "tor",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:24",
+  "run_et": "09:24",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.106695,
+  "minutes_before_open": 5.812768,
   "p": 0.534607,
   "p_raw": 0.534607,
   "bias": "NØYTRAL",
@@ -1580,8 +1580,8 @@
    "hit_rate": 0.50924,
    "signed_bp": 0.110572
   },
-  "nq_price": 27712.0,
-  "typical_points": 129.323537,
+  "nq_price": 27716.5,
+  "typical_points": 129.344538,
   "bull": [
    {
     "key": "gap_z",
@@ -1695,28 +1695,28 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 27712.0,
-    "chg": 1.914201
+    "last": 27716.5,
+    "chg": 1.93075
    },
    {
     "name": "ES future",
-    "last": 7419.25,
-    "chg": 1.076258
+    "last": 7420.0,
+    "chg": 1.086475
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 671.88,
-    "chg": 1.875633
+    "last": 671.7,
+    "chg": 1.84834
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 738.0655,
-    "chg": 1.059176
+    "last": 738.02,
+    "chg": 1.052946
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 473.3,
-    "chg": 3.023442
+    "last": 473.01,
+    "chg": 2.960318
    },
    {
     "name": "10-års Treasury future",
@@ -1725,33 +1725,33 @@
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.648003,
-    "chg": -0.127188
+    "last": 103.635002,
+    "chg": -0.139715
    },
    {
     "name": "USD/JPY",
-    "last": 159.848999,
-    "chg": 0.343371
+    "last": 159.854004,
+    "chg": 0.346513
    },
    {
     "name": "Bitcoin",
-    "last": 63873.449219,
-    "chg": 2.148877
+    "last": 63859.730469,
+    "chg": 2.126937
    },
    {
     "name": "Råolje (WTI)",
-    "last": 83.809998,
-    "chg": 2.382112
+    "last": 83.779999,
+    "chg": 2.345466
    },
    {
     "name": "Gull",
-    "last": 3709.399902,
-    "chg": -0.49893
+    "last": 3711.199951,
+    "chg": -0.450645
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6172.399902,
-    "chg": 0.239373
+    "last": 6172.149902,
+    "chg": 0.235313
    }
   ],
   "regime": [
@@ -1762,8 +1762,8 @@
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.908,
-    "chg": -0.037
+    "level": 4.913,
+    "chg": -0.032
    },
    {
     "name": "10-års rente (%)",
@@ -1772,13 +1772,13 @@
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.42,
-    "chg": -0.013
+    "level": 5.423,
+    "chg": -0.01
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.934999,
-    "chg": -0.040001
+    "level": 0.938,
+    "chg": -0.037001
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
