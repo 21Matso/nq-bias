@@ -1,22 +1,22 @@
 {
  "meta": {
-  "generated_utc": "2026-11-20T14:23:28.857300+00:00",
-  "generated_oslo": "2026-11-20 15:23",
-  "phase": "live",
-  "next_open_date": "2026-11-20",
+  "generated_utc": "2026-11-20T15:49:32.278170+00:00",
+  "generated_oslo": "2026-11-20 16:49",
+  "phase": "followup",
+  "next_open_date": "2026-11-23",
   "next_open_oslo": "15:30",
-  "next_open_label": "fre 20.11",
+  "next_open_label": "man 23.11",
   "next_bias_oslo": "15:00–15:25",
   "source_errors": [],
   "error": null
  },
  "journal": {
   "logged": 10,
-  "with_outcome": 9,
+  "with_outcome": 10,
   "directional": 2,
   "hits": 2,
   "hit_rate": 1.0,
-  "neutral_days": 7,
+  "neutral_days": 8,
   "by_strength": [
    {
     "name": "Svak",
@@ -36,10 +36,10 @@
     "p_cal": 0.4919,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
-    "fh_ret_pct": null,
-    "nq_points": null,
-    "outcome": null,
-    "correct": null
+    "fh_ret_pct": -1.036,
+    "nq_points": -270.5,
+    "outcome": "NED",
+    "correct": "nøytral"
    },
    {
     "date": "2026-11-19",
