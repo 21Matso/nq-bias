@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-20T14:22:17.582100+00:00",
-  "generated_oslo": "2026-11-20 15:22",
+  "generated_utc": "2026-11-20T14:23:28.857300+00:00",
+  "generated_oslo": "2026-11-20 15:23",
   "phase": "live",
   "next_open_date": "2026-11-20",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-20",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:23",
     "p_cal": 0.4919,
     "bias": "NØYTRAL",
     "strength": "Nøytral",
@@ -1577,10 +1577,10 @@
   "model_version": 2,
   "date": "2026-11-20",
   "weekday": "fre",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:23",
+  "run_et": "09:23",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.989581,
+  "minutes_before_open": 6.975451,
   "p": 0.491867,
   "p_raw": 0.491867,
   "bias": "NØYTRAL",
@@ -1591,8 +1591,8 @@
    "hit_rate": 0.509031,
    "signed_bp": 0.062394
   },
-  "nq_price": 26279.0,
-  "typical_points": 130.280438,
+  "nq_price": 26248.0,
+  "typical_points": 130.126753,
   "bull": [
    {
     "key": "fh_mom5_z",
@@ -1730,28 +1730,28 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 26279.0,
-    "chg": -1.167754
+    "last": 26248.0,
+    "chg": -1.284342
    },
    {
     "name": "ES future",
-    "last": 7154.25,
-    "chg": -0.556
+    "last": 7150.5,
+    "chg": -0.608125
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 637.3182,
-    "chg": -1.20629
+    "last": 637.0752,
+    "chg": -1.243958
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 712.39,
-    "chg": -0.473613
+    "last": 712.3,
+    "chg": -0.486187
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 437.8,
-    "chg": -2.176344
+    "last": 437.813,
+    "chg": -2.173439
    },
    {
     "name": "10-års Treasury future",
@@ -1760,60 +1760,60 @@
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.702003,
-    "chg": -0.179036
+    "last": 103.688004,
+    "chg": -0.192512
    },
    {
     "name": "USD/JPY",
-    "last": 158.768005,
-    "chg": -0.563666
+    "last": 158.766998,
+    "chg": -0.564297
    },
    {
     "name": "Bitcoin",
-    "last": 61894.558594,
-    "chg": -0.248808
+    "last": 61894.351562,
+    "chg": -0.249142
    },
    {
     "name": "Råolje (WTI)",
-    "last": 82.279999,
-    "chg": -0.962931
+    "last": 82.269997,
+    "chg": -0.97497
    },
    {
     "name": "Gull",
-    "last": 3578.0,
-    "chg": -2.283158
+    "last": 3579.699951,
+    "chg": -2.236731
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 5987.049805,
-    "chg": -2.172709
+    "last": 5987.080078,
+    "chg": -2.172214
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.138,
-    "chg": 0.016
+    "level": 4.14,
+    "chg": 0.018
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.764,
-    "chg": -0.217
+    "level": 4.787,
+    "chg": -0.194
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.968,
-    "chg": -0.186
+    "level": 4.988,
+    "chg": -0.166
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.35,
-    "chg": -0.131
+    "level": 5.363,
+    "chg": -0.118
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.83,
-    "chg": -0.202
+    "level": 0.848,
+    "chg": -0.184
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1871,9 +1871,9 @@
    "Anthropic raises $93.5 billion total as underwriters scoop up ‘greenshoe’ overallotment",
    "U.S.-China trade, Taiwan and tech tensions remain unresolved as Trump returns from Asia",
    "SpaceX’s subsidiary Cursor tells lawmakers it's considering phasing out Chinese AI models",
+   "The bull market has a new problem. The 'smart money' is selling",
    "Cathie Wood's ARK Invest was a big buyer of Anthropic, tells CNBC she's 'quite optimistic'",
-   "A24 is having a great year at the box office. That could give HBO Max a streaming edge",
-   "Rejecting cheap fabrics, higher prices: Why shoppers are asking for better clothes"
+   "A24 is having a great year at the box office. That could give HBO Max a streaming edge"
   ],
   "warnings": [],
   "missing": [],
