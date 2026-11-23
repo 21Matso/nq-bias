@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-23T14:00:28.801150+00:00",
-  "generated_oslo": "2026-11-23 15:00",
+  "generated_utc": "2026-11-23T14:12:23.119188+00:00",
+  "generated_oslo": "2026-11-23 15:12",
   "phase": "live",
   "next_open_date": "2026-11-23",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-23",
-    "run_time_oslo": "15:00",
-    "p_cal": 0.6585,
+    "run_time_oslo": "15:12",
+    "p_cal": 0.6748,
     "bias": "BULLISH",
     "strength": "Tydelig",
     "fh_ret_pct": null,
@@ -1593,12 +1593,12 @@
   "model_version": 2,
   "date": "2026-11-23",
   "weekday": "man",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.990271,
-  "p": 0.658508,
-  "p_raw": 0.658508,
+  "minutes_before_open": 17.824921,
+  "p": 0.674822,
+  "p_raw": 0.674822,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1607,30 +1607,30 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 25897.75,
-  "typical_points": 154.921535,
+  "nq_price": 26728.5,
+  "typical_points": 159.89112,
   "bull": [
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "+5.62 % (+2.2σ)",
-    "pp": 6.600435,
+    "value": "+6.15 % (+2.5σ)",
+    "pp": 7.055557,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
-    "value": "+2.43σ",
-    "pp": 5.007926,
+    "value": "+2.80σ",
+    "pp": 6.041676,
     "why": "Volatilitet",
     "missing": false
    },
    {
     "key": "gap_x_outside",
     "label": "Gap utenfor gårsdagens range",
-    "value": "gap +5.62 % (+2.2σ)",
-    "pp": 3.965305,
+    "value": "gap +6.15 % (+2.5σ)",
+    "pp": 4.236117,
     "why": "Åpning utenfor gårsdagens høy/lav har reversert oftere.",
     "missing": false
    },
@@ -1638,7 +1638,7 @@
     "key": "monday",
     "label": "Mandag",
     "value": "Ja",
-    "pp": 3.919936,
+    "pp": 3.825142,
     "why": "Ukedagseffekt",
     "missing": false
    },
@@ -1646,7 +1646,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.33σ",
-    "pp": 2.766819,
+    "pp": 2.699911,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1654,15 +1654,15 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.09σ",
-    "pp": 1.765257,
+    "pp": 1.722569,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "gap_x_vix",
     "label": "Gap når VIX er høy",
-    "value": "gap +5.62 % (+2.2σ)",
-    "pp": 0.349225,
+    "value": "gap +6.15 % (+2.5σ)",
+    "pp": 0.372952,
     "why": "Reversering ved høy volatilitet.",
     "missing": false
    }
@@ -1671,16 +1671,16 @@
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "+0.87σ",
-    "pp": -6.829091,
+    "value": "+0.90σ",
+    "pp": -6.908432,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
    {
     "key": "gap_x_big",
     "label": "Stort gap (over 1σ)",
-    "value": "gap +5.62 % (+2.2σ)",
-    "pp": -3.441805,
+    "value": "gap +6.15 % (+2.5σ)",
+    "pp": -3.671342,
     "why": "Store gap reverseres mer enn små.",
     "missing": false
    },
@@ -1688,7 +1688,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.16",
-    "pp": -2.064884,
+    "pp": -2.01495,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1746,63 +1746,63 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 25897.75,
-    "chg": 3.005926
+    "last": 26728.5,
+    "chg": 6.310158
    },
    {
     "name": "ES future",
-    "last": 7091.75,
-    "chg": 2.131413
+    "last": 7209.75,
+    "chg": 3.830783
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 647.35,
-    "chg": 6.115561
+    "last": 649.5,
+    "chg": 6.467995
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 716.38,
-    "chg": 3.686447
+    "last": 719.04,
+    "chg": 4.071446
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 454.8,
-    "chg": 13.839451
+    "last": 460.4,
+    "chg": 15.241168
    },
    {
     "name": "10-års Treasury future",
-    "last": 106.8125,
-    "chg": 0.058548
+    "last": 106.421875,
+    "chg": -0.307377
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 104.096001,
-    "chg": 0.228194
+    "last": 104.171997,
+    "chg": 0.301366
    },
    {
     "name": "USD/JPY",
-    "last": 159.285004,
-    "chg": 0.495909
+    "last": 159.367996,
+    "chg": 0.548271
    },
    {
     "name": "Bitcoin",
-    "last": 63784.449219,
-    "chg": 9.391772
+    "last": 63182.230469,
+    "chg": 8.358953
    },
    {
     "name": "Råolje (WTI)",
-    "last": 81.110001,
-    "chg": -3.405979
+    "last": 82.190002,
+    "chg": -2.119803
    },
    {
     "name": "Gull",
-    "last": 3615.899902,
-    "chg": 2.543814
+    "last": 3663.199951,
+    "chg": 3.885202
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 5984.339844,
-    "chg": 0.543847
+    "last": 6023.080078,
+    "chg": 1.194728
    }
   ],
   "regime": [
@@ -1872,12 +1872,12 @@
   ],
   "flags": [],
   "headlines": [
+   "Nvidia reinstates Jensen Huang as CEO. Stock skyrockets 27%",
    "SpaceX sued by Oregon and Virginia over AI deepfake porn, Grok safety claims",
    "Tokenized stocks face pushback as NYSE, Nasdaq pivot for a new market",
    "Zelenskyy praises ‘exemplary’ drone operation that sank Russian warship in a Libyan port",
    "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case",
-   "‘Worst COP ever’: Climate talks collapse after draft deal fails to include fossil fuels",
-   "More Americans pay this Obama-era investment tax every year — how to avoid it"
+   "‘Worst COP ever’: Climate talks collapse after draft deal fails to include fossil fuels"
   ],
   "warnings": [],
   "missing": [],
