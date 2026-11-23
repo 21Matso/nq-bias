@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-23T14:23:49.000400+00:00",
-  "generated_oslo": "2026-11-23 15:23",
+  "generated_utc": "2026-11-23T14:29:46.863831+00:00",
+  "generated_oslo": "2026-11-23 15:29",
   "phase": "live",
   "next_open_date": "2026-11-23",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-23",
-    "run_time_oslo": "15:23",
-    "p_cal": 0.6812,
+    "run_time_oslo": "15:29",
+    "p_cal": 0.6833,
     "bias": "BULLISH",
     "strength": "Tydelig",
     "fh_ret_pct": null,
@@ -1593,12 +1593,12 @@
   "model_version": 2,
   "date": "2026-11-23",
   "weekday": "man",
-  "run_oslo": "15:23",
-  "run_et": "09:23",
+  "run_oslo": "15:29",
+  "run_et": "09:29",
   "open_oslo": "15:30",
-  "minutes_before_open": 6.670068,
-  "p": 0.681199,
-  "p_raw": 0.681199,
+  "minutes_before_open": 0.632742,
+  "p": 0.683324,
+  "p_raw": 0.683324,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1607,14 +1607,14 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 26812.5,
-  "typical_points": 160.393612,
+  "nq_price": 26878.5,
+  "typical_points": 160.788427,
   "bull": [
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
     "value": "+6.84 % (+2.7σ)",
-    "pp": 7.773747,
+    "pp": 7.746116,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
@@ -1622,7 +1622,7 @@
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+2.80σ",
-    "pp": 5.979173,
+    "pp": 5.957844,
     "why": "Volatilitet",
     "missing": false
    },
@@ -1630,7 +1630,7 @@
     "key": "gap_x_outside",
     "label": "Gap utenfor gårsdagens range",
     "value": "gap +6.84 % (+2.7σ)",
-    "pp": 4.664249,
+    "pp": 4.64767,
     "why": "Åpning utenfor gårsdagens høy/lav har reversert oftere.",
     "missing": false
    },
@@ -1638,7 +1638,7 @@
     "key": "monday",
     "label": "Mandag",
     "value": "Ja",
-    "pp": 3.78557,
+    "pp": 3.772066,
     "why": "Ukedagseffekt",
     "missing": false
    },
@@ -1646,7 +1646,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.33σ",
-    "pp": 2.671979,
+    "pp": 2.662448,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1654,7 +1654,7 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.09σ",
-    "pp": 1.704749,
+    "pp": 1.698668,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
@@ -1662,7 +1662,7 @@
     "key": "gap_x_vix",
     "label": "Gap når VIX er høy",
     "value": "gap +6.84 % (+2.7σ)",
-    "pp": 0.4105,
+    "pp": 0.409041,
     "why": "Reversering ved høy volatilitet.",
     "missing": false
    }
@@ -1671,8 +1671,8 @@
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "+0.93σ",
-    "pp": -7.104648,
+    "value": "+0.90σ",
+    "pp": -6.867286,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
@@ -1680,7 +1680,7 @@
     "key": "gap_x_big",
     "label": "Stort gap (over 1σ)",
     "value": "gap +6.84 % (+2.7σ)",
-    "pp": -4.035901,
+    "pp": -4.021555,
     "why": "Store gap reverseres mer enn små.",
     "missing": false
    },
@@ -1688,7 +1688,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.16",
-    "pp": -1.994105,
+    "pp": -1.986992,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1746,90 +1746,90 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 26812.5,
-    "chg": 6.644261
+    "last": 26878.5,
+    "chg": 6.90677
    },
    {
     "name": "ES future",
-    "last": 7229.5,
-    "chg": 4.115212
+    "last": 7257.0,
+    "chg": 4.511251
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 652.4201,
-    "chg": 6.946667
+    "last": 656.4,
+    "chg": 7.599064
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 722.55,
-    "chg": 4.579472
+    "last": 724.11,
+    "chg": 4.805261
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 464.79,
-    "chg": 16.340014
+    "last": 470.0,
+    "chg": 17.644111
    },
    {
     "name": "10-års Treasury future",
-    "last": 106.40625,
-    "chg": -0.322014
+    "last": 106.421875,
+    "chg": -0.307377
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 104.147003,
-    "chg": 0.277301
+    "last": 104.102997,
+    "chg": 0.23493
    },
    {
     "name": "USD/JPY",
-    "last": 159.343994,
-    "chg": 0.533127
+    "last": 159.376007,
+    "chg": 0.553325
    },
    {
     "name": "Bitcoin",
-    "last": 63676.058594,
-    "chg": 9.20588
+    "last": 64302.269531,
+    "chg": 10.279845
    },
    {
     "name": "Råolje (WTI)",
-    "last": 81.900002,
-    "chg": -2.465166
+    "last": 81.949997,
+    "chg": -2.405626
    },
    {
     "name": "Gull",
-    "last": 3661.199951,
-    "chg": 3.828484
+    "last": 3669.5,
+    "chg": 4.063866
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6060.569824,
-    "chg": 1.824599
+    "last": 6051.049805,
+    "chg": 1.664652
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.153,
-    "chg": 0.028
+    "level": 4.155,
+    "chg": 0.03
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.792,
-    "chg": -0.143
+    "level": 4.791,
+    "chg": -0.144
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.976,
-    "chg": -0.145
+    "level": 4.974,
+    "chg": -0.147
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.343,
-    "chg": -0.124
+    "level": 5.342,
+    "chg": -0.125
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.823,
-    "chg": -0.173
+    "level": 0.819,
+    "chg": -0.177
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1872,12 +1872,12 @@
   ],
   "flags": [],
   "headlines": [
-   "Nvidia reinstates Jensen Huang as CEO. Stock skyrockets 27%",
+   "Nvidia reinstates Jensen Huang as CEO. Stock skyrockets 31%",
    "SpaceX sued by Oregon and Virginia over AI deepfake porn, Grok safety claims",
    "Tokenized stocks face pushback as NYSE, Nasdaq pivot for a new market",
    "Zelenskyy praises ‘exemplary’ drone operation that sank Russian warship in a Libyan port",
-   "Wall Street's 'Fear Gauge' just flashed a buy sign",
-   "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case"
+   "Trump hosts crypto gala as his meme coin falls below $1",
+   "Wall Street's 'Fear Gauge' just flashed a buy sign"
   ],
   "warnings": [],
   "missing": [],
