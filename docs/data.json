@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-23T14:22:22.832630+00:00",
-  "generated_oslo": "2026-11-23 15:22",
+  "generated_utc": "2026-11-23T14:23:49.000400+00:00",
+  "generated_oslo": "2026-11-23 15:23",
   "phase": "live",
   "next_open_date": "2026-11-23",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-23",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:23",
     "p_cal": 0.6812,
     "bias": "BULLISH",
     "strength": "Tydelig",
@@ -1593,10 +1593,10 @@
   "model_version": 2,
   "date": "2026-11-23",
   "weekday": "man",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:23",
+  "run_et": "09:23",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.823292,
+  "minutes_before_open": 6.670068,
   "p": 0.681199,
   "p_raw": 0.681199,
   "bias": "BULLISH",
@@ -1607,8 +1607,8 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 26766.5,
-  "typical_points": 160.118438,
+  "nq_price": 26812.5,
+  "typical_points": 160.393612,
   "bull": [
    {
     "key": "gap_z",
@@ -1746,90 +1746,90 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 26766.5,
-    "chg": 6.4613
+    "last": 26812.5,
+    "chg": 6.644261
    },
    {
     "name": "ES future",
-    "last": 7223.5,
-    "chg": 4.028803
+    "last": 7229.5,
+    "chg": 4.115212
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 652.32,
-    "chg": 6.930258
+    "last": 652.4201,
+    "chg": 6.946667
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 722.0,
-    "chg": 4.499867
+    "last": 722.55,
+    "chg": 4.579472
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 464.1174,
-    "chg": 16.171657
+    "last": 464.79,
+    "chg": 16.340014
    },
    {
     "name": "10-års Treasury future",
-    "last": 106.375,
-    "chg": -0.351288
+    "last": 106.40625,
+    "chg": -0.322014
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 104.138,
-    "chg": 0.268633
+    "last": 104.147003,
+    "chg": 0.277301
    },
    {
     "name": "USD/JPY",
-    "last": 159.358002,
-    "chg": 0.541965
+    "last": 159.343994,
+    "chg": 0.533127
    },
    {
     "name": "Bitcoin",
-    "last": 63663.558594,
-    "chg": 9.184442
+    "last": 63676.058594,
+    "chg": 9.20588
    },
    {
     "name": "Råolje (WTI)",
-    "last": 81.919998,
-    "chg": -2.441352
+    "last": 81.900002,
+    "chg": -2.465166
    },
    {
     "name": "Gull",
-    "last": 3659.5,
-    "chg": 3.780275
+    "last": 3661.199951,
+    "chg": 3.828484
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6063.509766,
-    "chg": 1.873994
+    "last": 6060.569824,
+    "chg": 1.824599
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.143,
-    "chg": 0.018
+    "level": 4.153,
+    "chg": 0.028
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.728,
-    "chg": -0.207
+    "level": 4.792,
+    "chg": -0.143
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.924,
-    "chg": -0.197
+    "level": 4.976,
+    "chg": -0.145
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.31,
-    "chg": -0.157
+    "level": 5.343,
+    "chg": -0.124
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.781,
-    "chg": -0.215
+    "level": 0.823,
+    "chg": -0.173
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1876,8 +1876,8 @@
    "SpaceX sued by Oregon and Virginia over AI deepfake porn, Grok safety claims",
    "Tokenized stocks face pushback as NYSE, Nasdaq pivot for a new market",
    "Zelenskyy praises ‘exemplary’ drone operation that sank Russian warship in a Libyan port",
-   "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case",
-   "‘Worst COP ever’: Climate talks collapse after draft deal fails to include fossil fuels"
+   "Wall Street's 'Fear Gauge' just flashed a buy sign",
+   "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case"
   ],
   "warnings": [],
   "missing": [],
