@@ -1,21 +1,21 @@
 {
  "meta": {
-  "generated_utc": "2026-11-24T14:25:09.453676+00:00",
-  "generated_oslo": "2026-11-24 15:24",
-  "phase": "live",
-  "next_open_date": "2026-11-24",
+  "generated_utc": "2026-11-24T15:57:09.766394+00:00",
+  "generated_oslo": "2026-11-24 16:56",
+  "phase": "followup",
+  "next_open_date": "2026-11-25",
   "next_open_oslo": "15:30",
-  "next_open_label": "tir 24.11",
+  "next_open_label": "ons 25.11",
   "next_bias_oslo": "15:00–15:25",
   "source_errors": [],
   "error": null
  },
  "journal": {
   "logged": 12,
-  "with_outcome": 11,
-  "directional": 3,
+  "with_outcome": 12,
+  "directional": 4,
   "hits": 2,
-  "hit_rate": 0.666667,
+  "hit_rate": 0.5,
   "neutral_days": 8,
   "by_strength": [
    {
@@ -25,8 +25,8 @@
    },
    {
     "name": "Tydelig",
-    "n": 2,
-    "hit_rate": 0.5
+    "n": 3,
+    "hit_rate": 0.333333
    }
   ],
   "rows": [
@@ -36,10 +36,10 @@
     "p_cal": 0.6256,
     "bias": "BULLISH",
     "strength": "Tydelig",
-    "fh_ret_pct": null,
-    "nq_points": null,
-    "outcome": null,
-    "correct": null
+    "fh_ret_pct": -0.748,
+    "nq_points": -196.0,
+    "outcome": "NED",
+    "correct": "nei"
    },
    {
     "date": "2026-11-23",
