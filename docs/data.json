@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-24T14:00:37.148177+00:00",
-  "generated_oslo": "2026-11-24 15:00",
+  "generated_utc": "2026-11-24T14:12:21.213059+00:00",
+  "generated_oslo": "2026-11-24 15:12",
   "phase": "live",
   "next_open_date": "2026-11-24",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-24",
-    "run_time_oslo": "15:00",
-    "p_cal": 0.6259,
+    "run_time_oslo": "15:12",
+    "p_cal": 0.6242,
     "bias": "BULLISH",
     "strength": "Tydelig",
     "fh_ret_pct": null,
@@ -1604,12 +1604,12 @@
   "model_version": 2,
   "date": "2026-11-24",
   "weekday": "tir",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.992629,
-  "p": 0.625905,
-  "p_raw": 0.625905,
+  "minutes_before_open": 17.99377,
+  "p": 0.624232,
+  "p_raw": 0.624232,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1618,22 +1618,22 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 26264.75,
-  "typical_points": 157.116946,
+  "nq_price": 26281.0,
+  "typical_points": 157.214154,
   "bull": [
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+3.18σ",
-    "pp": 7.685635,
+    "pp": 7.699366,
     "why": "Volatilitet",
     "missing": false
    },
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "+4.38 % (+1.8σ)",
-    "pp": 5.330486,
+    "value": "+4.51 % (+1.8σ)",
+    "pp": 5.500084,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    },
@@ -1641,7 +1641,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.33σ",
-    "pp": 2.880911,
+    "pp": 2.886058,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1649,15 +1649,15 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.09σ",
-    "pp": 1.838049,
+    "pp": 1.841333,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "gap_x_vix",
     "label": "Gap når VIX er høy",
-    "value": "gap +4.38 % (+1.8σ)",
-    "pp": 0.282918,
+    "value": "gap +4.51 % (+1.8σ)",
+    "pp": 0.291801,
     "why": "Reversering ved høy volatilitet.",
     "missing": false
    }
@@ -1666,16 +1666,16 @@
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "+0.47σ",
-    "pp": -3.796174,
+    "value": "+0.50σ",
+    "pp": -4.057359,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
    {
     "key": "gap_x_big",
     "label": "Stort gap (over 1σ)",
-    "value": "gap +4.38 % (+1.8σ)",
-    "pp": -2.799121,
+    "value": "gap +4.51 % (+1.8σ)",
+    "pp": -2.885566,
     "why": "Store gap reverseres mer enn små.",
     "missing": false
    },
@@ -1683,7 +1683,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.04",
-    "pp": -1.224221,
+    "pp": -1.226408,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1733,28 +1733,28 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 26264.75,
-    "chg": -2.063893
+    "last": 26281.0,
+    "chg": -2.0033
    },
    {
     "name": "ES future",
-    "last": 7167.75,
-    "chg": -1.240054
+    "last": 7169.25,
+    "chg": -1.219386
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 636.42,
-    "chg": -2.220105
+    "last": 638.75,
+    "chg": -1.862122
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 712.78,
-    "chg": -1.330308
+    "last": 714.44,
+    "chg": -1.100516
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 436.57,
-    "chg": -5.126479
+    "last": 439.52,
+    "chg": -4.485397
    },
    {
     "name": "10-års Treasury future",
@@ -1763,33 +1763,33 @@
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.886002,
-    "chg": -0.438933
+    "last": 103.870003,
+    "chg": -0.454266
    },
    {
     "name": "USD/JPY",
-    "last": 159.082993,
-    "chg": 0.086813
+    "last": 159.158997,
+    "chg": 0.134631
    },
    {
     "name": "Bitcoin",
-    "last": 59913.949219,
-    "chg": -2.015797
+    "last": 60279.679688,
+    "chg": -1.417675
    },
    {
     "name": "Råolje (WTI)",
-    "last": 80.709999,
-    "chg": 0.648456
+    "last": 80.849998,
+    "chg": 0.82304
    },
    {
     "name": "Gull",
-    "last": 3619.199951,
-    "chg": -0.448358
+    "last": 3618.800049,
+    "chg": -0.459358
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6015.830078,
-    "chg": -1.029706
+    "last": 6022.649902,
+    "chg": -0.917509
    }
   ],
   "regime": [
@@ -1849,12 +1849,12 @@
   ],
   "flags": [],
   "headlines": [
-   "Six key questions raised by Jensen Huang's return to Nvidia",
+   "Jensen Huang is back as Nvidia CEO, but investigations and risks remain",
    "Best Buy reports comparable sales growth of 6.1%, highest in five years",
+   "Six key questions raised by Jensen Huang's return to Nvidia",
    "Commercial real estate activity falls 14% in October, as interest rates rise",
    "Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years",
-   "Russia accuses NATO member Estonia of hostile actions ‘on the verge of unleashing open war’",
-   "Peterson: Here’s what Bessent’s about-face on Jensen Huang reveals about Trump and China"
+   "Russia accuses NATO member Estonia of hostile actions ‘on the verge of unleashing open war’"
   ],
   "warnings": [
    "Dukascopy-data var forsinket (siste bar 2026-11-20 16:15:00-05:00); dagens rad er beregnet med Yahoo-priser."
