@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-25T14:22:13.587152+00:00",
-  "generated_oslo": "2026-11-25 15:22",
+  "generated_utc": "2026-11-25T14:23:33.252281+00:00",
+  "generated_oslo": "2026-11-25 15:23",
   "phase": "live",
   "next_open_date": "2026-11-25",
   "next_open_oslo": "15:30",
@@ -32,8 +32,8 @@
   "rows": [
    {
     "date": "2026-11-25",
-    "run_time_oslo": "15:22",
-    "p_cal": 0.6531,
+    "run_time_oslo": "15:23",
+    "p_cal": 0.6515,
     "bias": "BULLISH",
     "strength": "Tydelig",
     "fh_ret_pct": null,
@@ -1615,12 +1615,12 @@
   "model_version": 2,
   "date": "2026-11-25",
   "weekday": "ons",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:23",
+  "run_et": "09:23",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.992917,
-  "p": 0.653062,
-  "p_raw": 0.653062,
+  "minutes_before_open": 6.960984,
+  "p": 0.651514,
+  "p_raw": 0.651514,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1629,14 +1629,14 @@
    "hit_rate": 0.585062,
    "signed_bp": 15.516981
   },
-  "nq_price": 25434.75,
-  "typical_points": 152.151848,
+  "nq_price": 25433.0,
+  "typical_points": 152.141379,
   "bull": [
    {
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+3.18σ",
-    "pp": 7.436966,
+    "pp": 7.45244,
     "why": "Volatilitet",
     "missing": false
    },
@@ -1644,15 +1644,15 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.33σ",
-    "pp": 2.787699,
+    "pp": 2.793499,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "rel_es_z",
     "label": "NQ vs ES gap",
-    "value": "-0.27σ",
-    "pp": 2.281174,
+    "value": "-0.25σ",
+    "pp": 2.149165,
     "why": "Relativ verdi: NQ trekkes mot ES",
     "missing": false
    },
@@ -1660,15 +1660,15 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.09σ",
-    "pp": 1.778579,
+    "pp": 1.782279,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
    {
     "key": "gap_z",
     "label": "Overnight-gap (σ)",
-    "value": "+1.13 % (+0.5σ)",
-    "pp": 1.237235,
+    "value": "+1.17 % (+0.5σ)",
+    "pp": 1.290816,
     "why": "Gap-reversering: Liu & Tse (2017); Yu, Rentzler & Wolf (NQ)",
     "missing": false
    }
@@ -1677,8 +1677,8 @@
    {
     "key": "gap_x_news",
     "label": "Gap på 08:30-nyhetsdag",
-    "value": "gap +1.13 % (+0.5σ)",
-    "pp": -1.932018,
+    "value": "gap +1.17 % (+0.5σ)",
+    "pp": -2.0079,
     "why": "Gapet på dager med store makrotall har historisk blitt delvis reversert i første time.",
     "missing": false
    },
@@ -1686,7 +1686,7 @@
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
     "value": "1.03",
-    "pp": -1.115311,
+    "pp": -1.117631,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1752,28 +1752,28 @@
   "market": [
    {
     "name": "NQ future",
-    "last": 25434.75,
-    "chg": -3.231053
+    "last": 25433.0,
+    "chg": -3.237711
    },
    {
     "name": "ES future",
-    "last": 7070.25,
-    "chg": -2.07749
+    "last": 7068.5,
+    "chg": -2.101728
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
-    "last": 617.17,
-    "chg": -3.278538
+    "last": 617.5,
+    "chg": -3.226822
    },
    {
     "name": "S&P 500 (SPY) premarket",
-    "last": 703.5277,
-    "chg": -2.123329
+    "last": 703.69,
+    "chg": -2.10075
    },
    {
     "name": "Halvledere (SMH) premarket",
-    "last": 405.3,
-    "chg": -5.210718
+    "last": 405.37,
+    "chg": -5.194347
    },
    {
     "name": "10-års Treasury future",
@@ -1782,60 +1782,60 @@
    },
    {
     "name": "Dollarindeks (DXY)",
-    "last": 103.934998,
-    "chg": 0.108839
+    "last": 103.955002,
+    "chg": 0.128107
    },
    {
     "name": "USD/JPY",
-    "last": 159.348999,
-    "chg": 0.068446
+    "last": 159.345993,
+    "chg": 0.066558
    },
    {
     "name": "Bitcoin",
-    "last": 58261.191406,
-    "chg": -2.399681
+    "last": 58317.101562,
+    "chg": -2.306019
    },
    {
     "name": "Råolje (WTI)",
-    "last": 82.550003,
-    "chg": 1.362967
+    "last": 82.470001,
+    "chg": 1.264733
    },
    {
     "name": "Gull",
-    "last": 3511.0,
-    "chg": -1.140363
+    "last": 3513.5,
+    "chg": -1.06997
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 5962.910156,
-    "chg": -0.683219
+    "last": 5964.25,
+    "chg": -0.660903
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.153,
-    "chg": 0.008
+    "level": 4.155,
+    "chg": 0.01
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.634,
-    "chg": -0.25
+    "level": 4.636,
+    "chg": -0.248
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.842,
-    "chg": -0.224
+    "level": 4.84,
+    "chg": -0.226
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.254,
-    "chg": -0.158
+    "level": 5.25,
+    "chg": -0.162
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.689,
-    "chg": -0.232
+    "level": 0.685,
+    "chg": -0.236
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1893,9 +1893,9 @@
    "Fed’s preferred inflation gauge accelerated to 3.8% in October, raising the 2027 stakes for the central bank",
    "U.S. proposes new tariffs on 14 trading partners, including China and the EU",
    "Trump’s meddling in Huang scandal reignites voter angst over tech’s outsized political power",
-   "Liesman: Nvidia whiplash tests Kevin Warsh’s push to read market signals",
    "Ukraine tells Putin to ‘stop complaining’ over oil refinery attacks as Russia promises retaliation",
-   "Jensen Huang tells staff that Nvidia doesn't need a succession plan"
+   "Jensen Huang tells staff that Nvidia doesn't need a succession plan",
+   "Liesman: Nvidia whiplash tests Kevin Warsh’s push to read market signals"
   ],
   "warnings": [
    "Dukascopy-data var forsinket (siste bar 2026-11-20 16:15:00-05:00); dagens rad er beregnet med Yahoo-priser."
