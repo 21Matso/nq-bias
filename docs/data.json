@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-26T14:22:21.940852+00:00",
-  "generated_oslo": "2026-11-26 15:22",
+  "generated_utc": "2026-11-26T14:23:26.904834+00:00",
+  "generated_oslo": "2026-11-26 15:23",
   "phase": "live",
   "next_open_date": "2026-11-26",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-26",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:23",
     "p_cal": 0.6553,
     "bias": "BULLISH",
     "strength": "Tydelig",
@@ -1626,10 +1626,10 @@
   "model_version": 2,
   "date": "2026-11-26",
   "weekday": "tor",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:23",
+  "run_et": "09:23",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.992905,
+  "minutes_before_open": 6.988234,
   "p": 0.655291,
   "p_raw": 0.655291,
   "bias": "BULLISH",
@@ -1724,12 +1724,12 @@
    {
     "name": "NQ future",
     "last": 26389.75,
-    "chg": 1.091755
+    "chg": 1.087883
    },
    {
     "name": "ES future",
     "last": 7247.75,
-    "chg": 0.712152
+    "chg": 0.708653
    },
    {
     "name": "Nasdaq-100 (QQQ) premarket",
@@ -1739,7 +1739,7 @@
    {
     "name": "S&P 500 (SPY) premarket",
     "last": 720.43,
-    "chg": 0.512025
+    "chg": 0.519035
    },
    {
     "name": "Halvledere (SMH) premarket",
@@ -1758,13 +1758,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.207993,
-    "chg": -0.008798
+    "last": 159.203003,
+    "chg": -0.011931
    },
    {
     "name": "Bitcoin",
-    "last": 60717.789062,
-    "chg": 0.907402
+    "last": 60725.589844,
+    "chg": 0.912263
    },
    {
     "name": "Råolje (WTI)",
@@ -1774,12 +1774,12 @@
    {
     "name": "Gull",
     "last": 3620.399902,
-    "chg": 0.494082
+    "chg": 0.491297
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6012.339844,
-    "chg": 1.818292
+    "last": 6010.990234,
+    "chg": 1.795437
    }
   ],
   "regime": [
@@ -1830,10 +1830,10 @@
   "headlines": [
    "Even the price of toys is on the rise. How Americans are scaling back holiday plans",
    "Semiconductor chips are the new oil. Here's why",
+   "Spain’s Pablo Hernández de Cos set to lead European Central Bank",
    "SpaceX, Musk pledge to donate a share each to active Trump Accounts",
    "Global stocks rally as investors shrug off U.S. tariffs and AI jitters to 'fish for bargains'",
-   "Trump, NATO chief caution Russia as attacks on Ukraine’s energy infrastructure intensify",
-   "What is ‘texture-maxxing’? The food trend putting crunch on the menu"
+   "Trump, NATO chief caution Russia as attacks on Ukraine’s energy infrastructure intensify"
   ],
   "warnings": [
    "VIKTIG: mangler fersk pris for NQ – biasen er usikker.",

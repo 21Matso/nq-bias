@@ -12,4 +12,4 @@ date,run_time_oslo,run_time_et,minutes_before_open,p_raw,p_cal,bias,strength,top
 2026-11-23,15:29,09:29,0.6,0.6833,0.6833,BULLISH,Tydelig,Overnight-gap (σ) +7.7pp; NQ vs ES gap -6.9pp; Overnight-range (størrelse) +6.0pp; Gap utenfor gårsdagens range +4.6pp,26878.5,-0.055,-14.8,NED,nei
 2026-11-24,15:24,09:24,5.4,0.6256,0.6256,BULLISH,Tydelig,Overnight-range (størrelse) +7.7pp; Overnight-gap (σ) +5.5pp; NQ vs ES gap -3.9pp; Stort gap (over 1σ) -2.9pp,26295.25,-0.748,-196.0,NED,nei
 2026-11-25,15:26,09:26,3.2,0.6529,0.6529,BULLISH,Tydelig,"Overnight-range (størrelse) +7.4pp; Første time, snitt 5 dager +2.8pp; NQ vs ES gap +2.2pp; Gap på 08:30-nyhetsdag -1.8pp",25426.75,-1.075,-271.9,NED,nei
-2026-11-26,15:22,09:22,8.0,0.6553,0.6553,BULLISH,Tydelig,"Overnight-range (størrelse) +7.6pp; Første time, snitt 5 dager +2.8pp; Første time, snitt 20 dager +1.8pp; VIX/VIX3M − 1 -1.4pp",26389.75,,,,
+2026-11-26,15:23,09:23,7.0,0.6553,0.6553,BULLISH,Tydelig,"Overnight-range (størrelse) +7.6pp; Første time, snitt 5 dager +2.8pp; Første time, snitt 20 dager +1.8pp; VIX/VIX3M − 1 -1.4pp",26389.75,,,,
