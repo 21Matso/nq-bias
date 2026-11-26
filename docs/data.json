@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-26T14:00:33.258243+00:00",
-  "generated_oslo": "2026-11-26 15:00",
+  "generated_utc": "2026-11-26T14:12:20.695398+00:00",
+  "generated_oslo": "2026-11-26 15:12",
   "phase": "live",
   "next_open_date": "2026-11-26",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-26",
-    "run_time_oslo": "15:00",
+    "run_time_oslo": "15:12",
     "p_cal": 0.6553,
     "bias": "BULLISH",
     "strength": "Tydelig",
@@ -1626,10 +1626,10 @@
   "model_version": 2,
   "date": "2026-11-26",
   "weekday": "tor",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.991816,
+  "minutes_before_open": 17.992946,
   "p": 0.655291,
   "p_raw": 0.655291,
   "bias": "BULLISH",
@@ -1758,13 +1758,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.195007,
-    "chg": -0.016953
+    "last": 159.197998,
+    "chg": -0.015075
    },
    {
     "name": "Bitcoin",
-    "last": 60797.410156,
-    "chg": 1.039725
+    "last": 60866.589844,
+    "chg": 1.154695
    },
    {
     "name": "Råolje (WTI)",
@@ -1778,8 +1778,8 @@
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6010.240234,
-    "chg": 1.782736
+    "last": 6012.129883,
+    "chg": 1.814737
    }
   ],
   "regime": [
@@ -1828,12 +1828,12 @@
   "events": [],
   "flags": [],
   "headlines": [
+   "Even the price of toys is on the rise. How Americans are scaling back holiday plans",
+   "Semiconductor chips are the new oil. Here's why",
    "SpaceX, Musk pledge to donate a share each to active Trump Accounts",
-   "Trump, NATO chief caution Russia as attacks on Ukraine’s energy infrastructure intensify",
    "Global stocks rally as investors shrug off U.S. tariffs and AI jitters to 'fish for bargains'",
-   "What is ‘texture-maxxing’? The food trend putting crunch on the menu",
-   "Switzerland’s biggest bank set for showdown with lawmakers as capital fight intensifies amid crisis planning",
-   "Norse Atlantic suspends all flights, warns it may file for bankruptcy after share price collapse"
+   "Trump, NATO chief caution Russia as attacks on Ukraine’s energy infrastructure intensify",
+   "What is ‘texture-maxxing’? The food trend putting crunch on the menu"
   ],
   "warnings": [
    "VIKTIG: mangler fersk pris for NQ – biasen er usikker.",
