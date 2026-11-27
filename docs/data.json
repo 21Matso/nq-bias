@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generated_utc": "2026-11-26T22:26:46.819416+00:00",
-  "generated_oslo": "2026-11-26 23:26",
-  "phase": "followup",
+  "generated_utc": "2026-11-27T14:00:28.473228+00:00",
+  "generated_oslo": "2026-11-27 15:00",
+  "phase": "live",
   "next_open_date": "2026-11-27",
   "next_open_oslo": "15:30",
   "next_open_label": "fre 27.11",
@@ -11,7 +11,7 @@
   "error": null
  },
  "journal": {
-  "logged": 14,
+  "logged": 15,
   "with_outcome": 13,
   "directional": 5,
   "hits": 2,
@@ -30,6 +30,17 @@
    }
   ],
   "rows": [
+   {
+    "date": "2026-11-27",
+    "run_time_oslo": "15:00",
+    "p_cal": 0.6596,
+    "bias": "BULLISH",
+    "strength": "Tydelig",
+    "fh_ret_pct": null,
+    "nq_points": null,
+    "outcome": null,
+    "correct": null
+   },
    {
     "date": "2026-11-26",
     "run_time_oslo": "15:25",
@@ -1540,7 +1551,7 @@
    "p": 0.008386,
    "excess": 34.315741
   },
-  "trained_on": "2026-11-26 15:00",
+  "trained_on": "2026-11-27 15:00",
   "n_train": 3719,
   "features": [
    {
@@ -1624,14 +1635,14 @@
  },
  "today": {
   "model_version": 2,
-  "date": "2026-11-26",
-  "weekday": "tor",
-  "run_oslo": "15:25",
-  "run_et": "09:25",
+  "date": "2026-11-27",
+  "weekday": "fre",
+  "run_oslo": "15:00",
+  "run_et": "09:00",
   "open_oslo": "15:30",
-  "minutes_before_open": 4.929688,
-  "p": 0.655291,
-  "p_raw": 0.655291,
+  "minutes_before_open": 29.995297,
+  "p": 0.659639,
+  "p_raw": 0.659639,
   "bias": "BULLISH",
   "strength": "Tydelig",
   "class_hist": {
@@ -1647,7 +1658,7 @@
     "key": "on_range_z",
     "label": "Overnight-range (størrelse)",
     "value": "+3.23σ",
-    "pp": 7.587436,
+    "pp": 7.54144,
     "why": "Volatilitet",
     "missing": false
    },
@@ -1655,7 +1666,7 @@
     "key": "fh_mom5_z",
     "label": "Første time, snitt 5 dager",
     "value": "-0.33σ",
-    "pp": 2.779241,
+    "pp": 2.762393,
     "why": "Første time har gått motsatt vei av de siste dagenes første time oftere enn tilfeldig.",
     "missing": false
    },
@@ -1663,7 +1674,7 @@
     "key": "fh_mom20_z",
     "label": "Første time, snitt 20 dager",
     "value": "-0.09σ",
-    "pp": 1.773182,
+    "pp": 1.762433,
     "why": "Første time har gått motsatt vei av snittet de siste 20 dagene oftere enn tilfeldig.",
     "missing": false
    },
@@ -1671,7 +1682,7 @@
     "key": "thu_fri",
     "label": "Torsdag/fredag",
     "value": "Ja",
-    "pp": 1.180957,
+    "pp": 1.173798,
     "why": "Åpningsreversering størst tor/fre: Boyarchenko m.fl.",
     "missing": false
    }
@@ -1680,8 +1691,8 @@
    {
     "key": "vix_ts",
     "label": "VIX/VIX3M − 1",
-    "value": "1.08",
-    "pp": -1.428438,
+    "value": "1.02",
+    "pp": -0.986297,
     "why": "Backwardation → oversolgt",
     "missing": false
    }
@@ -1696,12 +1707,12 @@
     "up_recent": 0.524568
    },
    {
-    "name": "Alle torsdager",
-    "n": 750,
-    "up": 0.508,
-    "bp": -0.030298,
-    "n_recent": 149,
-    "up_recent": 0.463087
+    "name": "Alle fredager",
+    "n": 746,
+    "up": 0.520107,
+    "bp": -1.275214,
+    "n_recent": 151,
+    "up_recent": 0.543046
    },
    {
     "name": "Første time har vært svak de siste 20 dagene (laveste 20 %)",
@@ -1758,13 +1769,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.192993,
-    "chg": -0.018218
+    "last": 159.552002,
+    "chg": 0.207259
    },
    {
     "name": "Bitcoin",
-    "last": 60739.339844,
-    "chg": 0.935112
+    "last": 61369.480469,
+    "chg": 1.982264
    },
    {
     "name": "Råolje (WTI)",
@@ -1778,35 +1789,35 @@
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6008.620117,
-    "chg": 1.755299
+    "last": 6083.120117,
+    "chg": 3.016948
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.155,
-    "chg": 0.01
+    "level": 4.16,
+    "chg": 0.013
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.66,
-    "chg": -0.224
+    "level": 4.712,
+    "chg": -0.154
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.848,
-    "chg": -0.218
+    "level": 4.896,
+    "chg": -0.156
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.235,
-    "chg": -0.177
+    "level": 5.284,
+    "chg": -0.117
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.693,
-    "chg": -0.228
+    "level": 0.736,
+    "chg": -0.169
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1815,12 +1826,12 @@
    },
    {
     "name": "VIX (i går)",
-    "level": 28.290001,
+    "level": 26.799999,
     "chg": null
    },
    {
     "name": "VIX / VIX3M",
-    "level": 1.076075,
+    "level": 1.019399,
     "chg": null,
     "note": "backwardation (stress)"
    }
@@ -1828,12 +1839,12 @@
   "events": [],
   "flags": [],
   "headlines": [
-   "Even the price of toys is on the rise. How Americans are scaling back holiday plans",
-   "Semiconductor chips are the new oil. Here's why",
-   "Spain’s Pablo Hernández de Cos set to lead European Central Bank",
-   "SpaceX, Musk pledge to donate a share each to active Trump Accounts",
-   "Global stocks rally as investors shrug off U.S. tariffs and AI jitters to 'fish for bargains'",
-   "Trump, NATO chief caution Russia as attacks on Ukraine’s energy infrastructure intensify"
+   "Trump demands probe into ‘record setting error’ after third-quarter GDP data gets massive revision higher",
+   "The S&P 500 is in a correction. Bear markets and recessions don't always follow",
+   "Budget airline Norse Atlantic files for bankruptcy in Europe after failing to secure funding",
+   "SpaceX shares jump 4% amid tech rally and after Musk says he will expand on Trump Account share donations",
+   "New car prices are at a record high. Here's where to look for deals",
+   "Spain’s election could pull Madrid closer to Trump’s Washington"
   ],
   "warnings": [
    "VIKTIG: mangler fersk pris for NQ – biasen er usikker.",
