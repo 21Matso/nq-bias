@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-27T14:00:28.473228+00:00",
-  "generated_oslo": "2026-11-27 15:00",
+  "generated_utc": "2026-11-27T14:12:14.195490+00:00",
+  "generated_oslo": "2026-11-27 15:12",
   "phase": "live",
   "next_open_date": "2026-11-27",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-27",
-    "run_time_oslo": "15:00",
+    "run_time_oslo": "15:12",
     "p_cal": 0.6596,
     "bias": "BULLISH",
     "strength": "Tydelig",
@@ -1637,10 +1637,10 @@
   "model_version": 2,
   "date": "2026-11-27",
   "weekday": "fre",
-  "run_oslo": "15:00",
-  "run_et": "09:00",
+  "run_oslo": "15:12",
+  "run_et": "09:12",
   "open_oslo": "15:30",
-  "minutes_before_open": 29.995297,
+  "minutes_before_open": 17.995445,
   "p": 0.659639,
   "p_raw": 0.659639,
   "bias": "BULLISH",
@@ -1769,13 +1769,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.552002,
-    "chg": 0.207259
+    "last": 159.541,
+    "chg": 0.200349
    },
    {
     "name": "Bitcoin",
-    "last": 61369.480469,
-    "chg": 1.982264
+    "last": 61336.980469,
+    "chg": 1.928256
    },
    {
     "name": "Råolje (WTI)",
@@ -1789,8 +1789,8 @@
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6083.120117,
-    "chg": 3.016948
+    "last": 6081.169922,
+    "chg": 2.983922
    }
   ],
   "regime": [
