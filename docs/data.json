@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_utc": "2026-11-27T14:23:21.511791+00:00",
-  "generated_oslo": "2026-11-27 15:22",
+  "generated_utc": "2026-11-27T14:24:40.599127+00:00",
+  "generated_oslo": "2026-11-27 15:24",
   "phase": "live",
   "next_open_date": "2026-11-27",
   "next_open_oslo": "15:30",
@@ -32,7 +32,7 @@
   "rows": [
    {
     "date": "2026-11-27",
-    "run_time_oslo": "15:22",
+    "run_time_oslo": "15:24",
     "p_cal": 0.6596,
     "bias": "BULLISH",
     "strength": "Tydelig",
@@ -1637,10 +1637,10 @@
   "model_version": 2,
   "date": "2026-11-27",
   "weekday": "fre",
-  "run_oslo": "15:22",
-  "run_et": "09:22",
+  "run_oslo": "15:24",
+  "run_et": "09:24",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.039786,
+  "minutes_before_open": 5.827593,
   "p": 0.659639,
   "p_raw": 0.659639,
   "bias": "BULLISH",
@@ -1769,13 +1769,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.520996,
-    "chg": 0.187786
+    "last": 159.529007,
+    "chg": 0.192817
    },
    {
     "name": "Bitcoin",
-    "last": 61320.011719,
-    "chg": 1.900058
+    "last": 61326.519531,
+    "chg": 1.910872
    },
    {
     "name": "Råolje (WTI)",
@@ -1789,8 +1789,8 @@
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6073.25,
-    "chg": 2.849799
+    "last": 6073.259766,
+    "chg": 2.849964
    }
   ],
   "regime": [
@@ -1801,23 +1801,23 @@
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.719,
-    "chg": -0.147
+    "level": 4.717,
+    "chg": -0.149
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.906,
-    "chg": -0.146
+    "level": 4.904,
+    "chg": -0.148
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.292,
-    "chg": -0.109
+    "level": 5.291,
+    "chg": -0.11
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.744,
-    "chg": -0.161
+    "level": 0.742001,
+    "chg": -0.163
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
@@ -1843,8 +1843,8 @@
    "The S&P 500 is in a correction. Bear markets and recessions don't always follow",
    "Budget airline Norse Atlantic files for bankruptcy in Europe after failing to secure funding",
    "SpaceX shares jump 4% amid tech rally and after Musk says he will expand on Trump Account share donations",
-   "New car prices are at a record high. Here's where to look for deals",
-   "Spain’s election could pull Madrid closer to Trump’s Washington"
+   "EU leaders fail to break $1.7 trillion budget deadlock as political pressure mounts",
+   "New car prices are at a record high. Here's where to look for deals"
   ],
   "warnings": [
    "VIKTIG: mangler fersk pris for NQ – biasen er usikker.",
