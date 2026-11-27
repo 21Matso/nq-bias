@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_utc": "2026-11-27T14:22:14.163184+00:00",
+  "generated_utc": "2026-11-27T14:23:21.511791+00:00",
   "generated_oslo": "2026-11-27 15:22",
   "phase": "live",
   "next_open_date": "2026-11-27",
@@ -1640,7 +1640,7 @@
   "run_oslo": "15:22",
   "run_et": "09:22",
   "open_oslo": "15:30",
-  "minutes_before_open": 7.99627,
+  "minutes_before_open": 7.039786,
   "p": 0.659639,
   "p_raw": 0.659639,
   "bias": "BULLISH",
@@ -1769,13 +1769,13 @@
    },
    {
     "name": "USD/JPY",
-    "last": 159.524002,
-    "chg": 0.189674
+    "last": 159.520996,
+    "chg": 0.187786
    },
    {
     "name": "Bitcoin",
-    "last": 61350.769531,
-    "chg": 1.95117
+    "last": 61320.011719,
+    "chg": 1.900058
    },
    {
     "name": "Råolje (WTI)",
@@ -1789,35 +1789,35 @@
    },
    {
     "name": "Euro Stoxx 50",
-    "last": 6073.419922,
-    "chg": 2.852677
+    "last": 6073.25,
+    "chg": 2.849799
    }
   ],
   "regime": [
    {
     "name": "3-mnd rente (%)",
-    "level": 4.16,
-    "chg": 0.013
+    "level": 4.162,
+    "chg": 0.015
    },
    {
     "name": "5-års rente (%)",
-    "level": 4.712,
-    "chg": -0.154
+    "level": 4.719,
+    "chg": -0.147
    },
    {
     "name": "10-års rente (%)",
-    "level": 4.896,
-    "chg": -0.156
+    "level": 4.906,
+    "chg": -0.146
    },
    {
     "name": "30-års rente (%)",
-    "level": 5.284,
-    "chg": -0.117
+    "level": 5.292,
+    "chg": -0.109
    },
    {
     "name": "Rentekurve 10 år – 3 mnd (pp)",
-    "level": 0.736,
-    "chg": -0.169
+    "level": 0.744,
+    "chg": -0.161
    },
    {
     "name": "Kreditt HYG/IEF (endring i %)",
